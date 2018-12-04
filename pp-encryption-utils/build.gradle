@@ -1,0 +1,57 @@
+buildscript {
+	ext {
+		projectGroup = 'com.placepass'
+		moduleArtifact = 'encryption-utils'
+		moduleVersion = '1.1.0'
+	}
+}
+plugins {
+    id "java"
+    id "io.spring.dependency-management" version "1.0.3.RELEASE"
+	id "maven" //Fix, remove this plugin and use maven-publish
+    id "maven-publish"
+}
+
+group = '${projectGroup}'
+archivesBaseName = '${moduleArtifact}'
+version = '${moduleVersion}'
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven {
+          url "http://54.152.79.131:8081/nexus/content/groups/public"
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'com.amazonaws:aws-java-sdk-bom:1.11.174'
+    }
+}
+
+dependencies {
+    compile 'com.amazonaws:aws-encryption-sdk-java:1.3.1'
+    compile 'com.amazonaws:aws-java-sdk-core:1.11.174'
+    compile 'com.amazonaws:aws-java-sdk-kms:1.11.174'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.github.stefanbirkner:system-rules:1.16.1'
+}
+
+jar {
+	baseName = project.archivesBaseName
+}
+
+uploadArchives {
+    repositories {
+       mavenDeployer {
+             repository(url: "http://54.152.79.131:8081/nexus/content/repositories/releases") {
+             	authentication(userName: "$GuserName", password: "$Gpassword")
+			}
+             pom.version = "${moduleVersion}"
+             pom.artifactId = "${moduleArtifact}"
+             pom.groupId = "${projectGroup}"
+       }
+    }
+}

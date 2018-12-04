@@ -1,0 +1,62 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.2.RELEASE'
+	}
+	repositories {
+		maven {
+	          url "https://repo.maven.apache.org/maven2/"
+	    }
+	}
+	
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+version = '0.0.1'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	maven {
+	          url "https://repo.maven.apache.org/maven2/"
+	    }
+}
+ext {
+	springCloudVersion = 'Dalston.SR2'
+}
+
+dependencyManagement {
+     imports {
+     	mavenBom 'org.springframework.cloud:spring-cloud-sleuth:1.2.0.RELEASE'
+     }
+     imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	 }
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-data-mongodb:1.5.1.RELEASE')
+	compile ("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.4")
+	compile('io.springfox:springfox-swagger2:2.6.1')
+ 	compile('io.springfox:springfox-swagger-ui:2.6.1')
+ 	
+ 	compile('com.placepass:placepass-exception-util:1.2.0')
+	compile('com.placepass:pp-utils:1.1.0')
+	compile('com.placepass:pp-connector-common:1.0.0')
+ 	
+ 	compile ("org.springframework.cloud:spring-cloud-starter-sleuth")
+	compile group: 'org.modelmapper', name: 'modelmapper', version: '1.1.0'
+ 	
+ 	compile group: 'com.algolia', name: 'algoliasearch', version: '1.11.0'
+	compile('com.google.code.gson:gson:1.7.2')
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile('org.springframework.cloud:spring-cloud-starter-config')
+}

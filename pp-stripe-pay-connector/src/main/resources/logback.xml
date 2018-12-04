@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<contextName>CONPAY_STRIPE</contextName>
+	
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				 %d{yyyy-MM-dd HH:mm:ss.SSSZ} | %level | %contextName | ${SPRING_PROFILES_ACTIVE} | %X{X-B3-TraceId:-} | %X{X-B3-SpanId:-} | ${PID:-} | [%thread] | %logger{35} | %message%n
+			</Pattern>
+		</layout>
+	</appender>
+	
+	
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/var/log/pp-stripe-connector-${SPRING_PROFILES_ACTIVE}.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				 %d{yyyy-MM-dd HH:mm:ss.SSSZ} | %level | %contextName | ${SPRING_PROFILES_ACTIVE} | %X{X-B3-TraceId:-} | %X{X-B3-SpanId:-} | ${PID:-} | [%thread] | %logger{35} | %message%n
+			</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/var/log/pp-stripe-connector-${SPRING_PROFILES_ACTIVE}.%d{yyyy-MM-dd}.%i.log
+                        </fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+
+	</appender>
+	
+	<!-- <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/var/log/pp-stripe-connector.log</file>
+		<encoder
+			class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<pattern>
+					<pattern>
+						{
+						"Time": " %d{yyyy-MM-dd HH:mm:ss.SSSZ}",
+						"Level": "%level",
+						"ContextName": "%contextName",
+						"TraceId": "%X{X-B3-TraceId:-}",
+						"SpanId": "%X{X-B3-SpanId:-}",
+						"PId": "${PID:-}",
+						"Thread": "%thread",
+						"Logger": "%logger{35}",
+						"Message": " %message"
+						}
+					</pattern>
+				</pattern>
+			</providers>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/var/log/pp-stripe-connector.%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender> -->
+	
+	
+	
+  	<logger name="org.spring" level="WARN" />
+	<logger name="org.springframework" level="INFO" />
+	<logger name="ch.qos.logback" level="INFO" />
+	<logger name="org.hibernate.type" level="WARN" />
+  	<logger name="org.hibernate" level="WARN" />
+  	<logger name="com.mchange" level="WARN" />
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</root>
+  	
+</configuration>

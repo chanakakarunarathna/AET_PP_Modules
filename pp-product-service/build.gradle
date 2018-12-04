@@ -1,0 +1,57 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.2.RELEASE'
+	}
+	repositories {
+		maven {
+	          url "http://54.152.79.131:8081/nexus/content/groups/public"
+	    }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+version = '0.0.1'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	maven {
+	          url "http://54.152.79.131:8081/nexus/content/groups/public"
+	    }
+}
+
+dependencyManagement {
+     imports {
+     	mavenBom 'org.springframework.cloud:spring-cloud-sleuth:1.2.0.RELEASE'
+     }
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile ("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.4")
+	compile('io.springfox:springfox-swagger2:2.6.1')
+ 	compile('io.springfox:springfox-swagger-ui:2.6.1')
+ 	
+ 	compile('com.placepass:placepass-exception-util:1.2.0')
+	compile('com.placepass:pp-utils:1.2.0')
+	compile('com.placepass:pp-connector-common:1.0.0')
+ 	
+	compile group: 'com.algolia', name: 'algoliasearch', version: '1.11.0'
+	compile group: 'org.modelmapper', name: 'modelmapper', version: '1.1.0'
+	compile ("org.springframework.cloud:spring-cloud-starter-sleuth")
+	compile group: 'com.google.code.gson', name: 'gson', version: '1.7.2'
+	
+	compile("org.springframework.boot:spring-boot-starter-amqp")
+ 	compile("org.springframework.boot:spring-boot-starter-integration")
+ 	compile("org.springframework.integration:spring-integration-amqp:4.3.9.RELEASE")
+	
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}

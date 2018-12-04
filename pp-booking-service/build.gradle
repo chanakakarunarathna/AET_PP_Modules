@@ -1,0 +1,62 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.3.RELEASE'
+	}
+	repositories {
+		maven {
+	          url "https://repo.maven.apache.org/maven2/"
+	    }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management' 
+
+version = '0.0.1'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	maven {
+          url "https://repo.maven.apache.org/maven2/"
+    }
+}
+
+dependencyManagement {
+     imports {
+     	mavenBom 'org.springframework.cloud:spring-cloud-sleuth:1.2.0.RELEASE'
+     	mavenBom 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.5'
+     }
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-data-mongodb:1.5.1.RELEASE')
+	compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+	compile('io.springfox:springfox-swagger2:2.6.1')
+ 	compile('io.springfox:springfox-swagger-ui:2.6.1')
+ 	
+ 	compile ("org.springframework.cloud:spring-cloud-starter-sleuth")
+ 	
+ 	compile('com.placepass:placepass-exception-util:1.2.0')
+	compile('com.placepass:pp-utils:1.1.1')
+	compile('com.placepass:pp-connector-common:1.0.0')
+	compile 'com.placepass:encryption-utils:1.1.0'
+	compile('com.placepass:pp-event-publisher:1.1.0')
+	
+ 	compile ("org.springframework.integration:spring-integration-amqp:4.3.4.RELEASE")
+	compile('org.springframework.amqp:spring-rabbit:1.6.3.RELEASE')
+	compile ("org.springframework.amqp:spring-amqp:1.6.3.RELEASE")
+	
+	compile('com.google.code.gson:gson:1.7.2')
+	compile group: 'com.googlecode.libphonenumber', name: 'libphonenumber', version: '8.5.0'
+	
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}

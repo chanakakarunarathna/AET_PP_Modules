@@ -1,0 +1,68 @@
+configurations {
+    jaxb
+}
+
+buildscript {
+	ext {
+		springBootVersion = '1.5.2.RELEASE'
+	}
+	repositories {
+		maven {
+	          url "http://54.152.79.131:8081/nexus/content/groups/public"
+	    }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+version = '0.0.1'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	maven {
+	          url "http://54.152.79.131:8081/nexus/content/groups/public"
+	    }
+}
+
+ext {
+	springCloudVersion = 'Dalston.SR2'
+}
+
+dependencyManagement {
+     imports {
+     	mavenBom 'org.springframework.cloud:spring-cloud-sleuth:1.2.0.RELEASE'
+     }
+     imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile group: 'org.springframework.ws', name: 'spring-ws-core', version: '2.4.0.RELEASE'
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
+	compile ("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.4")
+	compile('io.springfox:springfox-swagger2:2.6.1')
+ 	compile('io.springfox:springfox-swagger-ui:2.6.1')
+ 	compile group: 'commons-codec', name: 'commons-codec', version: '1.9'
+ 	
+ 	compile('com.placepass:placepass-exception-util:1.2.0')
+	compile('com.placepass:pp-utils:1.1.1')
+	compile('com.placepass:pp-connector-common:1.0.0')
+ 	
+ 	compile ("org.springframework.cloud:spring-cloud-starter-sleuth")
+ 	
+ 	compile('org.springframework.cloud:spring-cloud-starter-config')
+	compile('org.springframework.boot:spring-boot-starter-data-rest')
+	
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}

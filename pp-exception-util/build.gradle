@@ -1,0 +1,49 @@
+buildscript {
+	ext {
+		projectGroup = 'com.placepass'
+		moduleArtifact = 'placepass-exception-util'
+		moduleVersion = '1.2.0'
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin : 'maven'
+apply plugin : 'maven-publish'
+
+group = '${projectGroup}'
+archivesBaseName = '${moduleArtifact}'
+version = '${moduleVersion}'
+description='Manage exceptions and HTTP status translations'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	maven {
+          url "http://54.152.79.131:8081/nexus/content/groups/public"
+    }
+}
+
+dependencies {
+	compile('org.springframework:spring-web:4.2.6.RELEASE')
+	compile('javax.servlet:javax.servlet-api:3.1.0')
+	compile('org.slf4j:slf4j-api:1.7.24')
+}
+
+jar {
+	baseName = 'placepass-exception-util'
+}
+
+uploadArchives {
+    repositories {
+       mavenDeployer {
+             repository(url: "http://54.152.79.131:8081/nexus/content/repositories/releases") {
+             	
+			}
+             pom.version = "${moduleVersion}"
+             pom.artifactId = "${moduleArtifact}"
+             pom.groupId = "${projectGroup}"
+       }
+    }
+}

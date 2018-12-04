@@ -1,0 +1,58 @@
+package com.placepass.booking.domain.common;
+
+/**
+ * Indicates the state transition a flow may go through and are logged. These can be granular as possible based on the
+ * need.
+ * 
+ * @author wathsala.w
+ *
+ */
+public enum LogEventProcessingStage {
+
+    PAYMENT_CONNECTOR_SALE_CALL_STARTED,
+
+    PAYMENT_CONNECTOR_SALE_CALL_COMPLETED,
+
+    PAYMENT_CONNECTOR_SALE_REVERSAL_CALL_STARTED,
+
+    PAYMENT_CONNECTOR_SALE_REVERSAL_CALL_COMPLETED,
+
+    PAYMENT_CONNECTOR_REFUND_CALL_STARTED,
+
+    PAYMENT_CONNECTOR_REFUND_CALL_COMPLETED,
+
+    // out-bound call to product service
+    PRODUCT_BOOKING_AVAILABILITY_CALL_STARTED,
+
+    PRODUCT_BOOKING_AVAILABILITY_CALL_COMPLETED,
+
+    CART_SAVED,
+
+    CART_UPDATED,
+
+    BOOKING_INITIATED,
+
+    BOOKING_SAVED,
+
+    BOOKING_UPDATED,
+
+    BOOKING_CONFIRMED,
+
+    BOOKING_FAILED,
+
+    PAYMENT_SUCCESS,
+
+    PAYMENT_FAILED,
+
+    PAYMENT_REVERSAL_SUCCESS,
+
+    PAYMENT_REVERSAL_FAILED,
+
+    BOOKING_AVAILABILITY_AND_VALIDATION,
+
+    // out-bound call to vendor connector
+    VENDOR_CONNECTOR_BOOKING_CALL_STARTED,
+
+    VENDOR_CONNECTOR_BOOKING_CALL_COMPLETED;
+
+}
