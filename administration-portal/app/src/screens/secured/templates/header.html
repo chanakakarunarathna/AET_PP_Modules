@@ -1,0 +1,74 @@
+<nav class="navbar">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button class="navbar-toggle collapsed" data-target="#nav-bar" data-toggle="collapse" type="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a ng-if="hasPermissionForPartnerPlace" class="navbar-brand aet-brand" ng-class="{'mini' : isSidebarMinimized == true}" ui-sref="index.secured.partnerPlace.search">
+            <img alt="placepass" class="navbar-logo" src="./assets/images/logo.png">
+        </a>
+        <a ng-if="!hasPermissionForPartnerPlace" class="navbar-brand aet-brand" ng-class="{'mini' : isSidebarMinimized == true}">
+            <img alt="placepass" class="navbar-logo" src="./assets/images/logo.png">
+        </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="nav-bar">
+
+        <div class="navbar-main">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="dropdown partner" dropdown is-open="partnerStatus.isopen">
+                    <a class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle ng-disabled="disabled" role="button" >
+                        {{partnerDetails.getSelectedPartner().name}}&nbsp;
+                        <span ng-if="partnerDetails.getAuthorizedPartners().length>1" class="icon icon-placepass-icons-pp-caret-down pull-right"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" ng-if="partnerDetails.getAuthorizedPartners().length>1">
+                        <li ng-repeat="partner in partnerDetails.getAuthorizedPartners() | orderBy: 'name'">
+                            <a href ng-click="selectPartner(partner)">
+                                {{partner.name}}
+                            </a>
+                        </li>
+                    </ul>
+                    <!--a class="dropdown-toggle" role="button" ng-if="!(user.isSuperAdmin)" ng-click="selectPartner(partnerDetails.getSelectedPartner())">
+                        {{partnerDetails.getSelectedPartner().name}}
+                    </a-->
+                </li>
+                <li class="dropdown partner-place" dropdown is-open="partnerPlaceStatus.isopen" ng-hide="partnerPlaceDetails.getAuthorizedPartnerPlaces() === null || partnerPlaceDetails.getAuthorizedPartnerPlaces().length < 1">
+                    <a class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle ng-disabled="disabled" role="button">
+                        {{partnerPlaceDetails.getSelectedPartnerPlace().location}}&nbsp;
+                        <span class="icon icon-placepass-icons-pp-caret-down pull-right"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-repeat="partnerPlace in partnerPlaceDetails.getAuthorizedPartnerPlaces() | orderBy: 'location'">
+                            <a href ng-click="selectPartnerPlace(partnerPlace)">{{partnerPlace.location}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <!-- <aet-navbar-notifications limit="5"></aet-navbar-notifications> -->
+                <li class="dropdown" dropdown is-open="status.isopen">
+                    <a class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle ng-disabled="disabled" role="button">
+                        <span class="user-icon">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href ng-click="manage()">Manage Account</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href ng-click="logout()">Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /.navbar-collapse -->
+</nav>

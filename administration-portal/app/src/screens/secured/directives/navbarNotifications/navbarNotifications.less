@@ -1,0 +1,99 @@
+@keyframes added {
+  0% {
+    color: @nav-link-color;
+  }
+  15% {
+    color: @brand-warning;
+  }
+  100% {
+    color: @nav-link-color;
+  }
+}
+
+.notifications-dropdown {
+  @li-padding: 5px;
+  @li-height: @line-height-computed + (@li-padding * 2);
+  .notifications-icon {
+    transition: color 1s linear;
+  }
+  &.added {
+    .notifications-icon {
+      animation: 2s added;
+    }
+  }
+  ul.dropdown-menu {
+
+    padding: 0;
+    width: 400px;
+    max-height: ((@li-height + 1) * 6);
+    overflow-y: auto;
+    li {
+      cursor: default;
+      margin-right: 0;
+      &:hover {
+        background-color: @gray-lighter;
+      }
+      div.type {
+        float: left;
+        width: 5px;
+        height: @li-height;
+        margin-right: @li-padding;
+        border-bottom: 1px solid @gray-lighter;
+      }
+      div.content {
+        padding: @li-padding;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      &.success {
+        color: @alerts-success;
+        div.type {
+          background-color: @alerts-success;
+        }
+      }
+      &.error {
+        color: @alerts-error;
+        div.type {
+          background-color: @alerts-error;
+        }
+      }
+      &.info {
+        color: @alerts-info;
+        div.type {
+          background-color: @alerts-info;
+        }
+      }
+
+      &.message {
+        color: @alerts-message;
+        div.type {
+          background-color: @alerts-message;
+        }
+      }
+    }
+
+    .controls {
+      &:hover {
+        background-color: inherit;
+      }
+      margin-bottom: 1px;
+      div.content {
+        display: inline-block;
+        width: 50%;
+        text-align: center;
+        border-bottom: 1px solid @gray-lighter;
+        border-right: 1px solid @gray-lighter;
+        padding: @li-padding * 2 0;
+        &:hover {
+          background-color: @gray-lighter;
+          cursor: pointer;
+          border-bottom: 1px solid @nav-link-color;
+        }
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+  }
+}

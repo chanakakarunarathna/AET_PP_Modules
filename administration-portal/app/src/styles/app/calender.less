@@ -1,0 +1,47 @@
+[datepicker]{
+  .btn{
+    box-shadow: none;
+    &.btn-sm{
+      padding: 5px 10px;
+      font-size: 12px;
+      line-height: 1.5;
+      border-radius: 3px;
+    }
+    &.btn-default{
+      color: #848d98;
+      background-color: #fff;
+      border-color: transparent;
+      &:hover{
+        color: #333;
+        background-color: #ebebeb;
+        border-color: #adadad;
+      }
+      &[disabled]{
+        border-color: transparent;
+        cursor: not-allowed;
+        pointer-events: none;
+        opacity: .65;
+        color: #ccc;
+        .text-muted{
+          color: #ccc;
+        }
+        &.active{
+          color: #ffffff;
+        }
+      }
+    }
+    &.btn-info{
+      color: #fff;
+      background-color: #39b3d7;
+      border-color: #269abc;
+      .text-info{
+        color: #fff;
+      }
+      &:hover{
+        color: #fff;
+        background-color: #39b3d7;
+        border-color: #269abc;
+      }
+    }
+  }
+}

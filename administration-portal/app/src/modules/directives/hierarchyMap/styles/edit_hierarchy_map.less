@@ -1,0 +1,163 @@
+.hierarchy-map-main-container {
+  &.edit{
+    .alert{
+      &.alert-info{
+        h4{
+          font-weight: bold;
+        }
+        p{
+          margin-left: 40px;
+        }
+      }
+    }
+    width: 100%;
+    .labels-container {
+      display: flex;
+      float: left;
+      ul {
+        padding: 0;
+        margin: 0;
+        li {
+          list-style: none;
+          margin-bottom: @height;
+          position: relative;
+          width: 180px;
+          height: @height + 41;
+          cursor: pointer;
+          &.stage {
+            height: 85px;
+            &.edit{
+              height: 105px;
+            }
+          }
+          /*&.action{
+            &.edit {
+              height: 179px;
+            }
+          }*/
+          &.edit{
+            height: 140px;
+          }
+        }
+      }
+    }
+    .tree {
+      .btn{
+        &.add{
+          background-color: @blue-color;
+          border-color: darken(@blue-color , 10%);
+          &:hover{
+            background-color: darken(@blue-color , 10%);;
+          }
+        }
+      }
+      .root-container {
+        .element-container {
+          .line-to {
+            border-top: 2px solid #8a959f !important;
+          }
+          .node {
+            > .panel {
+              .btn{
+                font-size: 14px;
+                padding: 1px 5px;
+                background-color: #8a959f;
+                border-color: #8a959f;
+                border-radius: 15px;
+                &.add{
+                  border-radius: 30px;
+                  display: block;
+                  position: absolute;
+                  right: -15px;
+                  z-index: 20;
+                  bottom: -15px;
+                  padding: 6px 10px;
+                  i {
+                    left: 0;
+                    top: 2px;
+                    position: relative;
+                  }
+                }
+                .glyphicon {
+                  font-size: 12px;
+                }
+              }
+              &.panel-primary {
+                .shadow(5px, 5px, 0, 0, @secondary-color);
+                &.stage{
+                  box-shadow: none;
+                  .panel-body {
+                    p {}
+                  }
+                }
+                .panel-body {
+                  p {}
+                }
+                .btn{
+                  &.edit{
+                    background-color: @main-color-lighten;
+                    border-color: @main-color;
+                    &:hover{
+                      background-color: @main-color;
+                    }
+                  }
+                  &.delete{
+                    background-color: @red;
+                    border-color: darken(@red , 10%);
+                    &:hover{
+                      background-color : darken(@red , 10%);
+                    }
+                  }
+                  &.add{
+                    background-color: @blue-color;
+                    border-color: darken(@blue-color , 10%);
+                    &:hover{
+                      background-color: darken(@blue-color , 10%);;
+                    }
+                  }
+                }
+              }
+              .panel-body {
+
+              }
+              .ctrl-btns {
+                position: absolute;
+                bottom: -12px;
+                text-align: center;
+                display: block;
+                width: 126px;
+              }
+            }
+          }
+        }
+      }
+      .child-container {
+        &:before {
+          content: '';
+          width: (@width / 2) + @padding;
+          position: absolute;
+          height: @height / 2;
+          left: 0;
+          top: -@height;
+          border-right: 2px solid #8a959f;
+          max-width: 100%;
+          max-height: 100%;
+          display: block;
+          z-index: -1;
+        }
+        .element-container {
+          &:before {
+            content: "";
+            width: (@width / 2) + @padding;
+            position: absolute;
+            height: @height / 2;
+            left: 0;
+            top: -(@height / 2);
+            border-right: 2px solid #8a959f;
+          }
+        }
+      }
+    }
+  }
+
+}

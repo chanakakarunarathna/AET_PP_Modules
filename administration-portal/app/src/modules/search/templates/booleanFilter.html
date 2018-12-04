@@ -1,0 +1,6 @@
+<li class="boolean-filter">
+    <a href ng-click="toggleStatus()">
+        <span class="status" ng-class="{'text-success':status.value===true,'text-danger':status.value===false}">{{status.label}}</span> |
+        <span class="filter-label">{{filter.label}}</span>
+    </a>
+</li>

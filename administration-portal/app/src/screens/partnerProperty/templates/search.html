@@ -1,0 +1,57 @@
+<div class="search-screen">
+
+  <div class="search-header row">
+
+    <div class="col-sm-8 title-column">
+      <span class="search-title">Partner Property</span>
+      <span class="search-count">{{searchManager.searchResults.pagination.total}} Results</span>
+      <div class="clearfix"></div>
+	  <button class="btn create-btn btn-primary" title="New Partner Property" ui-sref="index.secured.partnerProperty.create" aet-has-permission="ADD_PARTNER_PROPERTY">
+        <i class="icon-placepass-icons-pp-plus"></i> Create New Partner Property
+      </button>
+    </div>
+
+    <div class="col-sm-4 search-column">
+
+      <div class="input-container form-group has-feedback">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search Partner Property"
+                   ng-model="searchManager.query" ng-change="addFilter();searchManager.debouncedSearch()"
+                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Partner Property'">
+            <span class="input-group-btn">
+              <button ng-click="addFilter();searchManager.search()" class="btn btn-default" type="button">
+                <i class="icon-placepass-icons-pp-search form-control-feedback"></i>
+              </button>
+            </span>
+          </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12">
+
+      <div class="row">
+        <div class="col-sm-12">
+          <aet-search row-name="partnerProperty" search-manager="searchManager">
+            <aet-search-column label="Property Code" name="propertyCode" searchable="true" sort="true"></aet-search-column>
+            <aet-search-column label="Property Name" name="propertyName" searchable="true" sort="true"></aet-search-column>
+            <aet-search-column label="Brand" name="brand" searchable="true" sort="true"></aet-search-column>
+            <aet-search-column label="Sub Brand" name="subBrand" searchable="true" sort="true"></aet-search-column>            <a aet-action-button class="hover-primary" ng-click="editPartnerProperty(partnerProperty)" title="edit" type="submit">
+              <span class="icon-placepass-icons-pp-edit"></span>
+            </a>
+            <a aet-action-button class="hover-danger" ng-click="deletePartnerProperty(partnerProperty)" title="delete" type="submit">
+              <span class="icon-placepass-icons-pp-remove"></span>
+            </a>
+          </aet-search>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

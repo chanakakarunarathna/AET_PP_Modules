@@ -1,0 +1,27 @@
+<div class="aet-modal ">
+    <div class="modal-header">
+        <h3 class="modal-title">Resend {{emailType}}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row listscustomer-landing">
+            <div class=" col-sm-12">
+                <form name="resendEmailForm" novalidate>
+                    <section>
+                        <div class="row">
+                            <div class="col-xs-6">
+	                            <div class="form-group has-feedback">
+	                                <label for="email">Email :</label>
+	                                <input type="text" class="form-control" name="email" id="email" ng-model-options="{ updateOn: 'blur' }" ng-model="email">
+	                            </div>
+                        	</div>
+                        </div>
+                    </section>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger" ng-disabled="resendEmailForm.$invalid" ng-click="ok()">Resend {{emailType}}</button>
+        <button class="btn btn-default" ng-click="cancel()" type="button">Cancel</button>
+    </div>
+</div>

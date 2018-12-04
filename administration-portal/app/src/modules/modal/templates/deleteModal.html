@@ -1,0 +1,22 @@
+<div class="delete-modal aet-modal">
+
+  <div class="modal-header">
+    <h3 class="modal-title">Delete
+      {{name}}.</h3>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure, you want to delete
+      <strong>{{name}}</strong>?</p>
+    <div ng-show="isAdminUser" class="alert alert-warning">
+      <p>WARNING: This will remove all the dependent Roles for Partners and Partner Places.</p>
+    </div>
+    <div ng-show="partnerPlacesFound" class="alert alert-warning">
+      <p>WARNING: This will remove all the dependent Partner Places for Places.</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default btn-danger" ng-click="ok()">Delete</button>
+    <button class="btn btn-primary" ng-click="cancel()">Cancel</button>
+  </div>
+
+</div>

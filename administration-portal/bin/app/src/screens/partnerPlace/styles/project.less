@@ -1,0 +1,197 @@
+.partner-place-landing {
+    section {
+        background-color: @partner-place-section-bg-color;
+        .pad(10);
+        .border-radius(6);
+        .mar-b-20;
+        .shadow(5px, 5px, 20px, 0px, rgba(0, 0, 0, 0.2));
+
+        ._partner-place {}
+
+        &.tab-collapsed {
+            background-color: @partner-place-section-collapse-bg-color;
+
+            .section-header {
+                color: @partner-place-section-bg-color;
+
+                .description {
+                    margin-bottom: 0;
+                }
+
+                .collapse-btn {
+                    background: @partner-place-section-bg-color;
+
+                    i {
+                        color: @white;
+                    }
+                }
+            }
+
+            &.tab-error {
+                border: 2px solid @required-color;
+            }
+        }
+
+        .title {
+            font-weight: 100;
+            margin-top: 5px;
+            margin-right: 25px;
+        }
+
+        .error-count {
+            color: @required-color;
+            margin-top: 12px;
+
+            .count {
+                margin-left: 5px;
+                font-weight: bold;
+            }
+        }
+
+        .section-header {
+            color: @white;
+
+            .c-icon {
+                margin-right: 15px;
+
+                &:before {
+                    background-size: 40px 40px !important;
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+
+            > div {
+                .icon,
+                > .glyphicon {
+                    font-size: @large-font-size;
+                    .mar-r-15;
+                }
+
+                > .c-icon {
+                    top: 1px;
+                    position: relative;
+                }
+            }
+
+            .title {
+                text-transform: uppercase;
+            }
+
+            .collapse-btn {
+                width: 60PX;
+                height: 60px;
+                background: @white;
+                border-radius: 30px;
+                text-align: center;
+                position: relative;
+                top: 5px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: @main-color;
+
+                    i {
+                        color: @white;
+                    }
+                }
+
+                i {
+                    position: relative;
+                    color: @partner-place-section-bg-color;
+                    top: 11px;
+                    font-size: 35px;
+                    margin-right: inherit;
+
+                    &.glyphicon-minus {
+                        left: -1px;
+                        top: 14px;
+                    }
+                }
+            }
+        }
+
+        .section-body {
+            .ui-select-container {
+                .ui-select-choices,
+                .ui-select-match {
+                    .form-control,
+                    .ui-select-choices-group {
+                        em,
+                        strong {
+                            font-size: 11px;
+                        }
+                    }
+                }
+            }
+            .pad(10);
+            background-color: @partner-place-section-body-bg-color;
+            .mar-b-10;
+
+            h3.title {
+                margin-bottom: 20px;
+                .mar-r-15;
+            }
+
+            p.title {
+                color: @sub-header-p-color;
+                font-style: italic;
+            }
+
+            .sub-section {
+                .show-role-descriptions {}
+            }
+
+            .form-group {}
+
+            .add-chanel {
+                .mar-t-20;
+
+                .icon {
+                    margin-right: 8px;
+                    top: 2px;
+                    position: relative;
+                }
+            }
+
+            .test-mail {
+                margin-top: 25px;
+                height: 35px;
+
+                .icon {
+                    margin-right: 8px;
+                }
+            }
+
+            .clear-field {
+                margin-top: 10px;
+                height: 30px;
+            }
+        }
+
+        .section-footer {
+            .btn {
+                &.previous {
+                    .mar-r-5;
+                }
+            }
+        }
+    }
+
+    .channel {
+        word-break: break-all;
+        cursor: pointer;
+    }
+
+    .btn-p-top{
+        padding-top: 30px;
+    }
+    
+    .ui-select-bootstrap > .ui-select-choices {
+	  width: 100%;
+	  height: auto;
+	  max-height: 200px;
+	  overflow-x: auto;
+	  margin-top: -1px;
+}
+}

@@ -1,0 +1,52 @@
+.page-header {
+  margin-top: 0;
+  border-bottom: none;
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+/* main fade transition */
+[ui-view].fade-transition {
+	.transition(opacity, .3s, linear);
+}
+
+[ui-view].fade-transition.ng-enter {
+	opacity: 0;
+}
+
+[ui-view].fade-transition.ng-enter-active {
+	opacity: 1;
+}
+
+[ui-view].fade-transition.ng-leave {
+	opacity: 0;
+}
+
+[ui-view].fade-transition.ng-leave-active {
+	opacity: 1;
+}
+
+/* sidebar swap transition */
+[ui-view].sidebar-swap-transition {
+	.transition(all, .5s, ease);
+	opacity: 1;
+}
+
+[ui-view].sidebar-swap-transition.ng-enter {
+	opacity: 0;
+	.translateX(-100px);
+}
+
+[ui-view].sidebar-swap-transition.ng-enter-active {
+	opacity: 1;
+	.translateX(0);
+}
+
+[ui-view].sidebar-swap-transition.ng-leave {
+	opacity: 1;
+}
+
+[ui-view].sidebar-swap-transition.ng-leave-active {
+	opacity: 0;
+	.translateX(-100px);
+}

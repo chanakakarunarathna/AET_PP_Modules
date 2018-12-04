@@ -1,0 +1,137 @@
+.header {
+  margin-bottom: 0;
+  border: none;
+  z-index: 100;
+  height: 50px;
+  nav.navbar {
+    background-image: inherit;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+    height: 50px;
+    .navbar-header {
+      border-bottom: 1px solid @navbar-header-border-color;
+      height: @navbar-brand-height;
+      background-color: @navbar-header-bg-color;
+      .aet-brand {
+
+        &.mini{
+          width:@left-mini-sidebar-width;
+          background-image: url("@{img-root}/icons/pp-icon-white.png");
+          background-repeat: no-repeat;
+          background-size: 50px 50px;
+          background-position:10px 25px;
+          img{
+            display: none;
+          }
+        }
+
+        outline: 0 none;
+        background-color: @navbar-header-brand-bg-color;
+        color: lighten(@aet-brand-blue, 5%);
+        width: @left-sidebar-width;
+        height: @navbar-brand-height - 1;
+        padding: 40px 25px;
+        &:hover {
+          background-color: @navbar-header-brand-hover-color;
+        }
+        &:active {
+          background-color: @navbar-header-brand-hover-color;
+        }
+        img.navbar-logo {
+          float: left;
+          margin-top: -@grid-gutter-width / 4;
+          margin-right: 15px;
+          width: 190px;
+        }
+      }
+    }
+    .navbar-toggle {
+      span {
+        background-color: @nav-link-color;
+      }
+    }
+    .navbar-collapse {
+      height: 50px !important;
+      border-bottom: 1px solid @navbar-collapse-border-color;
+      background-color: @white;
+      ul.nav {
+
+        margin-right: 0;
+        font-size: 14px;
+        .partner {
+          border-right: 1px solid lighten(@navbar-collapse-border-color, 5%);
+        }
+        .partner-place {
+          border-right: 1px solid lighten(@navbar-collapse-border-color, 5%);
+        }
+        li.dropdown {
+          min-width: 60px;
+          text-align: center;
+          a {
+            color: @navbar-collapse-text-color;
+            font-weight: 400;
+            &:hover {
+              background-color: transparent;
+              color: darken(@navbar-collapse-text-color, 10%);
+              background-image: inherit;
+            }
+          }
+          &.dropdown {
+            background-color: transparent;
+            .glyphicon{
+              margin-left: 5px;
+              font-size: 10px;
+              top: 4px;
+            }
+            .icon{
+              font-size: 10px;
+              top: 2px;
+              position: relative;
+              margin-left: 8px;
+            }
+            &.open {
+              a.dropdown-toggle {
+                background-color: transparent;
+              }
+            }
+            .dropdown-menu {
+              border-radius: 0;
+              border: 1px solid @navbar-collapse-border-color;
+              border-top: transparent;
+              li{
+                a{
+                  padding: 10px 20px;
+                  &:hover{
+                    background-color: @navbar-header-dropdown-menu-hover-color;
+                    color: @white;
+                  }
+                }
+              }
+              .divider {
+                margin: 5px 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
+
+.dropdown {
+  .dropdown-menu {
+    max-height: 400px;
+    overflow: auto;
+    li{
+      a{
+        padding: 10px 20px;
+        &:hover{
+          background-color: @navbar-header-dropdown-menu-hover-color;
+          color: @white;
+        }
+      }
+    }
+  }
+}

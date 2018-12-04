@@ -1,0 +1,290 @@
+.search-screen {
+
+  .search-header, .search-sub-header {
+
+    .title-column {
+      line-height: 1;
+
+      .search-title, .sub-header{
+        color: @search-title-color;
+      }
+
+      .search-title {
+        font-size: @search-title-font-size;
+        padding-right: @grid-gutter-width;
+        margin-top: 13px;
+        display: inline-block;
+      }
+
+      .search-count {
+        font-size: @search-count-font-size;
+        font-style: italic;
+        color: @search-count-color;
+        //font-weight: bold;
+        white-space: nowrap;
+        padding-right: @grid-gutter-width;
+        margin-top: 10px;
+        display: inline-block;
+        position: relative;
+      }
+
+      .create-btn {
+        outline: none;
+        vertical-align: text-bottom;
+        margin-top: 10px;
+        i {
+          top: 2px;
+          position: relative;
+          margin-right: 10px;
+        }
+      }
+
+    }
+
+    .search-column {
+      .input-container {
+        .form-control {
+          padding: 10px;
+          &:focus{
+            cursor: text;
+          }
+        }
+        .input-group-btn{
+          .btn{
+            padding: 20px;
+            .form-control-feedback{
+              right: 4px;
+            }
+          }
+        }
+        margin-top: 10px;
+        .pull-right;
+        width: 100%;
+        &.form-group {
+          margin-bottom: 0;
+        }
+
+        input::-webkit-input-placeholder {
+          font-size: @placeholder-font-size;
+          font-style: italic;
+          color: @form-label-color;
+          text-align: right;
+          padding-top: 2px;
+        }
+        input::-moz-placeholder {
+          font-size: @placeholder-font-size;
+          font-style: italic;
+          color: @form-label-color;
+          text-align: right;
+        }
+        input:-moz-placeholder {   /* Older versions of Firefox */
+          font-size: @placeholder-font-size;
+          font-style: italic;
+          color: @form-label-color;
+          text-align: right;
+        }
+        input:-ms-input-placeholder {
+          font-size: @placeholder-font-size;
+          font-style: italic;
+          color: @form-label-color;
+          text-align: right;
+        }
+
+        .form-control-feedback {
+          font-size: 24px;
+          top: 8px;
+          right: 0;
+          color: @form-label-color;
+        }
+      }
+
+    }
+
+  }
+
+  .search-column-container{
+    padding: 15px;
+    margin-top: 15px;
+
+    .search-sub-header{
+      .sub-header{
+        margin: 8px 0 0;
+      }
+      .search-count{
+        margin: 13px 35px 0;
+      }
+      .create-btn{
+        margin-top: 0;
+      }
+    }
+    .search{
+      margin-top: 15px;
+    }
+  }
+  .search-ctrl{
+    .btn {
+      &.btn-lg{
+        padding-left: 60px;
+        .c-icon, .icon{
+          position: absolute;
+          left: 35px;
+          top: 18px;
+        }
+      }
+    }
+    .search-input{
+      .input-group, .form-control {
+        border-right: 0;
+        .placeholder(@form-control-border-color);
+      }
+      .input-group-addon {
+        background-color: @form-control-bg-color;
+        border-color: @form-control-border-color;
+        i{
+          top: 2px;
+          color: @form-control-border-color;
+        }
+      }
+    }
+
+  }
+
+  .search{
+    .table {
+      font-size: @table-font-size;
+      color: @form-label-color;
+      margin-bottom: 0;
+      thead {
+        tr {
+          th {
+            padding: 10px 5px;
+            vertical-align: middle;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: @form-label-color;
+
+            a {
+              color: @form-label-color;
+              &:hover {
+                color: @form-label-color;
+              }
+
+              &:active, &.active{
+                color: #86c355;
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+      tbody {
+        border: 2px solid #DDD;
+        tr {
+
+          border-bottom: 2px solid #DDD;
+          &:last-child{
+            border-bottom: none;
+          }
+          &.search-result {
+            &:hover {
+              background-color: @table-tr-hover-color !important;
+            }
+          }
+
+          td {
+            padding: 10px 6px;
+            vertical-align: middle;
+            border-top: 0;
+            &:first-child {
+              font-size: @default-font-size + 2;
+              color: @table-tr-first-child-color;
+              font-weight: bold;
+            }
+
+            &.action-column {
+
+              line-height: 0;
+
+              a {
+                padding-right: 15px;
+                text-decoration: none;
+                font-size: 20px;
+                color: @form-label-color;
+
+                &:hover {
+                  text-decoration: none;
+
+                  &.hover-success {
+                    color: @brand-success;
+                  }
+
+                  &.hover-danger {
+                    color: @brand-danger;
+                  }
+
+                  &.hover-info {
+                    color: @brand-info;
+                  }
+
+                  &.hover-primary {
+                    color: @primary-btn-color;
+                  }
+                }
+
+                &:last-child {
+                  padding-right: 10px;
+                }
+
+                span {
+                  margin-top: 3px;
+                }
+              }
+
+            }
+          }
+        }
+      }
+
+    }
+    .pagination-container {
+      background-color: #969ea9;
+      border: 2px solid #969ea9;
+      border-top: 0;
+      float: left;
+      width: 100%;
+      position: relative;
+      padding-right: 5px;
+      .search-wait {
+        position: absolute;
+        color: #ffffff;
+        top: 15px;
+        margin-left: 5px;
+      }
+      .pagination {
+        margin: 5px 0;
+        .pull-right;
+        li {
+          a {
+            padding: 7px 10px;
+          }
+          &.active {
+            a {
+              background-color: @primary-btn-color;
+              border-color: transparent;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@keyframes bg-pulse {
+  from {
+    color: transparent;
+  }
+  to {
+    color: #666;
+  }
+}

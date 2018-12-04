@@ -1,0 +1,207 @@
+<h1 class="page-header">
+	Create Field
+</h1>
+
+<div class="row">
+	<div class=" col-sm-6">
+		<form name="createMasterFieldForm" novalidate class="form-horizontal">
+			<div class="form-group has-feedback"
+				ng-class="{ 'has-success' : createMasterFieldForm.name.$valid, 'has-error' : createMasterFieldForm.name.$showError && createMasterFieldForm.name.$hasError()}"
+			>
+				<label for="name" class="col-sm-3 control-label">Name *</label>
+				<div class="col-sm-9">
+					<input name="name"
+						   id="name"
+						   type="text"
+						   class="form-control"
+						   placeholder="A short name to identify the master field ..."
+						   ng-model="masterField.name"
+						   ng-pattern="/^[a-z\d\s]+$/i"
+						   required
+						   ng-maxlength="25"
+						   aria-describedby="inputSuccess2Status"
+						   />
+
+					<div ng-show="createMasterFieldForm.name.$showError">
+						<span class="glyphicon  form-control-feedback" aria-hidden="true"
+							  ng-class="{'glyphicon-ok' : createMasterFieldForm.name.$valid, 'glyphicon-remove' : createMasterFieldForm.name.$showError && createMasterFieldForm.name.$hasError()}"
+						></span>
+						<span class="text-danger" ng-show="createMasterFieldForm.name.$error.required">Name is required.</span>
+						<span class="text-danger" ng-show="createMasterFieldForm.name.$error.maxlength">Name must be 25 characters or less</span>
+						<span class="text-danger" ng-show="createMasterFieldForm.name.$error.pattern">Name cannot contain special characters</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group has-feedback"
+				ng-class="{ 'has-success' : createMasterFieldForm.label.$valid, 'has-error' : createMasterFieldForm.label.$showError && createMasterFieldForm.label.$hasError()}"
+			>
+				<label for="label" class="col-sm-3 control-label">Label *</label>
+				<div class="col-sm-9">
+					<input name="label"
+						   id="label"
+						   type="text"
+						   class="form-control"
+						   placeholder="The name that actually appears on a permit..."
+						   ng-model="masterField.label"
+						   required
+						   ng-maxlength="255"
+						   />
+					<div ng-show="createMasterFieldForm.label.$showError">
+						<span class="glyphicon  form-control-feedback" aria-hidden="true"
+							  ng-class="{'glyphicon-ok' : createMasterFieldForm.label.$valid, 'glyphicon-remove' : createMasterFieldForm.label.$showError && createMasterFieldForm.label.$hasError()}"
+						></span>
+						<span class="text-danger" ng-show="createMasterFieldForm.label.$error.required">Label is required.</span>
+						<span class="text-danger" ng-show="createMasterFieldForm.label.$error.maxlength">Label must be 255 characters or less</span>
+					</div>
+				</div>
+			</div>
+			
+			
+
+			<div class="form-group has-feedback"
+				ng-class="{'has-error' : createMasterFieldForm.tooltip.$showError && createMasterFieldForm.tooltip.$hasError()}"
+			>
+				<label for="tooltip" class="col-sm-3 control-label">Tool Tip</label>
+				<div class="col-sm-9">
+					<input name="tooltip"
+						   id="tooltip"
+						   type="text"
+						   class="form-control"
+						   placeholder="A Tool Tip message that will display on hover..."
+						   ng-model="masterField.tooltip"
+						   ng-maxlength="255"
+						   />
+					<!-- <span class="glyphicon  form-control-feedback" aria-hidden="true"
+							  ng-class="{'glyphicon-remove' : createMasterFieldForm.tooltip.$showError && createMasterFieldForm.tooltip.$hasError()}"
+					></span> -->
+					<div ng-show="createMasterFieldForm.tooltip.$showError">
+						<span class="text-danger" ng-show="createMasterFieldForm.tooltip.$error.maxlength">Tool tip must be 255 characters or less</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group has-feedback"
+				ng-class="{ 'has-error' : createMasterFieldForm.maxLength.$showError && createMasterFieldForm.maxLength.$hasError()}"
+			>
+				<label for="maxLength" class="col-sm-3 control-label">Max Length</label>
+				<div class="col-sm-9">
+					<input name="maxLength"
+						   id="maxLength"
+						   type="number"
+						   min="1"
+						   ng-minlength="1"
+						   class="form-control"
+						   placeholder="Default maximum length for this master field is 255..."
+						   ng-model="masterField.maxLength"
+						   ng-pattern="/^-?\d+$/"
+						   />
+					<div ng-show="createMasterFieldForm.maxLength.$showError">
+						<span class="text-danger" ng-show="createMasterFieldForm.maxLength.$error.number">Max length must be a number</span>
+						<span class="text-danger" ng-show="createMasterFieldForm.maxLength.$error.min && !createMasterFieldForm.maxLength.$error.pattern">Max length must be greater than zero</span>
+						<span class="text-danger" ng-show="createMasterFieldForm.maxLength.$error.pattern">The value is not an integer</span>
+					</div> 
+					
+				</div>
+			</div>
+			
+			
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-9">
+					<div class="checkbox">
+						<label class="bold-text">
+							<input name="mandatory"
+								   type="checkbox"
+								   ng-model="masterField.isMandatory"
+							/>
+							 Required
+						</label>
+						<label class="bold-text col-sm-offset-1">
+							<input name="hidden"
+								   type="checkbox"
+								   ng-model="masterField.hidden"
+									/>
+							Hidden
+						</label>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group has-feedback"
+				 ng-class="{ 'has-error' : createMasterFieldForm.valueType.$showError && createMasterFieldForm.valueType.$hasError()}">
+				<label for="value" class="col-sm-3 control-label">Value Type *</label>
+				<div class="col-sm-9">
+					<select name="valueType"
+							id="valueType" 
+							class="form-control" 
+							ng-model="masterField.valueType" 
+							ng-options="valueType for valueType in valueTypes"
+							required>
+					</select>
+					<div ng-show="createMasterFieldForm.valueType.$showError">
+						<span class="text-danger" ng-show="createMasterFieldForm.valueType.$error.required">Value Type is required.</span>
+					</div> 
+					<div>
+						<span class="text-info" ng-show="(masterField.valueType == 'SINGLE_SELECT' || masterField.valueType == 'MULTI_SELECT') && masterField.options.length < 2">Add two or more options</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group" ng-show="masterField.valueType == 'SINGLE_SELECT' || masterField.valueType == 'MULTI_SELECT'">
+				<div class="col-sm-offset-3  col-sm-2">
+					<button class="btn btn-xs btn-primary"
+							type="submit"
+							ng-click="addOption(option)">
+						Add option
+					</button>
+				</div>
+				<div class="col-sm-7">
+					<input class="form-control input-xs"
+						   name="option"
+						   id="option"
+						   type="text"
+						   class="form-control"
+						   ng-model="option"
+						   />
+				</div>
+				
+			</div>
+			
+			<div class="form-group" ng-show="masterField.valueType == 'SINGLE_SELECT' || masterField.valueType == 'MULTI_SELECT'">
+				<div class="col-sm-offset-3 col-sm-9">
+					<table class="table">
+
+					<tbody>
+			
+						<tr ng-repeat="option in masterField.options">
+			
+							<td>{{option}}</td>
+			
+							<td>
+								<button class="btn btn-xs btn-danger pull-right" title="delete" type="submit" ng-click="deleteOption($index)">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+							</td>
+						</tr>
+			
+					</tbody>
+			
+				</table>
+				</div>
+			</div>
+			
+			
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-9">
+					<button class="btn btn-primary"
+							type="submit"
+							ng-disabled="createMasterFieldForm.$invalid  || ((masterField.valueType == 'SINGLE_SELECT' || masterField.valueType == 'MULTI_SELECT') && masterField.options.length < 2)"
+							ng-click="submitMasterFieldForm()">
+						Save
+					</button>
+				</div>
+			</div>
+			
+		</form>
+	</div>
+</div>

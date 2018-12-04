@@ -1,0 +1,238 @@
+<div id="shareMapModalWrapper">
+  <div class="modal-header">
+    <h3 class="modal-title">Share Map
+      <button class="btn btn-default pull-right" ng-click="cancel()" type="button">
+        <i class="glyphicon glyphicon-remove"></i>
+      </button>
+    </h3>
+  </div>
+  <div class="modal-body">
+
+    <div class="row">
+      <div class="col-md-12">
+        <tabset>
+          <tab active="tabActivity[0].active" disable=displayCloseBtn heading="How it Works">
+            <div class="padding20 instruction">
+              <div class="page1">
+                <div class="row">
+                  <div class="col-md-12">
+                    <!--<h4>Gather Insights on the Data Gathered in Your Map:</h4>-->
+                    <h4>Share Your Map with PartnerPlace Team Members or Subject Matter Experts (SMEs)</h4>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <p>What to keep in mind:</p>
+                    <ol>
+                      <li>Make sure those you want to share the Map with are assigned as a PartnerPlace Team member or SME on this Partner Place. This grants them access to view the entire Map.</li>
+                      <li>Next you are going to write the email message you want to share, plus define each Stage, Touchpoint or Action you want feedback on. Select the desired item, then write accompanying instructions. This specific direction will help focus their review of your Mission collected data, comments and media uploads. (Select at least one stage, touchpoint or action that has data.)</li>
+                    </ol>
+                  </div>
+                </div>
+                <div class="row floatRight">
+                  <div class="col-md-12">
+                    <button class="btn btn-primary" ng-click="next(1)" type="button">Next</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </tab>
+
+          <tab active="tabActivity[1].active" disable=displayCloseBtn heading="Assignment">
+            <div class="padding20">
+              <div class="page2">
+                <div class="row">
+                  <form class="form-horizontal col-md-12" name="assignmentForm" novalidate>
+                    <div class="row well form-group has-feedback required"
+                         ng-class="{'has-error' : assignmentForm.subjectLine.$showError && assignmentForm.subjectLine.$hasError()}">
+                      <label class="col-md-12" for="subjectLine">Email Subject Line:</label>
+                      <div class="col-md-12">
+                        <input
+                            aria-describedby="inputSuccess2Status"
+                            class="form-control"
+                            id="subjectLine"
+                            name="subjectLine"
+                            ng-model-options="{ updateOn: 'blur' }"
+                            ng-model="shareMap.assignment.emailSubjectLine"
+                            placeholder="Define subject line"
+                            required
+                            type="text"/>
+                        <div class="error relative" ng-show="assignmentForm.subjectLine.$showError">
+                          <p class="text-danger" ng-show="assignmentForm.subjectLine.$error.required">Email
+                            Subject Line is required.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row well">
+                      <div class="col-md-12 well well-sm">
+                        <p class="mar-b-0">
+                          <b>Please complete the following email template.</b>
+                          This will be sent to your selected participants.</p>
+                      </div>
+                      <div class="col-md-12 well">
+                        <div class="form-group has-feedback required mar-b-0"
+                             ng-class="{ 'has-error' : assignmentForm.introductoryComment.$showError && assignmentForm.introductoryComment.$hasError()}">
+                          <label class="col-md-12" for="introductoryComment">Write introductory email comments:</label>
+                          <div class="col-md-12">
+                            <textarea
+                                class="form-control"
+                                id="introductoryComment"
+                                name="introductoryComment"
+                                ng-model-options="{ updateOn: 'blur' }"
+                                ng-model="shareMap.assignment.introductoryComment"
+                                placeholder="e.g. We would like to gather your insights based on feedback we have collected about parts of our customer journey map. Below are directions on which parts of the map to focus on. Then lower in this email are tips on how to best find these segments of our map. The map includes stages, touchpoints, and action items. It’s at the Action level you will focus your review and insights."
+                                required
+                                rows="4">
+                            </textarea>
+                            <div class="error relative" ng-show="assignmentForm.introductoryComment.$showError">
+                              <p class="text-danger" ng-show="assignmentForm.introductoryComment.$error.required">
+                                Introductory Email Comment is required.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12 well" ng-repeat="focusItem in shareMap.assignment.itemsToFocus">
+                        <ng-form name="focusItemForm">
+                          <div class="row m-b-10" ng-if="shareMap.assignment.itemsToFocus.length>1">
+                            <div class="col-md-12">
+                              <a class="btn-text pull-right" ng-click="deleteFocusItem($index)" type="button">X</a>
+                            </div>
+                          </div>
+
+                          <div class="form-group has-feedback mar-b-0"
+                               ng-class="{'has-error' : focusItemForm.itemDropDown.$error.required && focusItemForm.itemDropDown.$hasError()}">
+                            <label class="col-md-6" for="itemDropDown">Please Review This Item :</label>
+                            <div class="col-md-6">
+                              <ui-select
+                                  options=""
+                                  id="itemDropDown"
+                                  name="itemDropDown"
+                                  ng-change="updateItems(focusItem, selectedModel)"
+                                  ng-model="$parent.selectedModel"
+                                  theme="bootstrap"
+                                  ng-required="focusItem.focusOn.length > 0"
+                                  title="{{selectedModel.title}}">
+                                <ui-select-match placeholder="">
+                                  <span ng-bind-html="$select.selected.title"></span>
+                                </ui-select-match>
+                                <ui-select-choices repeat="item in items">
+                                  <span ng-bind-html="item.title"></span>
+                                </ui-select-choices>
+                              </ui-select>
+                              <div class="error relative" ng-show="focusItemForm.itemDropDown.$error.required">
+                                <p class="text-danger">Item is Required</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group has-feedback mar-b-0"
+                               ng-class="{'has-error' : focusItemForm.itemFocus.$showError && focusItemForm.itemFocus.$hasError()}">
+                            <label class="col-md-12" for="itemFocus">Please focus on:</label>
+
+                            <div class="col-md-12">
+                              <textarea class="form-control" id="itemFocus" name="itemFocus"
+                                        ng-maxlength=5000 ng-model="focusItem.focusOn"
+                                        ng-required="selectedModel != undefined" placeholder="Focus on..."
+                                        rows="4">
+                              </textarea>
+                              <div class="error relative" ng-show="focusItemForm.itemFocus.$showError">
+                                <p class="text-danger" ng-show="focusItemForm.itemFocus.$error.required">Focus on
+                                  message is required.</p>
+                                <p class="text-danger" ng-show="focusItemForm.itemFocus.$error.maxlength">Focus on
+                                  message must be 5000 characters or less</p>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-form>
+                      </div>
+                      <div class="col-md-12">
+                        <a ng-click="addItem()" ng-if="shareMap.assignment.itemsToFocus.length < 10"
+                           type="button">+ Add Another Item</a>
+                      </div>
+                    </div>
+
+                  </form>
+
+                  <div class="row floatRight">
+                    <div class="col-md-12">
+                      <button class="btn btn-primary" ng-click="previous(0)" type="button">Previous</button>
+                      <button class="btn btn-primary" ng-click="next(2)" ng-disabled="!(assignmentForm.$valid)"
+                              type="button">Next
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </tab>
+          <tab active="tabActivity[2].active" disable="!(assignmentForm.$valid) || displayCloseBtn"
+               heading="Select Participants">
+            <div class="padding20">
+              <div class="page3">
+                <div class="row">
+                  <div class="col-md-12">
+                    <span ng-hide="participants.length > 0">You do not have any PartnerPlace Team or SME users assigned to this Partner Place. Please add these users to your Partner Place to use this feature. Thank you.</span>
+                    <table class="table">
+                      <tr ng-repeat="participant in participants">
+                        <td>
+                          <label>
+                            <input ng-change="updateParticipants(isChecked, $index)" ng-model="isChecked"
+                                   type="checkbox">
+                            {{participant.firstName}}
+                            {{participant.lastName}}
+                          </label>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <div class="row floatRight">
+                  <div class="col-md-12">
+                    <button class="btn btn-primary" ng-click="previous(1)" type="button">Previous</button>
+                    <button class="btn btn-primary" ng-click="next(3)" ng-disabled="shareMap.participants.length < 1"
+                            type="button">Next
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </tab>
+          <tab active="tabActivity[3].active"
+               disable="!(assignmentForm.$valid) || shareMap.participants.length < 1" heading="Send">
+            <div class="padding20">
+              <div class="page4">
+                <div class="row">
+                  <div class="col-md-12 instruction" ng-if="!displayCloseBtn">
+                    <h3>Ready to send?</h3>
+                    <p>
+                      Once you click send, this message will be sent, and they can login and view the map along with
+                      your email for directions.
+                    </p>
+                    <p>
+                      Note: We will include directions on how to locate items on the map by number, double click it to see the data and comments collected. Then they will learn they should navigate to the Insights tab to add their comments and/or upload a file.
+                    </p>
+                  </div>
+                  <div class="col-md-12" ng-if="displayCloseBtn">
+                    <h4 ng-if="displayCloseBtn">The Map has been shared successfully</h4>
+                  </div>
+                </div>
+                <div class="row floatRight">
+                  <div class="col-md-12">
+                    <button class="btn btn-primary" ng-click="previous(2)" ng-if="!displayCloseBtn" type="button">
+                      Previous
+                    </button>
+                    <button class="btn btn-primary" ng-click="send()" ng-if="!displayCloseBtn" type="button">Send Now
+                    </button>
+                    <button class="btn btn-primary" ng-click="cancel()" ng-if="displayCloseBtn" type="button">Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+</div>

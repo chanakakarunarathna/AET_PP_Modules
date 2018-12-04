@@ -1,0 +1,110 @@
+<h1 class="page-header">
+    Create Partner Property
+</h1>
+
+<div class="row partnerPropertys-landing">
+    <div class=" col-sm-12">
+        <form class="form-horizontal" name="createPartnerPropertyForm" novalidate>
+
+            <div class="section-body">
+                <div class="row sub-section project-setup">
+                    <div class="col-xs-12">
+                        <h3 class="title">Partner Property Setup</h3>
+                    </div>
+                    <div class="col-xs-6 section-padding">
+                        <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPartnerPropertyForm.propertyCode.$valid, 'has-error' : createPartnerPropertyForm.propertyCode.$showError && createPartnerPropertyForm.propertyCode.$hasError()}">
+                             <label for="propertyCode">Property Code</label>
+                             <input aria-describedby="inputSuccess2Status" ng-pattern="/^[0-9a-zA-Z\_\-]+$/" class="form-control" id="propertyCode" name="propertyCode" ng-maxlength="40" ng-model="partnerProperty.propertyCode" placeholder="Enter a unique Code to identify the Partner Property ..." required type="text"/>
+                             <div class="error" ng-show="createPartnerPropertyForm.propertyCode.$showError">
+                                 <p class="text-danger" ng-show="createPartnerPropertyForm.propertyCode.$error.required">Property Code is required.</p>
+                                 <p class="text-danger" ng-show="createPartnerPropertyForm.propertyCode.$error.maxlength">Property Code must be 40 characters or less</p>
+                                 <p class="text-danger" ng-show="createPartnerPropertyForm.propertyCode.$error.pattern">This doesn't seem to be a valid code.</p>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 section-padding">
+                        <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPartnerPropertyForm.propertyName.$valid, 'has-error' : createPartnerPropertyForm.propertyName.$showError && createPartnerPropertyForm.propertyName.$hasError()}">
+                              <label for="propertyName">Property Name</label>
+                              <input aria-describedby="inputSuccess2Status" class="form-control" id="propertyName" name="propertyName" ng-maxlength="150" ng-model="partnerProperty.propertyName" placeholder="Property Name ..." required type="text"/>
+                              <div class="error" ng-show="createPartnerPropertyForm.propertyName.$showError">
+                                  <p class="text-danger" ng-show="createPartnerPropertyForm.propertyName.$error.required">Property Name is required.</p>
+                                  <p class="text-danger" ng-show="createPartnerPropertyForm.propertyName.$error.maxlength">Property Name must be 150 characters or less</p>
+                              </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 section-padding">
+                        <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPartnerPropertyForm.brand.$valid, 'has-error' : createPartnerPropertyForm.brand.$showError && createPartnerPropertyForm.brand.$hasError()}">
+                             <label for="brand">Brand</label>
+                             <input aria-describedby="inputSuccess2Status" class="form-control" id="brand" name="brand" ng-maxlength="40" ng-model="partnerProperty.brand" placeholder="A Brand to identify the partnerProperty ..." required type="text"/>
+                             <div class="error" ng-show="createPartnerPropertyForm.brand.$showError">
+                                 <p class="text-danger" ng-show="createPartnerPropertyForm.brand.$error.required">Brand is required.</p>
+                                 <p class="text-danger" ng-show="createPartnerPropertyForm.brand.$error.maxlength">Brand must be 40 characters or less</p>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 section-padding">
+                        <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPartnerPropertyForm.subBrand.$valid, 'has-error' : createPartnerPropertyForm.subBrand.$showError && createPartnerPropertyForm.subBrand.$hasError()}">
+                             <label for="subBrand">Sub Brand</label>
+                             <input aria-describedby="inputSuccess2Status" class="form-control" id="subBrand" name="subBrand" ng-maxlength="40" ng-model="partnerProperty.subBrand" placeholder="A Sub Brand to identify the partnerProperty ..." required type="text"/>
+                             <div class="error" ng-show="createPartnerPropertyForm.subBrand.$showError">
+                                 <p class="text-danger" ng-show="createPartnerPropertyForm.subBrand.$error.required">Sub Brand is required.</p>
+                                 <p class="text-danger" ng-show="createPartnerPropertyForm.subBrand.$error.maxlength">Sub Brand must be 40 characters or less</p>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 section-padding">
+                        <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPartnerPropertyForm.imageUrl.$valid, 'has-error' : createPartnerPropertyForm.imageUrl.$showError && createPartnerPropertyForm.imageUrl.$hasError()}">
+                            <label for="imageUrl">Image Url</label>
+                            <input aria-describedby="inputSuccess2Status" class="form-control" id="imageUrl" name="imageUrl" ng-maxlength="250" ng-model="partnerProperty.imageUrl" placeholder="Please enter Image Url ..." required type="url"/>
+                            <div class="error" ng-show="createPartnerPropertyForm.imageUrl.$showError">
+                                <p class="text-danger" ng-show="createPartnerPropertyForm.imageUrl.$error.required">Image URL Id is required.</p>
+                                <p class="text-danger" ng-show="createPartnerPropertyForm.imageUrl.$error.url">Please enter valid Image URL.</p>
+                                <p class="text-danger" ng-show="createPartnerPropertyForm.imageUrl.$error.maxlength">Image URL must be 250 characters or less</p>
+                                <p class="text-danger" ng-show="createPartnerPropertyForm.imageUrl.$error.pattern">This doesn't seem to be a valid URL, don't use special characters</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="section-body">
+                <div class="row sub-section project-setup">
+                    <div class="col-xs-12">
+                        <h3 class="title">Geo Location</h3>
+                    </div>
+                    <div class="col-xs-6 section-padding">
+                        <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPartnerPropertyForm.lat.$valid, 'has-error' : createPartnerPropertyForm.lat.$showError && createPartnerPropertyForm.lat.$hasError()}">
+                             <label for="lat">Latitude</label>
+                             <input ng-pattern="latRegex" aria-describedby="inputSuccess2Status" class="form-control" id="lat" name="lat" onkeypress='return !(event.charCode != 8 && event.charCode != 0 && event.charCode != 46 && event.charCode != 45 && event.charCode > 31 && (event.charCode < 48 || event.charCode > 57))' ng-model="partnerProperty.geoLocation.lat" placeholder="Latitude ..." required type="text"/>
+                             <div class="error" ng-show="createPartnerPropertyForm.lat.$showError">
+                             	 <p class="text-danger" ng-show="createPartnerPropertyForm.lat.$error.pattern">Valid Latitude is required</p>
+                                 <p class="text-danger" ng-show="createPartnerPropertyForm.lat.$error.required">Latitude is required.</p>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 section-padding">
+                        <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPartnerPropertyForm.lng.$valid, 'has-error' : createPartnerPropertyForm.lng.$showError && createPartnerPropertyForm.lng.$hasError()}">
+                             <label for="lng">Longitude</label>
+                             <input ng-pattern="longRegex" aria-describedby="inputSuccess2Status" class="form-control" id="lng" name="lng" onkeypress='return !(event.charCode != 8 && event.charCode != 0 && event.charCode != 46 && event.charCode != 45 && event.charCode > 31 && (event.charCode < 48 || event.charCode > 57))' ng-model="partnerProperty.geoLocation.lng" placeholder="Longitude ..." required type="text"/>
+                             <div class="error" ng-show="createPartnerPropertyForm.lng.$showError">
+                             	 <p class="text-danger" ng-show="createPartnerPropertyForm.lng.$error.pattern">Valid Longitude is required</p>
+                                 <p class="text-danger" ng-show="createPartnerPropertyForm.lng.$error.required">Longitude is required.</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <button class="btn btn-primary pull-right button-holder" ng-click="submitPartnerPropertyForm()" ng-disabled="createPartnerPropertyForm.$invalid" type="submit">
+                        Save
+                    </button>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

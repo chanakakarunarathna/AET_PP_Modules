@@ -1,0 +1,85 @@
+<div class="loader" ng-show="loader" data-html2canvas-ignore="true">
+    <div class="backdrop"></div>
+    <div class="loader-container">
+      <div id="loader"></div>
+      <h1 ng-hide="loaderText">Updating...</h1>
+      <h1 ng-show="loaderText">{{loaderText}}</h1>
+    </div>
+  </div>
+<div class="login-screen">
+  <alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="closeAlert($index)">{{ alert.msg }}</alert>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="logo">
+        <img src="assets/images/logo.png" alt=""/>
+      </div>
+    </div>
+    <div class="panel-body">
+      <form name="loginForm" novalidate class="form-horizontal login-form">
+        <div class="form-group has-feedback mar-b-15"
+             ng-class="{'has-error' : loginForm.username.$showError && loginForm.username.$hasError()}">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+              <input name="username"
+                     id="username"
+                     type="text"
+                     class="form-control"
+                     placeholder="Username..."
+                     ng-pattern="emailValidationPattern"
+                     ng-model="loginRequestDTO.username"
+                     aria-describedby="username-addon"
+                     required
+                  />
+            </div>
+          </div>
+        </div>
+        <div class="form-group has-feedback mar-b-15"
+             ng-class="{'has-error' : loginForm.password.$showError && loginForm.password.$hasError()}">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+              <input name="password"
+                     id="password"
+                     type="password"
+                     class="form-control"
+                     placeholder="Password..."
+                     ng-model="loginRequestDTO.password"
+                     required
+                  />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <div class="checkbox">
+              <label class="bold-text">
+                <input name="rememberme"
+                       type="checkbox"
+                       ng-model="loginRequestDTO.rememberme"
+                       ng-enter="updateRememberme()"
+                    />
+                Remember me
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <button class="btn btn-block btn-primary"
+                    type="submit"
+                    ng-disabled="loginForm.$invalid"
+                    ng-click="submitLogin()">
+              Login
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <a ui-sref="resetPassword">
+      <div class="panel-footer">
+        Forgot Password?
+      </div>
+    </a>
+  </div>
+</div>

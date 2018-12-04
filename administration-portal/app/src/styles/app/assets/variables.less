@@ -1,0 +1,40 @@
+// Admin portal aside navbar
+@left-sidebar-width: 300px;
+@ggw: @grid-gutter-width;
+
+@permit-field-font-size: 14px;
+@permit-field-padding: 15px;
+@permit-field-height: (@permit-field-font-size * @line-height-base) + (@permit-field-padding * 2);
+
+@nav-height : 70px;
+
+/*-------------------------------------------*/
+
+@xs-max : 767px;
+@xs-min : 231px;
+
+@sm-min : 768px;
+@sm-max : 991px;
+
+@md-min : 992px;
+@md-max : 1199px;
+
+@md-min-sp : 319px;
+@md-max-sp : 767px;
+
+@lg-min : 1200px;
+
+@mobileEx:         ~"(max-width: @{xs-min})";
+@mobile:           ~"(max-width: @{xs-max})";
+@mobileAndTablet:  ~"(min-width: @{xs-max}) and (max-width: @{sm-max})";
+
+@mobile-landscape: ~"(max-width: @{xs-max}) and (min-width:580px)";
+
+@tablet:          ~"(max-width: @{sm-max})";
+@tablet-sp:       ~"(min-width: @{md-min-sp}) and (max-width: @{md-max-sp})";
+
+@desktop-smAndLg: ~"(min-width: @{sm-min})";
+
+@largeDesktop:    ~"(min-width: @{lg-min})";
+@mediumDesktop:   ~"(max-width : @{md-max})and (min-width: @{md-min})";
+@smallDesktop:    ~"(max-width : @{sm-max})and (min-width: @{sm-min})";

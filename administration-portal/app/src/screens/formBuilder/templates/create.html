@@ -1,0 +1,572 @@
+<h1 class="page-header">
+	Create Form
+</h1>
+<div class="row create-permit">
+	<div class="col-sm-4 permit-sidebar-nav">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Fields</label>
+						<div class="col-sm-10">
+							<aet-search-input search-manager="masterFieldSearchManager" class="form-control"></aet-search-input>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="panel-body">
+				<ul class="fields">
+					<li ng-repeat="field in masterFieldSearchManager.searchResults.results | searchFilter : masterFieldSearchManager.query : masterFieldSearchManager.searchableFields"
+						dnd-draggable="field"
+						dnd-type="'field'"
+						dnd-effect-allowed="copy"
+						ng-class="{'hidden-field' : field.hidden}" >
+						{{field.name}}
+						<span class="badge pull-right"
+							  popover-trigger="mouseenter"
+							  popover-template="'permitPopover.html'"
+							  popover-placement="right"	>
+							<span class="glyphicon glyphicon-info-sign"></span>
+							<script type="text/ng-template" id="permitPopover.html">
+								<div class="content">
+									<p><strong>Name</strong> {{field.name}}</p>
+									<p><strong>Label</strong> {{field.label}}</p>
+									<p><strong>Tooltip</strong> {{field.tooltip}}</p>
+									<p><strong>Mandatory</strong> {{field.isMandatory}}</p>
+									<p><strong>Type</strong> {{field.valueType}}</p>
+								</div>
+							</script>
+						</span>
+						<span class="badge pull-right"
+							  popover-trigger="mouseenter"
+							  popover-template="'hiddenPopover.html'"
+							  popover-placement="right"	
+							  ng-show="field.hidden">
+							<span class="glyphicon glyphicon-eye-close"></span>
+							<script type="text/ng-template" id="hiddenPopover.html">
+								<div class="content">
+									<p>Hidden Field</p>
+								</div>
+							</script>
+						</span>
+					</li>
+				</ul>
+				
+				<div class="below-search">
+
+					<div class="search-count" ng-show="!masterFieldSearchManager.showLoading">
+						{{masterFieldSearchManager.searchResults.pagination.total}} results
+					</div>
+
+					<div class="search-wait" ng-show="masterFieldSearchManager.showLoading">
+						Searching...
+					</div>
+				</div>
+
+
+				<pagination total-items="masterFieldSearchManager.searchResults.pagination.total" 
+							ng-model="masterFieldSearchManager.page" 
+							items-per-page="masterFieldSearchManager.count" 
+							ng-change="masterFieldSearchManager.search()"
+							max-size="masterFieldSearchManager.maxPages"
+							rotate="false"
+							ng-show="masterFieldSearchManager.searchResults.pagination.total"></pagination>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-8 permit-main">
+        <form name="createFormForm" novalidate class="form-horizontal">
+            <div class="panel panel-default">
+                <div class="panel-heading">				
+                    <div class="form-group has-feedback"
+                        ng-class="{ 'has-success' : createFormForm.permitName.$valid, 'has-error' : createFormForm.permitName.$showError && createFormForm.permitName.$hasError()}"
+                    >
+                        <label for="permitName" class="col-sm-2 control-label required">Form Name</label>
+                        <div class="col-sm-10">
+                            <input name="permitName" 
+                                   id="permitName"
+                                   type="text"
+                                   class="form-control"
+                                   ng-model="permit.name"
+                                   placeholder="Form Name"
+                                   ng-pattern="/^[a-z\d\s]+$/i"
+                                   required
+                                   ng-maxlength="255"
+                                   aria-describedby="inputSuccess2Status"
+                                   />
+
+                            <div ng-show="createFormForm.permitName.$showError">
+                                <span class="glyphicon  form-control-feedback" aria-hidden="true"
+                                      ng-class="{'glyphicon-ok' : createFormForm.permitName.$valid, 'glyphicon-remove' : createFormForm.permitName.$showError && createFormForm.permitName.$hasError()}"
+                                ></span>
+                                <span class="text-danger" ng-show="createFormForm.permitName.$error.required">Form Name is required.</span>
+                                <span class="text-danger" ng-show="createFormForm.permitName.$error.maxlength">Form Name must be 255 characters or less</span>
+                                <span class="text-danger" ng-show="createFormForm.permitName.$error.pattern">Name cannot contain special characters</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                
+				<div class="panel-body form-panel">
+					
+					<div class="screen-list-container row form-group">
+						
+						<label for="fields" class="col-sm-2 control-label">Screens</label>
+						
+						<div class="col-sm-10">
+							<button class="btn btn-primary pull-left new-screen" ng-click="addScreen()"><span class="glyphicon glyphicon-plus"></span> New Screen</button>
+
+							<ul class="screen-list list-inline"
+								dnd-list="permit.screens"
+								dnd-allowed-types="['screen']"
+								dnd-horizontal-list="true">
+
+								<screen-li ng-repeat="screen in permit.screens" 
+										   title="{{screen.label}}" 
+										   screen="screen"
+										   selected-screen="$parent.selectedScreen"
+										   screens="permit.screens"
+										   index="$index">
+								</screen-li>
+
+							</ul>
+						</div>
+
+					</div>
+					
+					<div class="field-container row form-group">
+						
+						<label for="fields" class="col-sm-2 control-label">Fields</label>
+						
+						<div class="col-sm-10">
+						
+							<div ng-repeat="screen in permit.screens"
+								 ng-show="selectedScreen == screen.name">
+
+								<div class="permit-screen">
+									
+									<ul class="permit-fields"
+										dnd-list="screen.fields"
+										dnd-allowed-types="['field']"
+										dnd-drop="onDropField(event,index,item,type)">
+										<li ng-repeat="field in screen.fields"
+											class="field-container"
+											ng-class="{'hidden-field' : field.hidden}">
+
+											<div dnd-draggable="field"
+												 dnd-type="field.type"
+												 dnd-moved="screen.fields.splice($index, 1)"
+												 dnd-effect-allowed="move"
+												 class="field" 
+												 ng-click="field.isCollapsed = !field.isCollapsed">
+												<div class="row">
+													<div class="col-xs-4 name-text">
+														<strong>Name:</strong> {{field.name}}
+													</div>
+													<div class="col-xs-4 label-text">
+														<strong>Label:</strong> {{field.label}}
+													</div>
+													
+													<div class="col-xs-4">
+														<button class="btn btn-xs btn-danger pull-right" title="delete" ng-click="removeField(screen, $index)"><span class="glyphicon glyphicon-trash"></span></button>
+														<span class="badge pull-right"
+															  popover-trigger="mouseenter"
+															  popover-template="'hiddenPopover.html'"
+															  popover-placement="left"	
+															  ng-show="field.hidden">
+															<span class="glyphicon glyphicon-eye-close"></span>
+															<script type="text/ng-template" id="hiddenPopover.html">
+																<div class="content">
+																	<p>Hidden Field</p>
+																</div>
+															</script>
+														</span>
+													</div>
+												</div>
+											</div>
+
+											<div collapse="!field.isCollapsed" class="field-body">
+												<div class="field-details">
+
+														<div class="form-group has-feedback"
+															ng-class="{ 'has-success' : createFormForm.label_{{screen.name}}_{{$index}}.$valid, 'has-error' : createFormForm.label_{{screen.name}}_{{$index}}.$showError && createFormForm.label_{{screen.name}}_{{$index}}.$hasError()}"
+														>
+															<label for="label" class="col-sm-3 control-label">Label *</label>
+															<div class="col-sm-9">
+																<input name="label_{{screen.name}}_{{$index}}"
+																	   id="label"
+																	   type="text"
+																	   class="form-control"
+																	   placeholder="The name that actually appears on a permit..."
+																	   ng-model="field.label"
+																	   required
+																	   ng-maxlength="255"
+																	   />
+																<div ng-show="createFormForm.label_{{screen.name}}_{{$index}}.$showError">
+																	<span class="glyphicon  form-control-feedback" aria-hidden="true"
+																		  ng-class="{'glyphicon-ok' : createFormForm.label_{{screen.name}}_{{$index}}.$valid, 'glyphicon-remove' : createFormForm.label_{{screen.name}}_{{$index}}.$showError && createFormForm.label_{{screen.name}}_{{$index}}.$hasError()}"
+																	></span>
+																	<span class="text-danger" ng-show="createFormForm.label_{{screen.name}}_{{$index}}.$error.required">Label is required.</span>
+																	<span class="text-danger" ng-show="createFormForm.label_{{screen.name}}_{{$index}}.$error.maxlength">Label must be 255 characters or less</span>
+																</div>
+															</div>
+														</div>
+
+														<div class="form-group has-feedback"
+															ng-class="{'has-error' : createFormForm.tooltip_{{screen.name}}_{{$index}}.$showError && createFormForm.tooltip_{{screen.name}}_{{$index}}.$hasError()}"
+														>
+															<label for="tooltip" class="col-sm-3 control-label">Tool Tip</label>
+															<div class="col-sm-9">
+																<input name="tooltip_{{screen.name}}_{{$index}}"
+																	   id="tooltip"
+																	   type="text"
+																	   class="form-control"
+																	   placeholder="A Tool Tip message that will display on hover..."
+																	   ng-model="field.tooltip"
+																	   ng-maxlength="255"
+																	   />
+																 <span class="glyphicon  form-control-feedback" aria-hidden="true"
+																		  ng-class="{'glyphicon-remove' : createMasterFieldForm.tooltip.$showError && createMasterFieldForm.tooltip.$hasError()}"
+																></span> 
+																<div ng-show="createFormForm.tooltip_{{screen.name}}_{{$index}}.$showError">
+																	<span class="text-danger" ng-show="createFormForm.tooltip_{{screen.name}}_{{$index}}.$error.maxlength">Tool tip must be 255 characters or less</span>
+																</div>
+															</div>
+														</div>
+
+														<div class="form-group has-feedback"
+															ng-class="{ 'has-error' : createFormForm.maxLength_{{screen.name}}_{{$index}}.$showError && createFormForm.maxLength_{{screen.name}}_{{$index}}.$hasError()}"
+														>
+															<label for="maxLength" class="col-sm-3 control-label">Max Length</label>
+															<div class="col-sm-9">
+																<input name="maxLength_{{screen.name}}_{{$index}}"
+																	   id="maxLength"
+																	   type="number"
+																	   min="1" 
+																	   class="form-control"
+																	   placeholder="Default maximum length for this master field is 255..."
+																	   ng-model="field.maxLength"
+																	   ng-pattern="/^[0-9]{1,}$/"
+																	   />
+																<div ng-show="createFormForm.maxLength_{{screen.name}}_{{$index}}.$showError">
+																	<span class="text-danger" ng-show="createFormForm.maxLength_{{screen.name}}_{{$index}}.$error.number">Max length must be a number</span>
+																	<span class="text-danger" ng-show="createFormForm.maxLength_{{screen.name}}_{{$index}}.$error.min">Max length must be greater than zero</span>
+																	<span class="text-danger" ng-show="createFormForm.maxLength_{{screen.name}}_{{$index}}.$error.pattern && !createFormForm.maxLength_{{screen.name}}_{{$index}}.$error.min">The value is not an integer</span>
+																</div> 
+
+															</div>
+														</div>
+	
+														<div class="form-group">
+															<div class="col-sm-offset-3 col-sm-9">
+																<div class="checkbox">
+																	<label>
+																		<input ng-model="field.isMandatory" type="checkbox"> <strong>Required</strong>
+																	</label>
+																</div>
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label for="valueType" class="col-sm-3 control-label">Value Type</label>
+															<div class="col-sm-9">
+																<label for="valueType" class="control-label">{{field.valueType}}</label>
+															</div>
+														</div>
+													
+														<div ng-show="field.valueType == 'SINGLE_SELECT' || field.valueType == 'MULTI_SELECT'">	
+															
+															<div class="form-group">
+																<div class="col-sm-3">
+																	<button class="btn btn-xs btn-primary pull-right"
+																			type="submit"
+																			ng-click="addOption(field, option)">
+																		Add option
+																	</button>
+																</div>
+																<div class="col-sm-9">
+																	<input class="form-control input-xs"
+																		   name="option"
+																		   id="option"
+																		   type="text"
+																		   class="form-control"
+																		   ng-model="option"
+																		   />
+																</div>
+
+															</div>
+															
+															<div class="form-group">
+																<div class="col-sm-offset-3 col-sm-9">
+																	<table class="table">
+
+																		<tbody>
+
+																			<tr ng-repeat="option in field.options track by $index">
+
+																				<td>{{option}}</td>
+
+																				<td>
+																					<button class="btn btn-xs btn-danger pull-right" title="delete" type="submit" ng-click="removeOption(field, $index)">
+																						<span class="glyphicon glyphicon-trash"></span>
+																					</button>
+																				</td>
+																			</tr>
+
+																		</tbody>
+
+																	</table>
+																</div>
+															</div>
+														
+
+														</div>
+
+												</div>
+											</div>
+										</li>
+
+									</ul>
+
+								</div>
+
+							</div>
+							
+						</div>
+						
+						
+					</div>
+				
+					
+				</div>
+
+            </div>
+            
+            
+            
+            <div class="panel panel-default">
+            
+            	<div class="panel-heading">
+					<strong>Fee Expressions</strong>
+				</div>
+				
+				<div class="panel-body form-panel">
+				
+				<!-- <ng-form name="feeForm"> -->
+					
+						<div class="form-group has-feedback">
+							<label for="feeExpressionLabelInput" class="col-sm-2 control-label required">Label</label>
+							<div class="col-sm-10">
+								<input name="feeExpressionLabelInput"
+									   id="feeExpressionLabelInput"
+									   type="text"
+									   class="form-control"
+									   placeholder="Label of the fee expression..."
+									   ng-model="feeExpression.label"
+									   
+									   />
+							</div>
+						</div>
+						
+						<div class="form-group has-feedback">
+							<label for="feeExpressionDescriptionInput" class="col-sm-2 control-label">Description</label>
+							<div class="col-sm-10">
+								<input name="feeExpressionDescriptionInput"
+									   id="feeExpressionDescriptionInput"
+									   type="text"
+									   class="form-control"
+									   placeholder="Description of the fee expression..."
+									   ng-model="feeExpression.description"
+									   
+									   />
+							</div>
+						</div>
+						
+						<div class="form-group has-feedback">
+	                        <label for="feeExpressionInput" class="col-sm-2 control-label">Expression</label>
+	                        <div class="col-sm-10">
+	                            <input name="feeExpressionInput" 
+	                                   id="feeExpressionInput"
+	                                   type="text"
+	                                   class="form-control"
+	                                   placeholder="Fee Expression..."
+	                                   ng-model="feeExpression.feeExpression"
+	                                   
+	                                   />
+	                        </div>
+	                    </div>
+						
+						<div class="form-group has-feedback">
+							<label for="feeExpressionTypeInput" class="col-sm-2 control-label required">Type</label>
+							<div class="col-sm-10">
+								<select name="feeExpressionTypeInput"
+										id="feeExpressionTypeInput" 
+										class="form-control" 
+										ng-model="feeExpression.type"
+										ng-options="feeType for feeType in feeTypes"
+										required>
+								</select>
+							</div>
+						</div>
+						
+						
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-3">
+								<button type="submit" class="btn btn-primary pull-left new-screen" ng-click="addFeeExpression(feeExpression)"><span class="glyphicon glyphicon-plus"></span> New Fee Expression</button>
+							</div>
+						</div>
+						
+						
+						
+						
+						<div class="permit-screen">
+						
+							<label class="col-sm-2 control-label">Fee Expressions</label>
+							
+							<div class="col-sm-10">
+										
+								<ul class="permit-fields">
+									<li ng-repeat="feeExpressionData in permit.feeExpressions"
+										class="field-container">
+	
+											<div class="field" 
+												 ng-click="feeExpressionData.isCollapsed = !feeExpressionData.isCollapsed">
+												<div class="row">
+													
+													<div class="col-xs-6 label-text">
+														<strong>Label:</strong> {{feeExpressionData.label}}
+													</div>
+													<div class="col-xs-6">
+														<button class="btn btn-xs btn-danger pull-right" title="delete" ng-click="removeFeeExpression($index)"><span class="glyphicon glyphicon-trash"></span></button>
+														
+													</div>
+												</div>
+											</div>
+
+											<div collapse="!feeExpressionData.isCollapsed" class="field-body">
+												<div class="field-details">
+													<div class="form-group">
+														<label for="feeExpressionDataLabel_{{$index}}" class="col-sm-2 control-label">Label</label>
+														<div class="col-sm-10">
+															<input name="feeExpressionDataLabel_{{$index}}"
+																   id="feeExpressionDataLabel_{{$index}}"
+																   type="text"
+																   class="form-control"
+																   placeholder="Label of the fee expression..."
+																   ng-model="feeExpressionData.label"
+																   ng-disabled="true"
+																   />
+														</div>
+													</div>
+													
+													<div class="form-group">
+														<label for="feeExpressionDataDescription_{{$index}}" class="col-sm-2 control-label">Description</label>
+														<div class="col-sm-10">
+															<input name="feeExpressionDataDescription_{{$index}}"
+																   id="feeExpressionDataDescription_{{$index}}"
+																   type="text"
+																   class="form-control"
+																   placeholder="Description of the fee expression..."
+																   ng-model="feeExpressionData.description"
+																   ng-disabled="true"
+																   />
+														</div>
+													</div>
+														
+													<div class="form-group">
+														<label for="feeExpressionDataExpression_{{$index}}" class="col-sm-2 control-label">Expression</label>
+														<div class="col-sm-10">
+															<input name="feeExpressionDataExpression_{{$index}}"
+																   id="feeExpressionDataExpression_{{$index}}"
+																   type="text"
+																   class="form-control"
+																   placeholder="Fee expression..."
+																   ng-model="feeExpressionData.feeExpression"
+																   ng-disabled="true"
+																   title="feeExpressionData.feeExpression"
+																   />
+														</div>
+													</div>
+													
+													<div class="form-group">
+														<label for="feeExpressionDataType_{{$index}}" class="col-sm-2 control-label">Type</label>
+														<div class="col-sm-10">
+															<input name="feeExpressionDataType_{{$index}}"
+																   id="feeExpressionDataType_{{$index}}"
+																   type="text"
+																   class="form-control"
+																   placeholder="Type of the fee expression..."
+																   ng-model="feeExpressionData.type"
+																   ng-disabled="true"
+																   />
+														</div>
+													</div>	
+	
+												</div>
+											</div>
+										</li>
+	
+									</ul>
+								</div>
+							</div>
+						
+						
+						
+						
+						<!-- </ng-form> -->
+				</div>
+            </div>
+            
+            
+			
+			<div class="panel panel-default notifications-panel">
+				<div class="panel-heading">
+					<strong>Notifications</strong>
+				</div>
+				
+				<div class="panel-body">
+					
+					<div class="notifications-list">
+					
+						<div class="form-group has-feedback row" 
+							 ng-repeat="status in statuses"
+							 ng-init="notificationId = 'notification-' + status.name"
+							 ng-class="{ 'has-error' : createFormForm[notificationId].$showError && createFormForm[notificationId].$hasError()}">
+							
+							<label for="notification" class="col-sm-2 control-label">{{status.label}}</label>
+							<div class="col-sm-10">
+								<input name="{{notificationId}}"
+									   id="{{notificationId}}"
+									   type="text"
+									   class="form-control"
+									   placeholder="Email Addresses..."
+									   ng-model="permit.notifications[status.name]"
+									   ng-pattern="/^((citizen)|([_A-Za-z0-9]+(\.[_A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,})))(,((citizen)|([_A-Za-z0-9]+(\.[_A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,}))))*$/"
+									   />
+								<div ng-show="createFormForm[notificationId].$showError">
+									<span class="text-danger" ng-show="createFormForm[notificationId].$error.pattern">Must be a comma separated list of valid email addresses or the string 'citizen', without spaces. E.g. bob@bob.com,jeff@jeff.com,citizen</span>
+								</div>
+							</div>
+							
+						</div>
+						
+					</div>
+					
+				</div>
+			</div>
+			
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="createFormForm.$invalid" ng-click="saveFormForm()">Save</button>
+                </div>
+                <div class="col-sm-3">
+                	<button type="submit" class="btn btn-primary btn-block" ng-disabled="createFormForm.$invalid" ng-click="publishFormForm()">Publish</button>
+                </div>
+            </div>
+			
+        </form>
+	</div>
+	
+</div>

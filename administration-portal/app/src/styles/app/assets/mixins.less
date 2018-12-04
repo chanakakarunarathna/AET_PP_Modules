@@ -1,0 +1,77 @@
+//vertical shadow
+.shadow(@horizontalLength, @verticalLength, @blurRadius, @spreadRadius, @shadowColor, @opacity){
+	-webkit-box-shadow: @horizontalLength @verticalLength @blurRadius @spreadRadius fade(@shadowColor, @opacity);
+	-moz-box-shadow: @horizontalLength @verticalLength @blurRadius @spreadRadius fade(@shadowColor, @opacity);
+	box-shadow: @horizontalLength @verticalLength @blurRadius @spreadRadius fade(@shadowColor, @opacity);
+}
+
+.transition(@property, @duration, @timingFunc) {
+	-webkit-transition:@property @duration @timingFunc;
+    -moz-transition:@property @duration @timingFunc;
+    -o-transition:@property @duration @timingFunc;
+    transition:@property @duration @timingFunc;
+}
+
+.translateX(@dist) {
+	-webkit-transform: translateX(@dist);
+  	-moz-transform: translateX(@dist);
+	-ms-transform: translateX(@dist);
+	-o-transform: translateX(@dist);
+  	transform: translateX(@dist);
+}
+
+.inner-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+	-webkit-box-shadow: inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	-moz-box-shadow:    inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	box-shadow:         inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+}
+
+.rotate(@deg){
+  -ms-transform: rotate(@deg); /* IE 9 */
+  -webkit-transform: rotate(@deg); /* Chrome, Safari, Opera */
+  transform: rotate(@deg);
+}
+
+.placeholder(@color){
+  &::-webkit-input-placeholder {
+	color: @color;
+	font-size: 14px;
+	font-style: italic;
+  }
+
+  &:-moz-placeholder { /* Firefox 18- */
+	color: @color;
+	font-size: 14px;
+	font-style: italic;
+  }
+
+  &::-moz-placeholder {  /* Firefox 19+ */
+	color: @color;
+	font-size: 14px;
+	font-style: italic;
+  }
+
+  &:-ms-input-placeholder {
+	color: @color;
+	font-size: 14px;
+	font-style: italic;
+  }
+}
+
+.placeholder-color(@color){
+  ::-webkit-input-placeholder {
+	color: @color;
+  }
+
+  :-moz-placeholder { /* Firefox 18- */
+	color: @color;
+  }
+
+  ::-moz-placeholder {  /* Firefox 19+ */
+	color: @color;
+  }
+
+  :-ms-input-placeholder {
+	color: @color;
+  }
+}

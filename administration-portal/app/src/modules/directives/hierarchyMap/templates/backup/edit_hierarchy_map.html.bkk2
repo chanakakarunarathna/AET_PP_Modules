@@ -1,0 +1,197 @@
+<div class="loader" ng-show="$root.loader">
+  <div class="backdrop"></div>
+  <div class="loader-container">
+    <div id="loader"></div>
+    <h1>Updating...</h1>
+  </div>
+</div>
+<div class="alert alert-info text-center" role="alert" ng-if="data.stages.length < 1 && mapType == 'view'">
+  <strong>No map data available</strong>
+</div>
+
+<div class="hierarchy-map-main-container">
+  <div class="hierarchy-map">
+    <div class="main-container">
+      <div class="element-container" ng-if="data.stageTemplate == 'CUSTOM' && mapType !== 'view'">
+        <button type="button" ng-click="addStageFn()"
+                class="btn btn-success add"
+                tooltip-placement="top"
+                tooltip="Add Stage">
+          <i class="glyphicon glyphicon-plus"></i>
+        </button>
+      </div>
+      <ul class="labels">
+        <li class="element-container">
+          <div class="node">
+            <h4>Stages</h4>
+          </div>
+        </li>
+        <li class="element-container">
+          <div class="node">
+            <h4>Touchpoints</h4>
+          </div>
+        </li>
+        <li class="element-container" ng-hide="">
+          <div class="node">
+            <h4>Actions</h4>
+          </div>
+        </li>
+        <li class="element-container" ng-show=""
+            ng-repeat="channel in data.channels">
+          <div class="node">
+            <h3>{{ channel.title }}</h3>
+          </div>
+        </li>
+      </ul>
+      <ul class="root-container root"
+          ui-sortable="stageSortableOptions"
+          ng-model="data.stages">
+        <li class="element-container parent has-children"
+            ng-repeat="stage in data.stages">
+          <div class="node">
+            <div class="panel panel-default"
+                 ng-class="{'panel-primary' : stage_index == stage.positionIndex}">
+              <div class="panel-body"
+                   ng-click="active(stage.positionIndex,0)">
+                <p>{{stage.positionIndex + 1}}</p>
+                <h4>{{stage.title}}</h4>
+
+                <div class="btn-group" role="group" ng-if="mapType !== 'view' && data.stageTemplate == 'CUSTOM'">
+                  <button ng-click="deleteFn(stage.id)" type="button"
+                          class="btn btn-default btn-danger delete">
+                    <i class="glyphicon glyphicon-trash"></i>
+                  </button>
+                  <button ng-click="editStageFn(stage)"
+                          type="button"
+                          class="btn btn-default btn-info edit">
+                    <i class="glyphicon glyphicon-pencil edit"></i>
+                  </button>
+                </div>
+              </div>
+
+              <button type="button"
+                      ng-click="addTouchpointFn(stage)"
+                      tooltip-placement="top"
+                      tooltip="Add Touchpoint"
+                      class="btn btn-success add"
+                      ng-if="mapType !== 'view'">
+                <i class="glyphicon glyphicon-plus"></i>
+              </button>
+
+            </div>
+          </div>
+          <ul class="children-container root"
+              ui-sortable="touchpointSortableOptions"
+              ng-model="stage.touchpoints"
+              ng-show="stage_index == stage.positionIndex && stage.touchpoints.length > 0">
+            <li class="element-container parent has-children"
+                ng-repeat="touchpoint in stage.touchpoints"
+                data-stageId="{{stage.id}}"
+                data-touchpointId="{{touchpoint.id}}">
+              <div class="line-to"></div>
+              <div class="node">
+                <div class="panel panel-default"
+                     ng-click="active(stage.positionIndex , touchpoint.positionIndex)"
+                     ng-class="{'panel-primary' : stage_index == stage.positionIndex && touchpoint_index == touchpoint.positionIndex}">
+                  <div class="panel-body" ng-click="active(stage.positionIndex,0)">
+                    <p>{{stage.positionIndex + 1}}.{{touchpoint.positionIndex + 1}} </p>
+                    <h4>{{touchpoint.title}}</h4>
+
+                    <div class="btn-group" role="group" ng-if="mapType !== 'view'">
+                      <button
+                          ng-click="deleteFn(stage.id, touchpoint.id)"
+                          class="btn btn-default btn-danger delete">
+                        <i class="glyphicon glyphicon-trash"></i>
+                      </button>
+                      <button ng-click="editTouchpointFn(stage, touchpoint)"
+                              type="button"
+                              class="btn btn-default btn-info edit">
+                        <i class="glyphicon glyphicon-pencil edit"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <button type="button"
+                          ng-click="addActionFn(stage, touchpoint)"
+                          class="btn btn-success add"
+                          tooltip-placement="top"
+                          tooltip="Add Action"
+                          ng-if="mapType !== 'view'">
+                    <i class="glyphicon glyphicon-plus"></i>
+                  </button>
+                </div>
+              </div>
+              <ul class="children-container root"
+                  ui-sortable="actionSortableOptions"
+                  ng-model="touchpoint.actions"
+                  ng-show="stage_index == stage.positionIndex && touchpoint_index == touchpoint.positionIndex && stage.touchpoints[stage.touchpoints.indexOf(touchpoint)].actions.length > 0">
+                <li class="element-container"
+                    ng-repeat="action in touchpoint.actions"
+                    data-stageId="{{stage.id}}"
+                    data-touchpointId="{{touchpoint.id}}">
+                  <div class="line-to" ng-show="touchpoint.actions.length > 1"></div>
+                  <div class="node">
+                    <div class="panel panel-primary">
+                      <div class="panel-body">
+                        <p>{{stage.positionIndex + 1}}.{{touchpoint.positionIndex + 1}}.{{action.positionIndex +
+                          1}}</p>
+                        <h4>{{action.title}}</h4>
+
+                        <div class="btn-group" role="group" ng-if="mapType !== 'view'">
+                          <button
+                              ng-click="deleteFn(stage.id, touchpoint.id, action.id )"
+                              class="btn btn-default btn-danger delete">
+                            <i class="glyphicon glyphicon-trash"></i>
+                          </button>
+                          <button ng-click="editActionFn(stage, touchpoint, action)"
+                                  type="button"
+                                  class="btn btn-default btn-info edit">
+                            <i class="glyphicon glyphicon-pencil edit"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <span ng-show="">
+                <ul class="children-container root"
+                    ng-repeat="channel in data.channels"
+                    ng-show="stage_index == stage.positionIndex &&
+                    touchpoint_index == touchpoint.positionIndex &&
+                    stage.touchpoints[stage.touchpoints.indexOf(touchpoint)].actions.length > 0">
+                  <li class="element-container"
+                      ng-repeat="action in touchpoint.actions"
+                      ng-if="channel.id === action.channel.id">
+                    <div class="line-to" ng-show="touchpoint.actions.length > 1"></div>
+                    <div class="node">
+                      <div class="panel panel-primary">
+                        <div class="panel-body">
+                          <p>{{stage.positionIndex + 1}}.{{touchpoint.positionIndex + 1}}.{{action.positionIndex +
+                            1}}</p>
+                          <h4>{{action.title}}</h4>
+
+                          <div class="btn-group" role="group" ng-if="mapType !== 'view'">
+                            <button
+                                ng-click="deleteFn(stage.id, touchpoint.id, action.id )"
+                                class="btn btn-default btn-danger delete">
+                              <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                            <button ng-click="editActionFn(stage, touchpoint, action)"
+                                    type="button"
+                                    class="btn btn-default btn-info edit">
+                              <i class="glyphicon glyphicon-pencil edit"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </span>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

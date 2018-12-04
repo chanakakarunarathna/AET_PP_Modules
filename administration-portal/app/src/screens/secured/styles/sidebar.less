@@ -1,0 +1,53 @@
+aside.sidebar {
+	position: fixed;
+	background-color: @admin-nav-bgColor;
+	padding: 0;
+	width: @left-sidebar-width;
+	top: @navbar-brand-height;
+	bottom: 0;
+	overflow-y: auto;
+  	z-index: 95;
+	.shadow(0, 0, 10px, 0, rgba(0, 0, 0, 0.3));
+
+	&.mini{
+		width: @left-mini-sidebar-width;
+		overflow: visible;
+
+		.dropdown-toggle {
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+		/*.dropdown{
+			&:hover {
+				border-left: 5px solid @main-color;
+			}
+			&:hover .dropdown-menu{
+				margin-left: -5px;
+				display: block;
+				margin-top: 0; // remove the gap so it doesn't close
+			}
+		}*/
+
+		.dropdown {
+			&.open {
+				background-color: @admin-nav-active-color;
+			}
+		}
+
+		.glyphicon, .c-icon {
+			margin-left: 5px;
+		}
+	}
+}
+
+@media screen and ( max-height: 800px ){
+	aside.sidebar {
+		&.mini{
+			.dropdown {
+				.dropdown-menu {
+    			max-height: 250px;
+				}
+			}
+		}
+	}
+}

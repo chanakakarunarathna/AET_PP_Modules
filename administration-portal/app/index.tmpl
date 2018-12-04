@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Place Pass</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="shortcut icon" type="image/png" href="assets/images/icons/favicon.ico"/>
+
+    <!-- version check -->
+
+	<!-- @if NODE_ENV='local' -->
+	<base href="/">
+	<!-- @endif -->
+
+	<!-- @if NODE_ENV='dev' -->
+	<!--base href="/administration-portal/"-->
+	<!-- @endif -->
+
+    <!-- @if NODE_ENV!='local' -->
+    <link rel="stylesheet" href="assets/css/aet.css?v=<!-- @echo cacheTimestamp -->"/>
+    <script src="assets/js/env.js?v=<!-- @echo cacheTimestamp -->"></script>
+    <script src="assets/js/dependencies.js?v=<!-- @echo cacheTimestamp -->"></script>
+    <script src="assets/js/aet.js?v=<!-- @echo cacheTimestamp -->"></script>
+    <!-- @endif -->
+
+    <!-- @if NODE_ENV='local' -->
+    <link rel="stylesheet" href="assets/css/aet.css"/>
+    <script src="assets/js/env.js"></script>
+    <script src="assets/js/dependencies.js"></script>
+    <script src="assets/js/aet.js"></script>
+    <!-- @endif -->
+
+</head>
+<body>
+
+<!--[if IE]>
+    <div class="alert alert-danger text-center" role="alert">This application is optimized for internet explorer version 10 or higher. Please update your browser.</div>
+<![endif]-->
+	<div ui-view="index" class="index-view" ng-class="$root.loginState() ? 'blank' : ''"></div>
+</body>
+</html>

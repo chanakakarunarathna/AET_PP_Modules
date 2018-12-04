@@ -1,0 +1,56 @@
+<h1 class="page-header">
+	Roles
+</h1>
+
+<div class="row search-screen role-landing">
+
+	<div class="col-sm-12">
+
+
+		<div class="row">
+
+			<div class="col-sm-4">
+				<button class="btn btn-lg btn-primary" ui-sref="index.secured.role.create" title="new role" aet-is-super-admin>
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Role
+				</button>
+			</div>
+
+			<div class="col-sm-4 pull-right">
+				<aet-search-input search-manager="searchManager"></aet-search-input>
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div class="col-sm-12">
+				
+				<aet-search search-manager="searchManager" row-name="role">
+
+					<aet-search-column name="title" label="Title" searchable="true"></aet-search-column>
+					<aet-search-column name="description" label="Description" searchable="true"></aet-search-column>
+					
+					<button aet-action-button aet-is-super-admin
+							class="btn btn-sm btn-default" 
+							title="edit" 
+							type="submit" 
+							ng-click="editRole(role)">
+						<span class="glyphicon glyphicon-edit"></span>
+					</button>
+					
+					<button aet-action-button aet-is-super-admin
+							class="btn btn-sm btn-danger" 
+							title="delete" 
+							type="submit" 
+							ng-click="deleteRole(role)">
+						<span class="glyphicon glyphicon-trash"></span>
+					</button>
+
+				</aet-search>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>

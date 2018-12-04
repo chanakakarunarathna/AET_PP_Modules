@@ -1,0 +1,4 @@
+<div click-outside="selected = false" class="pp-button-input" ng-class="{'editable':editable, 'placeholder':!ngModel}">
+  <div ng-show="!selected" ng-click="click()" class="input-button">{{ngModel || placeholder}}</div>
+  <input type="{{type}}" name="{{name}}" ng-show="selected" ng-model="ngModel" ng-keypress="onKeyPress($event)"></textarea>
+</div>

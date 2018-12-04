@@ -1,0 +1,123 @@
+<div id="modal" class="add-insight-modal map-modal">
+  <form class="form-horizontal" name="createCommentForm" novalidate>
+
+    <div class="modal-header">
+      <h3 class="modal-title">Add Comments or Files
+        <button class="btn pull-right close" ng-click="cancel()" ng-disabled="uploadManager.uploading || uploadManager2.uploading || uploadManager3.uploading">
+          <i class="glyphicon glyphicon-remove"></i>
+        </button>
+      </h3>
+    </div>
+    <div class="modal-body ">
+      <div class="row">
+        <div class="col-md-12 form-group has-feedback" ng-class="{'has-error' : createCommentForm.comment.$showError && createCommentForm.comment.$hasError()}">
+          <label class="col-md-12" for="comment">Your Comments</label>
+          <div class="col-md-12">
+            <textarea class="form-control" id="comment" name="comment" ng-maxlength="5000" ng-model="comment" rows="3"></textarea>
+            <div class="error" ng-show="createCommentForm.comment.$showError">
+              <span aria-hidden="true" class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove' : createCommentForm.comment.$showError && createCommentForm.comment.$hasError()}"></span>
+              <p class="text-danger" ng-show="createCommentForm.comment.$error.maxlength">Comment must be 5000 characters or less</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 form-group" id="uploadManagers">
+          <div class="col-md-12">
+            <h6>
+              <em>Optional.</em>
+            </h6>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-control upload pad-r-0" ecs-upload-data="uploadManager" ng-model="mediaList[0]" tabindex="0">
+              <div class="row">
+                <div class="buttons col-sm-8 col-xs-12">
+                  <button brand-btn-color="{{municipality.buttonColor}}" class="btn btn-primary" ecs-color-update ecs-upload-button="uploadManager" ng-show="!mediaList[0] && !uploadManager.uploading" tabindex="-1">
+                    <span>Upload Media File</span>
+                    <ecs-upload-input></ecs-upload-input>
+                  </button>
+                  <button brand-btn-color="{{municipality.buttonColor}}" class="btn btn-primary" ecs-color-update ecs-upload-button="uploadManager" ng-show="mediaList[0]" tabindex="-1">Change File
+                    <ecs-upload-input></ecs-upload-input>
+                  </button>
+                  <button class="btn btn-danger" ecs-delete-button="uploadManager" ng-show="mediaList[0]" tabindex="-1">Delete</button>
+                  <button class="btn btn-default" ng-click="uploadManager.cancel()" ng-show="uploadManager.uploading" tabindex="-1">Cancel</button>
+                </div>
+                <div class="data col-sm-12 col-xs-11 mar-t-5" ng-show="uploadManager.uploading">
+                  <progressbar animate="true" value="progress"></progressbar>
+                </div>
+                <div class="data col-sm-12 col-xs-12 overflow-hide" ng-show="mediaList[0]">
+                  <a class="filename btn" href ng-click="downloadFile(mediaList[0])">{{getFileName(mediaList[0])}}</a>
+                </div>
+              </div>
+            </div>
+            <p class="text-danger" ng-repeat="error in uploadManager.$errors" ng-show="uploadManager.$errors.length > 0">{{error}}</p>
+          </div>
+
+          <div class="col-md-12" ng-show="uploadManager2.isVisible">
+            <div class="form-control upload pad-r-0" ecs-upload-data="uploadManager2" ng-model="mediaList[1]" tabindex="0">
+              <div class="row">
+                <div class="buttons col-sm-8 col-xs-12">
+                  <button brand-btn-color="{{municipality.buttonColor}}" class="btn btn-primary" ecs-color-update ecs-upload-button="uploadManager2" ng-show="!mediaList[1] && !uploadManager2.uploading" tabindex="-1">
+                    <span ng-hide="true">Select File</span>
+                    <span>Add another?</span>
+                    <ecs-upload-input></ecs-upload-input>
+                  </button>
+                  <button brand-btn-color="{{municipality.buttonColor}}" class="btn btn-primary" ecs-color-update ecs-upload-button="uploadManager2" ng-show="mediaList[1]" tabindex="-1">Change File
+                    <ecs-upload-input></ecs-upload-input>
+                  </button>
+                  <button class="btn btn-danger" ecs-delete-button="uploadManager2" ng-show="mediaList[1]" tabindex="-1">Delete</button>
+                  <button class="btn btn-default" ng-click="uploadManager2.cancel()" ng-show="uploadManager2.uploading" tabindex="-1">Cancel</button>
+                </div>
+                <div class="data col-sm-12 col-xs-11 mar-t-5" ng-show="uploadManager2.uploading">
+                  <progressbar animate="true" value="progress"></progressbar>
+                </div>
+                <div class="data col-sm-12 col-xs-12 overflow-hide" ng-show="mediaList[1]">
+                  <a class="filename btn" href ng-click="downloadFile(mediaList[1])">{{getFileName(mediaList[1])}}</a>
+                </div>
+              </div>
+            </div>
+            <p class="text-danger" ng-repeat="error in uploadManager2.$errors" ng-show="uploadManager2.$errors.length > 0">{{error}}</p>
+          </div>
+
+          <div class="col-md-12" ng-show="uploadManager3.isVisible">
+            <div class="form-control upload pad-r-0" ecs-upload-data="uploadManager3" ng-model="mediaList[2]" tabindex="0">
+              <div class="row">
+                <div class="buttons col-sm-8 col-xs-12">
+                  <button brand-btn-color="{{municipality.buttonColor}}" class="btn btn-primary" ecs-color-update ecs-upload-button="uploadManager3" ng-show="!mediaList[2] && !uploadManager3.uploading" tabindex="-1">
+                    <span ng-hide="true">Select File</span>
+                    <span>Add another?</span>
+                    <ecs-upload-input></ecs-upload-input>
+                  </button>
+                  <button brand-btn-color="{{municipality.buttonColor}}" class="btn btn-primary" ecs-color-update ecs-upload-button="uploadManager3" ng-show="mediaList[2]" tabindex="-1">Change File
+                    <ecs-upload-input></ecs-upload-input>
+                  </button>
+                  <button class="btn btn-danger" ecs-delete-button="uploadManager3" ng-show="mediaList[2]" tabindex="-1">Delete</button>
+                  <button class="btn btn-default" ng-click="uploadManager3.cancel()" ng-show="uploadManager3.uploading" tabindex="-1">Cancel</button>
+                </div>
+                <div class="data col-sm-12 col-xs-11 mar-t-5" ng-show="uploadManager3.uploading">
+                  <progressbar animate="true" value="progress"></progressbar>
+                </div>
+                <div class="data col-sm-12 col-xs-12 overflow-hide" ng-show="mediaList[2]">
+                  <a class="filename btn" href ng-click="downloadFile(mediaList[2])">{{getFileName(mediaList[2])}}</a>
+                </div>
+              </div>
+            </div>
+            <p class="text-danger" ng-repeat="error in uploadManager3.$errors" ng-show="uploadManager3.$errors.length > 0">{{error}}</p>
+          </div>
+          <div class="col-md-12">
+            <h6>
+              You may upload any of these file types: PDF, Powerpoint, Word, Excel, image, audio, video
+            </h6>
+          </div>
+
+        </div>
+        <div style="clear:both"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="save()" ng-disabled="createCommentForm.$invalid || uploadManager.uploading || uploadManager2.uploading || uploadManager3.uploading || (!comment && !mediaList[0] && !mediaList[1] && !mediaList[2])">Submit</button>
+      <button class="btn btn-default" ng-click="cancel()" ng-disabled="uploadManager.uploading || uploadManager2.uploading || uploadManager3.uploading">Cancel</button>
+    </div>
+
+  </form>
+</div>

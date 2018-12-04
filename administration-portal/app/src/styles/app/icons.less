@@ -1,0 +1,139 @@
+.c-icon-common(@width, @height){
+  content: '';
+  background-size:@width @height !important;
+  width: @width;
+  height: @height;
+  display: inline-block;
+}
+.c-icon{
+  &:before{
+  }
+  &.c-icon-map-comment {
+    &:before{
+      .c-icon-common(28px, 28px);
+    }
+    &:before {
+      background: url("@{img-root}/icons/comment-ico.png") no-repeat;
+    }
+    &.new{
+      &:before {
+        background: url("@{img-root}/icons/comment-new-ico.png") no-repeat;
+      }
+    }
+  }
+  &.c-icon-map-discovery {
+    &:before{
+      .c-icon-common(28px, 28px);
+    }
+    &:before {
+      background: url("@{img-root}/icons/discovery-ico.png") no-repeat;
+    }
+  }
+  &.c-icon-map-loyalty {
+    &:before{
+      .c-icon-common(28px, 28px);
+    }
+    &:before {
+      background: url("@{img-root}/icons/loyalty-ico.png") no-repeat;
+    }
+  }
+  &.c-icon-map-media {
+    &:before{
+      .c-icon-common(28px, 28px);
+    }
+    &:before {
+      background: url("@{img-root}/icons/media-ico.png") no-repeat;
+    }
+    &.new{
+      &:before {
+        background: url("@{img-root}/icons/media-new-ico.png") no-repeat;
+      }
+    }
+  }
+
+  &.c-icon-smile-sad {
+    &:before{
+      .c-icon-common(18px, 18px);
+    }
+    &:before {
+      background: url("@{img-root}/icons/negative-smile-ico.png") no-repeat;
+    }
+  }
+
+  &.c-icon-smile-meh {
+    &:before{
+      .c-icon-common(18px, 18px);
+    }
+    &:before {
+      background: url("@{img-root}/icons/neutral-smile-ico.png") no-repeat;
+    }
+  }
+  &.c-icon-smile-happy {
+    &:before{
+      .c-icon-common(18px, 18px);
+    }
+    &:before {
+      background: url("@{img-root}/icons/positive-smile-ico.png") no-repeat;
+    }
+  }
+  &.c-icon-pp-gray {
+    &:before{
+      .c-icon-common(18px, 18px);
+    }
+    &:before {
+      background: url("@{img-root}/icons/pp-ico-white.png") no-repeat;
+    }
+  }
+  &.c-icon-pp-blue {
+    &:before{
+      .c-icon-common(18px, 18px);
+    }
+    &:before {
+      background: url("@{img-root}/icons/pp-ico-white.png") no-repeat;
+    }
+  }
+  &.c-icon-pp-white {
+    &:before{
+      .c-icon-common(18px, 18px);
+    }
+    &:before {
+      background: url("@{img-root}/icons/pp-ico-white.png") no-repeat;
+    }
+  }
+  &.c-icon-plus {
+    &:before{
+      .c-icon-common(24px, 24px);
+    }
+    &:before {
+      background: url("@{img-root}/icons/plus-icon.png") no-repeat;
+    }
+  }
+  &.c-icon-close {
+    &:before{
+      .c-icon-common(24px, 24px);
+    }
+    &:before {
+      background: url("@{img-root}/icons/close-icon.png") no-repeat;
+    }
+  }
+  &.c-icon-radio {
+    &:before{
+      content: '';
+      width: 24px;
+      height: 24px;
+      display: inline-block;
+      position: relative;
+      top: 9px;
+      background-size: inherit;
+    }
+    &:before {
+      background: url("@{img-root}/icons/radio-ico.png") no-repeat;
+    }
+    &.active{
+      &:before{
+        background-position: 0 -33px ;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-sm-2">
+    <div class="quote" ng-show="comment">
+      <i class="fa fa-quote-left"></i>
+    </div>
+  </div>
+  <div class="col-sm-10">
+    <p class="comment-paragraph-text" ng-show="comment">
+      {{ comment }}
+    </p>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-sm-4">
+    <button class="btn more" ng-class="{'btn-success' : type == 'positive' , 'btn-default' : type == 'natural', 'btn-danger' : type == 'negative'}" ng-click="showMoreTxt()" ng-show="more">
+      Read more
+    </button>
+  </div>
+  <div class="col-sm-8">
+    <div class="media-container-insight" ng-class="mediaPosition()" ng-repeat="mediaUrl in insightData" ng-show="insightData">
+      <div class="media ">
+        <a ng-href="{{ mediaUrl }}" target="_blank">
+          <div class="media-type col-xs-1">
+            <img-type image="mediaUrl" time="createdDate"></img-type>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

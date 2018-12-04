@@ -1,0 +1,59 @@
+<h1 class="page-header">
+	Fields
+</h1>
+
+<div class="row search-screen masterfield-landing">
+
+	<div class="col-sm-12">
+		
+		<div class="row">
+
+			<div class="col-sm-4">
+				<button class="btn btn-lg btn-primary" ui-sref="index.secured.masterfield.create" title="new field">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Field
+				</button>
+			</div>
+
+			<div class="col-sm-4 pull-right">
+				<aet-search-input search-manager="searchManager"></aet-search-input>
+			</div>
+		</div>
+		
+		
+		<div class="row">
+
+			<div class="col-sm-12">
+				<aet-search search-manager="searchManager" row-name="masterfield">
+
+					<aet-search-column name="name" label="Name" searchable="true"></aet-search-column>
+					<aet-search-column name="label" label="Label" searchable="true"></aet-search-column>
+					<aet-search-column name="tooltip" label="Tooltip" searchable="true"></aet-search-column>
+					<aet-search-column name="maxLength" label="Max Length"></aet-search-column>
+					<aet-search-column name="isMandatory" label="Required"></aet-search-column>
+					<aet-search-column name="valueType" label="Type"></aet-search-column>
+
+					<button aet-action-button 
+							class="btn btn-sm btn-default" 
+							title="edit" 
+							type="submit" 
+							ng-click="editMasterfield(masterfield)">
+						<span class="glyphicon glyphicon-edit"></span>
+					</button>
+					
+					<button aet-action-button 
+							class="btn btn-sm btn-danger" 
+							title="delete" 
+							type="submit" 
+							ng-click="deleteMasterfield(masterfield)">
+						<span class="glyphicon glyphicon-trash"></span>
+					</button>
+					
+				</aet-search>
+				
+			</div>
+			
+		</div>
+
+	</div>
+
+</div>

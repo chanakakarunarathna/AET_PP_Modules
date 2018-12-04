@@ -1,0 +1,276 @@
+<h1 class="page-header">
+  Bookings Issue Report
+</h1>
+<div class="report-landing">
+  <form name="reportBookingForm" novalidate>
+    <div class="row mar-lr-0 element-bg mar-b-20">
+      <div class="col-sm-4 mar-b-20">
+        <div class="form-group has-feedback mar-b-30">
+          <label for="confnumber">Booking Reference</label>
+          <input type="text" class="form-control" name="confnumber" id="confnumber" ng-maxlength="255" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.confnumber" placeholder="Enter Booking Reference">
+	      <div class="error" ng-show="reportBookingForm.confnumber.$showError">
+	          <p class="text-danger" ng-show="reportBookingForm.confnumber.$error.maxlength">Booking Reference must be 255 characters or less</p>
+	      </div>
+        </div>
+      </div>
+      <div class="col-sm-4 mar-b-20">
+      <div class="form-group has-feedback mar-b-30" ng-class="{'has-error' : reportBookingForm.firstname.$showError && reportBookingForm.firstname.$hasError()}">
+          <label for="firstname">First Name</label>
+          <input type="text" class="form-control" name="firstname" id="firstname" ng-maxlength="255" ng-model-options="{ updateOn: 'blur' }" ng-pattern="/^[a-zA-Z \'\-]*$/" ng-model="booking.firstname" placeholder="Enter First Name">
+	      <div class="error" ng-show="reportBookingForm.firstname.$showError">
+	          <p class="text-danger" ng-show="reportBookingForm.firstname.$error.maxlength">First Name must be 255 characters or less</p>
+	          <p class="text-danger" ng-show="reportBookingForm.firstname.$error.pattern">This doesn't seem to be a valid name, use only alpha characters and space</p>
+	      </div>
+        </div>
+      </div>
+      <div class="col-sm-4 mar-b-20">
+     <div class="form-group has-feedback mar-b-30" ng-class="{'has-error' : reportBookingForm.lastname.$showError && reportBookingForm.lastname.$hasError()}">
+          <label for="lastname">Last Name</label>
+          <input type="text" class="form-control" name="lastname" id="lastname" ng-maxlength="255" ng-model-options="{ updateOn: 'blur' }" ng-pattern="/^[a-zA-Z \'\-]*$/" ng-model="booking.lastname" placeholder="Enter Last Name">
+	      <div class="error" ng-show="reportBookingForm.lastname.$showError">
+	          <p class="text-danger" ng-show="reportBookingForm.lastname.$error.maxlength">Last Name must be 255 characters or less</p>
+	          <p class="text-danger" ng-show="reportBookingForm.lastname.$error.pattern">This doesn't seem to be a valid name, use only alpha characters and space</p>
+	      </div>
+        </div>
+      </div>
+      <div class="col-sm-4 mar-b-20">
+      	<div class="form-group has-feedback mar-b-30" ng-class="(booking.countryisocode != null && booking.countryisocode != '' && booking.phonenumber == null) || reportBookingForm.phonenumber.$error.pattern == true ? 'has-error' :reportBookingForm.phonenumber.$showError && reportBookingForm.phonenumber.$hasError()">
+          <label for="phonenumber">Phone Number</label>
+          <input type="text" class="form-control" name="phonenumber" id="phonenumber" ng-pattern="phoneNumberRegex" ng-change="passingValue()" ng-maxlength="10" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.phonenumber" ng-required="booking.countryisocode" placeholder="Enter Phone Number">
+	      <div class="error" ng-show="reportBookingForm.phonenumber.$showError">
+	          <p class="text-danger" ng-show="reportBookingForm.phonenumber.$error.maxlength && reportBookingForm.phonenumber.$dirty">Phone Number must be 10 digits</p>
+	          <p class="text-danger" ng-show="reportBookingForm.phonenumber.$error.pattern">Valid phone number is required</p>
+	          <p class="text-danger" ng-show="booking.countryisocode != null && booking.countryisocode != '' && booking.phonenumber == null">Please Enter Phone Number</p>
+	      </div>
+       </div>
+   	  </div>
+      <div class="col-sm-4 mar-b-20">
+        <div class="form-group has-feedback mar-b-30" ng-class="(booking.phonenumber!=null && booking.phonenumber!='' && booking.countryisocode==null) || reportBookingForm.countryisocode.$error.maxlength == true ? 'has-error' : reportBookingForm.countryisocode.$showError && reportBookingForm.countryisocode.$hasError()">
+          <label for="countryisocode">Country Iso Code</label>
+          <input type="text" class="form-control" name="countryisocode" id="countryisocode" ng-maxlength="10" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.countryisocode" ng-required="booking.phonenumber" placeholder="Enter Country Iso Code">
+	      <div class="error" ng-show="reportBookingForm.countryisocode.$showError">
+	          <p class="text-danger" ng-show="reportBookingForm.countryisocode.$error.maxlength">Country Iso Code must be entered</p>
+	          <p class="text-danger" ng-show="booking.phonenumber!=null && booking.phonenumber!='' && booking.countryisocode==null">Please Enter Country Iso Code</p>
+	      </div>
+       </div>
+      </div>
+      <div class="col-sm-4 mar-b-20">
+        <div class="form-group has-feedback mar-b-30" ng-class="{'has-error' : reportBookingForm.email.$showError && reportBookingForm.email.$hasError()}">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" name="email" id="email" ng-maxlength="255" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.email" placeholder="Enter Booker Email">
+	      <div class="error" ng-show="reportBookingForm.email.$showError">
+	          <p class="text-danger" ng-show="reportBookingForm.email.$error.maxlength">Booker Email must be 255 characters or less</p>
+	          <p class="text-danger" ng-show="reportBookingForm.email.$error.email">Valid email is required</p>
+	      </div>
+        </div>
+      </div>
+      <div class="col-sm-4 mar-b-20">
+        <div class="form-group mar-b-30 has-feedback no-star" ng-class="(booking.endactivitydate != null && booking.startactivitydate == null)? 'has-error' :''">
+          <label for="startactivitydate">Activity Start Date</label>
+          <div class="input-group">
+            <input class="form-control" readonly="readonly" autocomplete="off" ng-click="openStartActivity($event)" close-text="Close" datepicker-options="dateOptions" datepicker-popup="{{format}}" id="startactivitydate" is-open="openedStartActivity" min-date="minStartdActivityDate" name="startactivitydate" ng-change="onStartActivityDateChange();" ng-model="booking.startactivitydate" ng-required="booking.endactivitydate" placeholder="Enter Start Activity Date" type="text"/>
+            <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="openStartActivity($event)" type="button">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+          </div>
+          <div class="error">
+            <p class="text-danger" ng-show="booking.endactivitydate != null && booking.startactivitydate == null">Please select start activity date.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 mar-b-20">
+        <div class="form-group mar-b-30 has-feedback no-star" ng-class="(booking.startactivitydate != null && booking.endactivitydate == null)? 'has-error' :''">
+          <label for="endactivitydate">Activity End Date</label>
+          <div class="input-group">
+            <input class="form-control" readonly="readonly" autocomplete="off" ng-click="openEndActivity($event)" close-text="Close" datepicker-options="dateOptions" datepicker-popup="{{format}}" id="endactivitydate" is-open="openedEndActivity" min-date="minEndActivityDate" name="endactivitydate" ng-model="booking.endactivitydate" ng-required="booking.startactivitydate" type="text" placeholder="Enter End Activity Date"/>
+            <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="openEndActivity($event)" type="button">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+          </div>
+          <div class="error">
+            <p class="text-danger" ng-show="booking.startactivitydate != null && booking.endactivitydate == null">Please select end activity date.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 mar-b-20">
+        <div class="form-group has-feedback mar-b-30">
+          <label for="vendor">Vendor</label>
+	      <ui-select placeholder="Select Vendor" theme="bootstrap" id="vendor" name="vendor" ng-model="booking.vendor">
+              <ui-select-match>
+                  <span ng-bind-html="$select.selected.value"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="vendorListOption in vendorListOptions">
+                  <span ng-bind-html="vendorListOption.value"></span>
+              </ui-select-choices>
+          </ui-select>
+	      <div class="error" ng-show="reportBookingForm.vendor.$showError">
+	          <p class="text-danger" ng-show="reportBookingForm.vendor.$error.required">Vendor is required</p>
+	      </div>
+        </div>
+      </div>
+      <div class="col-sm-4 mar-b-20">
+        <div class="form-group mar-b-30 has-feedback no-star" ng-class="(booking.endbookingdate != null && booking.startbookingdate == null)? 'has-error' :''">
+          <label for="startbookingdate">Created Start Date</label>
+          <div class="input-group">
+            <input class="form-control" readonly="readonly" autocomplete="off" ng-click="openStartBooking($event)" close-text="Close" datepicker-options="dateOptions" datepicker-popup="{{format}}" id="startbookingdate" is-open="openedStartBooking" min-date="minStartdBookingDate" name="startbookingdate" ng-change="onStartBookingDateChange();" ng-model="booking.startbookingdate" ng-required="booking.endbookingdate" placeholder="Enter Created Start Date" type="text"/>
+            <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="openStartBooking($event)" type="button">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+          </div>
+          <div class="error">
+            <p class="text-danger" ng-show="booking.endbookingdate != null && booking.startbookingdate == null">Please select start booking date.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 mar-b-20">
+        <div class="form-group mar-b-30 has-feedback no-star" ng-class="(booking.startbookingdate != null && booking.endbookingdate == null)? 'has-error' :''">
+          <label for="endbookingdate">Created End Date</label>
+          <div class="input-group">
+            <input class="form-control" readonly="readonly" autocomplete="off" ng-click="openEndBooking($event)" close-text="Close" datepicker-options="dateOptions" datepicker-popup="{{format}}" id="endbookingdate" is-open="openedEndBooking" min-date="minEndBookingDate" name="endbookingdate" ng-model="booking.endbookingdate" ng-required="booking.startbookingdate" type="text" placeholder="Enter Created End Date"/>
+            <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="openEndBooking($event)" type="button">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </button>
+            </span>
+          </div>
+          <div class="error">
+            <p class="text-danger" ng-show="booking.startbookingdate != null && booking.endbookingdate == null">Please select end booking date.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 mar-b-20">
+        <div class="form-group has-feedback mar-b-30">
+          <label for="productid">Geo Location</label>
+          <input type="text" class="form-control" name="geolocation" id="geolocation" ng-maxlength="255" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.geolocation" placeholder="Enter Geo Location">
+	      <div class="error" ng-show="reportBookingForm.geolocation.$showError">
+	          <p class="text-danger" ng-show="reportBookingForm.geolocation.$error.maxlength">Geo Location must be 255 characters or less</p>
+	      </div>
+	    </div>
+      </div>
+      <div class="col-sm-4 mar-b-20">
+        <div class="form-group has-feedback mar-b-30">
+          <label for="productid">Product Id</label>
+          <input type="text" class="form-control" name="productid" id="productid" ng-maxlength="255" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.productid" placeholder="Enter Product Id">
+	      <div class="error" ng-show="reportBookingForm.productid.$showError">
+	          <p class="text-danger" ng-show="reportBookingForm.productid.$error.maxlength">Product Id must be 255 characters or less</p>
+	      </div>
+	    </div>
+      </div>
+      <div class="col-sm-4 mar-b-20">
+        <div class="form-group has-feedback mar-b-30">
+          <label for="status">Status</label>
+          <ui-select placeholder="Select Status" theme="bootstrap" id="status" name="status" ng-model="booking.status">
+              <ui-select-match>
+                  <span ng-bind-html="$select.selected.value"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="statusOption in statusOptions">
+                  <span ng-bind-html="statusOption.value"></span>
+              </ui-select-choices>
+          </ui-select>
+	      <div class="error" ng-show="reportBookingForm.status.$showError">
+	          <p class="text-danger" ng-show="reportBookingForm.status.$error.required">Status is required</p>
+	      </div>
+	    </div>
+      </div>
+      <div class="col-sm-4 mar-b-20">
+        <div class="form-group has-feedback mar-b-30">
+          <label for="searchoperator">Search Operator</label>
+          <ui-select placeholder="Select Search Operator" theme="bootstrap" id="searchoperator" name="searchoperator" ng-model="booking.searchoperator">
+              <ui-select-match>
+                  <span ng-bind-html="$select.selected.value"></span>
+              </ui-select-match>
+              <ui-select-choices repeat="searchoperator in searchOperatorOptions">
+                  <span ng-bind-html="searchoperator.value"></span>
+              </ui-select-choices>
+          </ui-select>
+          <div class="error" ng-show="reportBookingForm.searchoperator.$showError">
+	      	  <p class="text-danger" ng-show="reportBookingForm.searchoperator.$error.required">Search Operator is required</p>	
+	      </div>
+        </div>
+      </div>
+      <div class="col-sm-9">
+         <button aet-has-permission="LIST_PARTNER_BOOKINGS" class="btn btn-primary mar-t-18" ng-disabled="!isValidSearchBookingForm()" ng-click="retrieveBookingsReport(1)" type="submit">
+          Search
+        </button>
+        <button class="btn btn-default mar-t-18" ng-click="reset(reportBookingForm)" type="reset">
+          Clear
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+  <div class="row mar-lr-0 element-bg " ng-show="getLength(filteredReportResults)>0">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Booking Results</h2>
+        </div>
+        <div class="col-md-6">
+          <div class="search-screen text-right">
+            <div class="search" id="exportable">
+              <h4 class="mar-t-30" ng-class="{hide: (filteredReportResults == 'updating')}">
+                <i>{{resultReportDetails.pagination.total}}
+                  Result<span ng-if="filteredReportResults.length>1">s</span></i>
+              </h4>
+              <h4 class="blink mar-t-30" ng-class="{hide: !(filteredReportResults == 'updating')}">Updating...</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="search-screen-report">
+            <div class="search" id="exportable">
+              <table class="table table-bordered readonly">
+                <thead>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Title</th>
+                    <th>Created Date</th>
+                    <th>Email</th>
+                    <th>Booking Reference</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="result in filteredReportResults">
+                    <td>{{result.bookerDetails.firstName}}</td>
+                    <td>{{result.bookerDetails.lastName}}</td>
+                    <td>{{result.bookingOptions[0].title}}</td>
+                    <td>{{result.createdTime}}</td>
+                    <td>{{result.bookerDetails.email}}</td>
+                    <td>{{result.bookingReference}}</td>
+                    <td>{{setBookingStatus(result.bookingSummary.overallStatus.status)}}</td>
+                    <td><a class="hover-primary" ng-click="viewBooking(result)" title="view" type="submit">
+                      <span class="icon-placepass-icons-pp-edit"></span>
+                    </a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="search-screen">
+            <div class="search" id="exportable">
+              <pagination ng-change="retrieveBookingsReport(currentPage)" items-per-page="numPerPage" boundary-links="true" max-size="maxSize" ng-model="currentPage" ng-model-options="{ updateOn: 'click' }" ng-show="resultReportDetails.pagination.total > numPerPage" total-items="resultReportDetails.pagination.total"></pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+

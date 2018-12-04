@@ -1,0 +1,101 @@
+<div class="aet-modal ">
+    <div class="modal-header">
+        <h3 class="modal-title">Cancel Booking</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row listscustomer-landing">
+            <div class=" col-sm-12">
+                <form name="deleteBookingForm" novalidate>
+                    <section>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>
+                                    Booking : {{booking.bookingId}}
+                                </h3>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div ng-show="manual==true" class="row">
+                            <div class="col-md-6">
+                                <div class="form-group has-feedback required" ng-class="{'has-error' : deleteBookingForm.refundType.$showError && deleteBookingForm.refundType.$hasError()}">
+                                    <label class="control-label" for="refundType">What type of refund should be applied :</label>
+                                    <ui-select on-select="clearRefundTypeInputValues($item)" placeholder="Select Refund Type" theme="bootstrap" id="refundType" name="refundType" required ng-model="booking.refundType">
+                                        <ui-select-match>
+                                            <span ng-bind-html="$select.selected.value"></span>
+                                        </ui-select-match>
+                                        <ui-select-choices repeat="refundType in refundTypeOptions">
+                                            <span ng-bind-html="refundType.value"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="manual==true && booking.refundType.key=='AMOUNT'" class="row">
+                            <div class="col-md-6">
+                                <div class="form-group has-feedback required" ng-class="{'has-error' : deleteBookingForm.operator.$showError && deleteBookingForm.operator.$hasError()}">
+                                    <label class="control-label" for="operator">Select Partial Option :</label>
+                                    <ui-select on-select="clearPartialOptionInputValues($item)" placeholder="Select Search Operator" theme="bootstrap" id="operator" name="operator" ng-model="booking.operator">
+                                        <ui-select-match>
+                                            <span ng-bind-html="$select.selected.value"></span>
+                                        </ui-select-match>
+                                        <ui-select-choices repeat="op in operatorOptions">
+                                            <span ng-bind-html="op.value"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="manual==true && booking.operator.key=='AMOUNT'" class="row">
+                            <div class="col-md-6">
+                                <div ng-paste="preventPastingCharacters($event)" class="form-group has-feedback required" ng-class="(booking.total.finalTotal < booking.cancellationAmount) ? 'has-error' : deleteBookingForm.cancellationAmount.$showError && deleteBookingForm.cancellationAmount.$hasError()">
+						          	<label for="cancellationAmount">Cancellation Amount :</label>
+						          	<input type="text" class="form-control" name="cancellationAmount" id="cancellationAmount" ng-model-options="{ updateOn: 'blur' }" onkeypress='return !(event.charCode != 8 && event.charCode != 0 && event.charCode != 46 && event.charCode > 31 && (event.charCode < 48 || event.charCode > 57))' ng-model="booking.cancellationAmount" placeholder="Enter Cancellation Amount">
+							      	<div class="error" ng-show="deleteBookingForm.cancellationAmount.$showError">
+							          	<p class="text-danger" ng-show="deleteBookingForm.cancellationAmount.$error.required">Cancellation Amount is required.</p>
+							          	<p class="text-danger" ng-show="booking.total.finalTotal < booking.cancellationAmount">Cancellation Amount cannot be more than the total amount. Please enter valid Cancellation Amount</p>
+							      	</div>
+						        </div>
+						     </div>
+                        </div>
+                        <div ng-show="manual==true && booking.operator.key=='PERCENTAGE'" class="row">
+                            <div class="col-md-6">
+                                <div ng-paste="preventPastingCharacters($event)" class="form-group has-feedback required" ng-class="(booking.cancellationPercentage > 100) ? 'has-error' : deleteBookingForm.cancellationPercentage.$showError && deleteBookingForm.cancellationPercentage.$hasError()">
+						          	<label for="cancellationPercentage">Cancellation Percentage (%) :</label>																																		
+						          	<input type="text" class="form-control" name="cancellationPercentage" id="cancellationPercentage" ng-model-options="{ updateOn: 'blur' }" onkeypress='return !(event.charCode != 8 && event.charCode != 0 && event.charCode != 46 && event.charCode > 31 && (event.charCode < 48 || event.charCode > 57))' ng-model="booking.cancellationPercentage" placeholder="Enter Cancellation Percentage">
+							      	<div class="error" ng-show="deleteBookingForm.cancellationPercentage.$showError">
+							      		<p class="text-danger" ng-show="deleteBookingForm.cancellationPercentage.$error.required">Cancellation Percentage is required.</p>
+							          	<p class="text-danger" ng-show="(booking.cancellationPercentage > 100)">Cancellation Percentage must be 100% or less. Please enter valid Cancellation Percentage</p>
+							      	</div>
+						        </div>
+						     </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group has-feedback required" ng-class="{'has-success' : deleteBookingForm.cancellationReason.$valid, 'has-error' : deleteBookingForm.cancellationReason.$showError && deleteBookingForm.cancellationReason.$hasError()}">
+                                    <label for="cancellationReason">Cancellation Reason :</label>
+                                    <ui-select placeholder="Select Search Operator" theme="bootstrap" id="cancellationReason" name="cancellationReason" required ng-model="booking.cancellationReason" reset-search-input="true">
+                                        <ui-select-match>
+<!--                                        <span ng-show="$select.selected.cancelDescription != undefined">{{$select.selected.cancelDescription}}</span> -->
+                                            <span ng-bind-html="$select.selected.cancelDescription"></span>
+                                        </ui-select-match>
+                                        <ui-select-choices repeat="cancellationReason in cancellationReasons">
+                                            <span ng-bind-html="cancellationReason.cancelDescription"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                    <div class="error" ng-show="deleteBookingForm.cancellationReason.$showError">
+                                    	<p class="text-danger" ng-show="deleteBookingForm.cancellationReason.$error.required">Cancellation Reason is required.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+    	<button ng-show="manual==true" aet-has-permission="FORCE_CANCEL_PARTNER_BOOKING" class="btn btn-danger" ng-disabled="isValidForm()" ng-click="manualCancel()">Manual Cancel Booking</button>
+        <button ng-show="manual!=true" aet-has-permission="CANCEL_PARTNER_BOOKING" class="btn btn-danger" ng-disabled="isValidForm()" ng-click="ok()">Cancel Booking</button>
+        <button class="btn btn-default" ng-click="cancel()" type="button">Cancel</button>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <h3 class="modal-title">Welcome
+    {{userDetails.getUser().firstName}}</h3>
+
+</div>
+
+<div class="modal-body">
+  <label name="title" ng-hide="partnerPlaces.length == 0">What Partner Place do you want to work on today?</label>
+  <label name="noPartnerPlace" ng-show="partnerPlaces.length == 0"> There are no partner places created yet ...</label>
+  <div class="navbar-main">
+    <ul class="nav navbar-nav navbar-left">
+      <li class="dropdown partner-place" dropdown is-open="partnerPlaceStatus.isopen" ng-hide="partnerDetails.getAuthorizedPartners().length == 1 && partnerPlaces.length < 1">
+        <a class="dropdown-toggle" data-toggle="dropdown" dropdown-toggle ng-disabled="disabled" role="button"  ng-if="partnerPlaces.length > 1">
+          {{selectedPartnerPlace.location}}&nbsp;
+          <span class="icon icon-placepass-icons-pp-caret-down pull-right"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu" ng-if="partnerPlaces.length > 1">
+          <li ng-repeat="partnerPlace in partnerPlaces | orderBy: 'location'">
+          	<a href ng-click="selectPartnerPlace(partnerPlace)">{{partnerPlace.location}}</a>
+          </li>
+        </ul>
+        <a class="dropdown-toggle" role="button"  ng-disabled="disabled" ng-if="partnerPlaces.length < 2">
+          {{selectedPartnerPlace.title}}
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()" type="button">OK</button>
+    <button class="btn btn-default" ng-click="cancel()" type="button">Cancel</button>
+  </div>
+</div>

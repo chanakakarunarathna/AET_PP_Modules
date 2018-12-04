@@ -1,0 +1,28 @@
+<div class="notification-modal aet-modal">
+
+    <div class="modal-header">
+        <h3 class="modal-title">Role Change Restricted</h3>
+    </div>
+    <div class="modal-body">
+        <p ng-if="partnerPartnerPlaces.length > 0 && !(partnerLists.length > 0)">Admin user is currently assigned to partner place with parent id '{{partnerPartnerPlaces[0].partnerPlace.parentId}}'
+            <span ng-if='partnerPartnerPlaces.length > 1'>
+                and
+                {{(partnerPartnerPlaces.length - 1)}}
+                other partner place{{((partnerPartnerPlaces.length - 1) > 1 ? 's' : '')}} as partner place participants</span>. Please remove this admin user from the relevant partner place participants and delete the partner role.</p>
+        <p ng-if="partnerLists.length > 0 && !(partnerPartnerPlaces.length > 0)">Admin user is currently assigned to '{{partnerLists[0].title}}'
+            <span ng-if='partnerLists.length > 1'>
+                and
+                {{(partnerLists.length - 1)}}
+                other list{{((partnerLists.length - 1) > 1 ? 's' : '')}}</span>. Please update list assignments and retry.</p>
+        <p ng-if="partnerLists.length > 0 && partnerPartnerPlaces.length > 0">Admin user is currently assigned to partner place with parent id 
+            {{partnerPartnerPlaces.length>1? partnerPartnerPlaces.length : "'"+partnerPartnerPlaces[0].partnerPlace.parentId+"'"}}
+            partner place{{((partnerPartnerPlaces.length) > 1 ? 's' : '')}}
+            &
+            {{partnerLists.length>1? partnerLists.length : "'"+partnerLists[0].title+"'"}}
+            list{{((partnerLists.length) > 1 ? 's' : '')}}. Please remove this admin user from the relevant partner place participants and delete the partner role.</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()" type="button">OK</button>
+    </div>
+
+</div>

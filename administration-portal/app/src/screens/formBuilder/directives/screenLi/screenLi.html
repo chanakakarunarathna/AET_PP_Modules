@@ -1,0 +1,35 @@
+<li title="{{screen.label}}" 
+	class="screen-heading"
+	ng-class="{dndDraggingSource:dragging, 'edit-mode':editMode}"
+	ng-dblclick="editMode = true">
+
+	<div dnd-draggable="screen"
+		 dnd-moved="screens.splice(index,1)"
+		 dnd-type="'screen'"
+		 dnd-dragstart="dragStart(event)"
+		 class="screen-btn"
+		 ng-click="setSelected()"
+		 ng-class="{active:selectedScreen == screen.name}"
+		 ng-hide="editMode">
+		<span class="screen-label">{{screen.label}}</span>
+	</div>
+	
+	<form>
+		<div ng-show="editMode" class="input-group">
+			<input type="text" class="form-control" ng-model="screen.label" />
+			<span class="input-group-btn">
+				<button class="btn btn-success" type="button" ng-click="editMode = false"><span class="glyphicon glyphicon-ok"></span></button>
+				<button class="btn btn-danger" type="button" title="delete" 
+						ng-click="screens.splice(index, 1)"
+						ng-if="screens.length > 1">
+					<span class="glyphicon glyphicon-trash"></span>
+				</button>
+			</span>
+		</div>
+	</form>
+	
+</li>
+	
+
+	
+	

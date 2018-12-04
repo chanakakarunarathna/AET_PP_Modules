@@ -1,0 +1,130 @@
+// Place Pass branding colors
+/* Branding primary color variables */
+@white : #ffffff;
+@black : #000000;
+@red : #d7262c;
+@blue-color : #007ad7;
+@gray-blue: #b9c5d1;
+@select-header-navy: #222f3d;
+
+@main-color : #72c833;
+@secondary-color : #34495e;
+@trinity-color : #3498db;
+
+
+@main-color-lighten : lighten(@main-color, 18%);
+@main-color-darken : darken(@main-color, 15%);
+@secondary-color-lighten : lighten(@secondary-color, 25%);
+@secondary-color-darken : darken(@secondary-color, 10%);
+@required-color : @red;
+@border-color : lighten(@black, 80%);
+
+@element-bg-color : darken(@white, 4%); // for bg color that used in section divide
+@default-text-color : #848d98;
+
+
+//Button action colors
+@positive-action-color : @main-color; // Changes, sends, or adds information
+@neutral-action-color : #848d98; // Makes no change or takes users back a screen (e.g. Cancel)
+@negative-action-color : @trinity-color; // Deletes, resets or blocks information
+@disabled-color : lighten(@trinity-color , 20%); // Deletes, resets or blocks information
+
+//Form
+@form-control-bg-color : lighten(@secondary-color, 66%);
+@form-control-border-color : lighten(@secondary-color, 45%);
+@form-label-color : #333333;
+@form-input-border-color : @form-label-color;
+@form-table-input-error-bg-color : lighten(@required-color, 35%);
+
+//Btn Colors
+@primary-btn-color : lighten(@positive-action-color, 15%);
+@primary-btn-border-bottom-color : darken(@positive-action-color, 12%);
+@default-btn-color : lighten(@neutral-action-color, 20%);
+@info-btn-color : @blue-color;
+
+
+//bg-colors
+.bg-white{
+  background-color: @white;
+}
+
+.solidRed {
+  background-color: #c6000a !important;
+  color: @white !important;
+}
+
+.solidGreen {
+  background-color: #9bce67 !important;
+  color: @white !important;
+}
+
+.solidGray {
+  background-color: #96a1a1 !important;
+  color: @white !important;
+}
+
+.white {
+  background-color: #ffffff !important;
+}
+
+// TODO : Move these color variables to each section creating file called "branding.less"
+//Top navbar colors
+@nav-text-color : #b8c5d1;
+@navbar-bg-color : @secondary-color;
+@navbar-header-bg-color : @secondary-color;
+@navbar-header-border-color : @admin-nav-active-color;
+@navbar-header-brand-bg-color : @secondary-color;
+@navbar-header-brand-hover-color : @secondary-color;
+
+@navbar-header-dropdown-menu-hover-color : @main-color;
+@navbar-collapse-border-color : lighten(@black , 89%);
+@navbar-collapse-text-color : @trinity-color;
+
+
+//aside admin navigation colors
+@admin-nav-bgColor : @secondary-color;
+@admin-nav-borderColor : lighten(@admin-nav-bgColor,10%);
+@admin-nav-fontColor : @nav-text-color;
+
+@admin-nav-active-color : darken(@admin-nav-bgColor,10%);
+@admin-nav-active-fontColor : @nav-text-color;
+@admin-nav-hover-color : @admin-nav-bgColor;
+
+/*aside admin navigation sub menu colors*/
+@sub-menu-bg-color : lighten(@admin-nav-bgColor,5%);
+@sub-menu-border-color : lighten(@admin-nav-bgColor,20%);
+@sub-menu-fontColor : @nav-text-color;
+
+@sub-menu-active-bgColor : lighten(@admin-nav-bgColor,20%);
+@sub-menu-active-fontColor : lighten(@secondary-color,10%);
+@sub-menu-hover-color : lighten(@admin-nav-bgColor,20%);
+
+
+
+
+//login screen colors
+@login-bg-color : lighten(@secondary-color, 30%);
+@login-panel-border-color : @secondary-color;
+@login-panel-header-color : @secondary-color;
+@login-bg-border-color : lighten(@main-color, 10%);
+
+//Alerts and warning colors
+@success : @brand-success;
+@info : @brand-info;
+@warning : @brand-warning;
+@danger : @brand-danger;
+
+//border colors
+@success-border-color : @state-success-text;
+@danger-border-color : @state-danger-text ;
+
+//Filter colors
+@filter-bg-color : lighten(@admin-nav-bgColor, 40%);
+
+
+
+//table colors
+@table-font-color : lighten(@black, 60%);
+@table-tr-first-child-color : @secondary-color;
+@table-tr-hover-color : lighten(@main-color, 40%);
+@table-th-bg-color : lighten(@black, 60%);

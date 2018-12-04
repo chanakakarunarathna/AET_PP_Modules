@@ -1,0 +1,154 @@
+.mission {
+    .aside {
+        .tab-set {
+            .item-container {
+                // @media @desktop-md {
+                //   padding-left: 3px;
+                //   padding-right: 3px;
+                //   margin-bottom: 6px;
+                //
+                //   &:nth-child(4n + 0){
+                //     padding-right: 15px;
+                //   }
+                //   &:nth-child(4n + 1){
+                //     padding-left: 15px;
+                //   }
+                // }
+                // @media @tablet {
+                margin-bottom: 6px;
+                padding-left: 3px;
+                padding-right: 3px;
+                .mission.preview &{
+                  padding-left: 0px;
+                  padding-right: 0px;
+                }
+
+                &:nth-child(3n + 0) {
+                    padding-right: 15px;
+
+                    .mission.preview &{
+                      padding-right: 0px;
+                    }
+                }
+
+                &:nth-child(3n + 1) {
+                    padding-left: 15px;
+
+                    .mission.preview &{
+                      padding-left: 0px;
+                    }
+                }
+                // }
+                // @media @mobile {
+                //   margin-bottom: 6px;
+                //   padding-left: 3px;
+                //   padding-right: 3px;
+                //   &:nth-child(2n + 0){
+                //     padding-right: 15px;
+                //   }
+                //   &:nth-child(2n + 1){
+                //     padding-left: 15px;
+                //   }
+                // }
+                .tab-item {
+                    text-align: left;
+                    color: @secondary-color-lighter;
+                    background-color: @white;
+                    cursor: default;
+                    position: relative;
+                    border-radius: 5px;
+                    font-weight: bold;
+                    text-transform: none;
+                    // @media @desktop-lg {
+                    //   margin-bottom: 5px;
+                    // }
+                    // @media @tablet-and-desktop {
+                    font-size: 18px;
+                    padding: 15px;
+                    // }
+                    // @media @mobile {
+                    //   font-size: 14px;
+                    //   padding: 10px;
+                    // }
+                    .validation {
+                        display: block;
+                        width: 27px;
+                        height: 27px;
+                        position: absolute;
+                        border: 2px solid @secondary-color-lighter;
+                        border-radius: 15px;
+                        background-color: @white;
+                        // @media @desktop-sm-lg {
+                        //   top: 14px;
+                        //   right: 15px;
+                        // }
+                        // @media @tablet {
+                        top: 14px;
+                        right: 15px;
+                        // }
+                        // @media @mobile {
+                        //   top: 7px;
+                        //   right: 10px;
+                        // }
+                        i {
+                            position: relative;
+                            left: 4px;
+                            font-size: 15px;
+                        }
+                    }
+
+                    &.invalid {
+                        .validation {
+                            i {
+                                color: @red;
+                            }
+                        }
+                    }
+
+                    &.valid {
+                        background-color: @main-color-dark;
+                        color: @white;
+
+                        .validation {
+                            background-color: @main-color-light;
+                            border-color: @main-color-light;
+
+                            i {
+                                left: 4px;
+                                color: @white;
+                                // @media @desktop-sm-lg {
+                                //   top: 2px;
+                                // }
+                                // @media @mobile {
+                                //   top: 4px;
+                                // }
+                            }
+                        }
+                    }
+
+                    &.active {
+                        background-color: @main-color-lighter;
+                        color: @main-color-dark;
+                        box-shadow: 3px 3px 15px @medium-gray;
+
+                        .validation {
+                            border-color: @main-color-dark;
+
+                            &.valid {}
+
+                            &.invalid {}
+                        }
+                    }
+
+                    &:focus {
+                        outline: none;
+                    }
+
+                    &:active {
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+    }
+}

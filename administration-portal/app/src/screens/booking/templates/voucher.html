@@ -1,0 +1,18 @@
+<div class="loader" ng-show="loader" data-html2canvas-ignore="true">
+    <div class="backdrop"></div>
+    <div class="loader-container">
+      <div id="loader"></div>
+      <h1 ng-hide="loaderText">Updating...</h1>
+      <h1 ng-show="loaderText">{{loaderText}}</h1>
+    </div>
+</div>
+<div ng-show="htmlContent != null">
+	<div class="notification-modal aet-modal centered">
+	    <div class="modal-header">
+	        <h3 class="modal-title">View Voucher</h3>
+	    </div>
+	    <div class="modal-body">
+	     	<p ng-bind-html="htmlContent"></p>
+	    </div>
+	</div>
+</div>

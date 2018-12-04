@@ -1,0 +1,476 @@
+<h1 class="page-header">
+    View Booking
+</h1>
+
+<div class="booking-view-landing create">
+    <form name="viewBookingForm" novalidate>
+    	<section class="_map" ng-class="{'tab-collapsed' : tab[1], 'tab-expand' : !tab[1], 'tab-error' : _mapErrors.length > 0}">
+            <div class="section-header">
+                <div class="pull-left">
+                    <span class="icon icon-placepass-icons-pp-map pull-left"></span>
+                    <h2 class="title pull-left">Booker Details</h2>
+                    <div class="error-count" ng-show="_mapErrors.length > 0 && tab[1]">
+                        <span class="glyphicon glyphicon-alert"></span>
+                        <span class="count">{{ _mapErrors.length }}
+                            error<span ng-show="_mapErrors.length > 1">s</span>
+                            require<span ng-show="_mapErrors.length === 1">s</span>
+                            your attention</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="description">View the construct of the Booker Details.</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="collapse-btn pull-right" ng-click="tab[1] = !tab[1]">
+                    <i ng-class="tab[1] ? 'icon icon-placepass-icons-pp-plus' : 'glyphicon glyphicon-minus'"></i>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="tab[1]">
+                <div class="section-body">
+                    <div class="row sub-section partner-place-setup">
+                        <div class="col-xs-6">
+                            <div class="form-group has-feedback">
+                                <label for="bookerDetailsName">Booker Name</label>
+                                <input type="text" disabled class="form-control" name="bookerDetailsName" id="bookerDetailsName" ng-model-options="{ updateOn: 'blur' }" ng-model="bookerDetailsName">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group has-feedback">
+                                <label for="email">Email</label>
+                                <input type="text" disabled class="form-control" name="email" id="email" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.bookerDetails.email">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group has-feedback">
+                                <label for="email">Phone Number</label>
+                                <input type="text" disabled class="form-control" name="phoneNumber" id="phoneNumber" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.bookerDetails.phoneNumber">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group has-feedback">
+                                <label for="dateOfBirth">Date Of Birth</label>
+                                <input type="text" disabled class="form-control" name="dateOfBirth" id="dateOfBirth" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.bookerDetails.dateOfBirth">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group has-feedback">
+                                <label for="countryISOCode">Country ISO Code</label>
+                                <input type="text" disabled class="form-control" name="countryISOCode" id="countryISOCode" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.bookerDetails.countryISOCode">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary pull-right" ng-click="go('next', 1); mapFormValidity(viewBookingForm)">
+                                Next
+                            </button>
+                            <button class="btn btn-default pull-right previous" ng-click="go('previous', 1); mapFormValidity(viewBookingForm)">
+                                Previous
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="_map" ng-class="{'tab-collapsed' : tab[2], 'tab-expand' : !tab[2], 'tab-error' : _mapErrors.length > 0}">
+            <div class="section-header">
+                <div class="pull-left">
+                    <span class="icon icon-placepass-icons-pp-map pull-left"></span>
+                    <h2 class="title pull-left">Booking Options</h2>
+                    <div class="error-count" ng-show="_mapErrors.length > 0 && tab[2]">
+                        <span class="glyphicon glyphicon-alert"></span>
+                        <span class="count">{{ _mapErrors.length }}
+                            error<span ng-show="_mapErrors.length > 1">s</span>
+                            require<span ng-show="_mapErrors.length === 1">s</span>
+                            your attention</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="description">View the construct of Booking Options.</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="collapse-btn pull-right" ng-click="tab[2] = !tab[2]">
+                    <i ng-class="tab[2] ? 'icon icon-placepass-icons-pp-plus' : 'glyphicon glyphicon-minus'"></i>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="tab[2]">
+                <div class="section-body">
+                    <div ng-show="booking.bookingOptions.length>0" ng-repeat="bookingOption in booking.bookingOptions track by $index">
+                        <div class="row sub-section partner-place-setup">
+                            <div class="col-xs-6">
+                                <div class="form-group has-feedback">
+                                    <label for="productId">Product Id</label>
+                                    <input type="text" disabled class="form-control" name="productId" id="productId" ng-model-options="{ updateOn: 'blur' }" ng-model="bookingOption.productId">
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group has-feedback">
+                                    <label for="productOptionId">Product Option Id</label>
+                                    <input type="text" disabled class="form-control" name="productOptionId" id="productOptionId" ng-model-options="{ updateOn: 'blur' }" ng-model="bookingOption.productOptionId">
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group has-feedback">
+                                    <label for="bookingDate">Activity Date</label>
+                                    <input type="text" disabled class="form-control" name="bookingDate" id="bookingDate" ng-model-options="{ updateOn: 'blur' }" ng-model="bookingOption.bookingDate">
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group has-feedback">
+                                    <label for="endTime">End Time</label>
+                                    <input type="text" disabled class="form-control" name="endTime" id="endTime" ng-model-options="{ updateOn: 'blur' }" ng-model="bookingOption.endTime">
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group has-feedback">
+                                    <label for="description">Description</label>
+                                    <input type="text" disabled class="form-control" name="description" id="description" ng-model-options="{ updateOn: 'blur' }" ng-model="bookingOption.description">
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="form-group has-feedback">
+                                    <label for="pickupLocation">PICK-UP LOCATION</label>
+                                    <input type="text" disabled class="form-control" name="pickupLocation" id="pickupLocation" ng-model-options="{ updateOn: 'blur' }" ng-model="bookingOption.pickupLocation.locationName">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12" ng-show="bookingOption.voucherUrl.length>0">
+                            <button class="btn btn-success pull-right previous" ng-click="viewVoucher(bookingOption.voucherUrl)">
+                                View Voucher
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="row mar-lr-0 element-bg " ng-show="bookingOption.traverlerDetails.length>0">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h2>Travelers Records</h2>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="search-screen text-right">
+                                            <div class="search">
+                                                <h4 class="mar-t-30" ng-class="{hide: (results == 'updating')}">
+                                                    <i>{{bookingOption.traverlerDetails.length}}
+                                                        Result<span ng-if="bookingOption.traverlerDetails.length>1">s</span></i>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="search-screen-report">
+                                            <div class="search">
+                                                <table class="table table-bordered readonly">
+                                                    <colgroup>
+                                                        <col width="30%">
+                                                        <col width="20%">
+                                                        <col width="10%">
+                                                        <col width="15%">
+                                                        <col width="15%">
+                                                        <col width="10%">
+                                                    </colgroup>
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Email</th>
+                                                        <th>Date Of Birth</th>
+                                                        <th>Phone Number</th>
+                                                        <th>Lead Traveler</th>
+                                                        <th>Country ISO Code</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr ng-repeat="traveller in bookingOption.traverlerDetails">
+                                                        <td>{{traveller.title}} {{traveller.firstName}} {{traveller.lastName}}</td>
+                                                        <td>{{traveller.email}}</td>
+                                                        <td>{{traveller.dateOfBirth}}</td>
+                                                        <td>{{traveller.phoneNumber}}</td>
+                                                        <td> <span ng-show="traveller.leadTraveler"> Yes</span>
+                                                            <span ng-hide="traveller.leadTraveler"> No</span></td>
+                                                        <td>{{traveller.countryISOCode}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mar-lr-0 element-bg " ng-show="bookingOption.quantities.length>0">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h2>Travelers Quantities</h2>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="search-screen text-right">
+                                            <div class="search">
+                                                <h4 class="mar-t-30" ng-class="{hide: (results == 'updating')}">
+                                                    <i>{{bookingOption.quantities.length}}
+                                                        Result<span ng-if="bookingOption.quantities.length>1">s</span></i>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="search-screen-report">
+                                            <div class="search">
+                                                <table class="table table-bordered readonly">
+                                                    <colgroup>
+                                                        <col width="30%">
+                                                        <col width="20%">
+                                                        <col width="20%">
+                                                    </colgroup>
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Band Id</th>
+                                                        <th>Age Band</th>
+                                                        <th>Quantity</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr ng-repeat="quantity in bookingOption.quantities">
+                                                        <td>{{quantity.ageBandId}}</td>
+                                                        <td>{{quantity.ageBandLabel}}</td>
+                                                        <td>{{quantity.quantity}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+	                    <div class="row mar-lr-0 element-bg " ng-show="booking.payment.length>0">
+	                        <div class="col-md-12">
+	                            <div class="row">
+	                                <div class="col-md-6">
+	                                    <h2>Payment Records</h2>
+	                                </div>
+	                                <div class="col-md-6">
+	                                    <div class="search-screen text-right">
+	                                        <div class="search" id="exportable">
+	                                            <h4 class="mar-t-30" ng-class="{hide: (results == 'updating')}">
+	                                                <i>{{booking.payment.length}}
+	                                                    Result<span ng-if="booking.payment.length>1">s</span></i>
+	                                            </h4>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <div class="row">
+	                                <div class="col-md-12">
+	                                    <div class="search-screen-report">
+	                                        <div class="search">
+	                                            <table class="table table-bordered readonly">
+	                                                <colgroup>
+	                                                    <col width="30%">
+	                                                    <col width="20%">
+	                                                    <col width="10%">
+	                                                    <col width="15%">
+	                                                    <col width="15%">
+	                                                    <col width="10%">
+	                                                </colgroup>
+	                                                <thead>
+	                                                    <tr>
+	                                                        <th>Id</th>
+	                                                        <th>Holder Name</th>
+	                                                        <th>Payment</th>
+	                                                        <th>Payment Amount</th>
+	                                                        <th>Last 4 CardNumber</th>
+	                                                        <th>Expiry Date</th>
+	                                                    </tr>
+	                                                </thead>
+	                                                <tbody>
+	                                                    <tr ng-repeat="pay in booking.payment track by $index">
+	                                                        <td>{{pay.paymentId}}</td>
+	                                                        <td>{{pay.holderName}}</td>
+	                                                        <td>{{pay.paymentType}}</td>
+	                                                        <td>{{pay.currencyCode}} : {{pay.paymentAmount}}</td>
+	                                                        <td>{{pay.last4CardNumber}}</td>
+	                                                        <td>{{pay.expiryDate}}</td>
+	                                                    </tr>
+	                                                </tbody>
+	                                            </table>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+                        <div class="clearfix"></div>
+                        <div class="col-sm-12" ng-show="bookingOption.productDetails.cancellationPolicy.length>0">
+                            <span class="booking-cancel-policy"> Cancellation Policy : {{bookingOption.productDetails.cancellationPolicy}}</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="section-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary pull-right" ng-click="go('next', 2); mapFormValidity(viewBookingForm)">
+                                Next
+                            </button>
+                            <button class="btn btn-default pull-right previous" ng-click="go('previous', 2); mapFormValidity(viewBookingForm)">
+                                Previous
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="_map" ng-class="{'tab-collapsed' : tab[3], 'tab-expand' : !tab[3], 'tab-error' : _mapErrors.length > 0}">
+            <div class="section-header">
+                <div class="pull-left">
+                    <span class="icon icon-placepass-icons-pp-map pull-left"></span>
+                    <h2 class="title pull-left">Loyalty Details</h2>
+                    <div class="error-count" ng-show="_mapErrors.length > 0 && tab[3]">
+                        <span class="glyphicon glyphicon-alert"></span>
+                        <span class="count">{{ _mapErrors.length }}
+                            error<span ng-show="_mapErrors.length > 3">s</span>
+                            require<span ng-show="_mapErrors.length === 3">s</span>
+                            your attention</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="description">View the construct of the Loyalty Details.</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="collapse-btn pull-right" ng-click="tab[3] = !tab[3]">
+                    <i ng-class="tab[3] ? 'icon icon-placepass-icons-pp-plus' : 'glyphicon glyphicon-minus'"></i>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="tab[3]">
+                <div class="section-body">
+                    <div class="row sub-section partner-place-setup">
+                        <div class="col-xs-6">
+                            <div class="form-group has-feedback">
+                                <label for="email">Loyalty Account Id</label>
+                                <input type="text" disabled class="form-control" name="loyaltyAccountId" id="loyaltyAccountId" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.loyaltyAccount.loyaltyAccountId">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group has-feedback">
+                                <label for="loyaltyProgramId">Loyalty Program Id</label>
+                                <input type="text" disabled class="form-control" name="loyaltyProgramId" id="loyaltyProgramId" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.loyaltyAccount.loyaltyProgramId">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group has-feedback">
+                                <label for="email">Loyalty Points</label>
+                                <input type="text" disabled class="form-control" name="loyaltyPoints" id="loyaltyPoints" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.loyaltyAccount.loyaltyPoints">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary pull-right" ng-click="go('next', 3); mapFormValidity(viewBookingForm)">
+                                Next
+                            </button>
+                            <button class="btn btn-default pull-right previous" ng-click="go('previous', 3);">
+                                Previous
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="booking-view" ng-class="{'tab-collapsed' : tab[4], 'tab-expand' : !tab[4], 'tab-error' : _partnerPlaceErrors.length > 0}">
+            <div class="section-header">
+                <div class="pull-left">
+                    <span class="icon icon-placepass-icons-pp-map pull-left"></span>
+                    <h2 class="title pull-left">Booking Details</h2>
+                    <div class="error-count" ng-show="_partnerPlaceErrors.length > 0 && tab[4]">
+                        <span class="glyphicon glyphicon-alert"></span>
+                        <span class="count">{{ _partnerPlaceErrors.length }}
+                            error<span ng-show="_partnerPlaceErrors.length > 4">s</span>
+                            require<span ng-show="_partnerPlaceErrors.length === 4">s</span>
+                            your attention</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="description">Basic Details of Booking.</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="collapse-btn pull-right" ng-click="tab[4] = !tab[4]">
+                    <i ng-class="tab[4] ? 'icon icon-placepass-icons-pp-plus' : 'glyphicon glyphicon-minus'"></i>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            
+            <div collapse="tab[4]">
+                <div class="section-body">
+                    <div class="row sub-section partner-place-setup">
+                         <div class="col-xs-6">
+                            <div class="form-group has-feedback">
+                                <label for="bookingId">Booking Id</label>
+                                <input type="text" disabled class="form-control" name="bookingId" id="bookingId" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.bookingId">
+                              </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group has-feedback">
+                                <label for="partnerId">Partner Id</label>
+                                <input type="text" disabled class="form-control" name="partnerId" id="partnerId" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.partnerId">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group has-feedback">
+                                <label for="customerId">Customer Id</label>
+                                <input type="text" disabled class="form-control" name="customerId" id="customerId" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.customerId">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group has-feedback">
+                                <label for="bookingReference">Booking Reference</label>
+                                <input type="text" disabled class="form-control" name="bookingReference" id="bookingReference" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.bookingReference">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group has-feedback">
+                                <label for="bookingReference">Total</label>
+                                <input type="text" disabled class="form-control" name="total" id="total" ng-model-options="{ updateOn: 'blur' }" ng-model="total">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group has-feedback">
+                                <label for="bookingReference">Status</label>
+                                <input type="text" disabled class="form-control" name="status" id="status" ng-model-options="{ updateOn: 'blur' }" ng-model="booking.bookingSummary.overallStatus.status">
+                            </div>
+                        </div>
+
+                    </div>
+                </div >
+                <div class="section-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button ng-show="publishEventType!='Cancellation'" ng-disabled="booking.bookingSummary.overallStatus.status == 'PENDING'" class="btn btn-danger pull-right previous" ng-click="cancelBooking(booking)">
+                                Cancel Booking
+                            </button>
+                            <button class="btn btn-default pull-right previous" ng-click="publishEvent(booking)">
+                                Resend {{publishEventType}} Mail
+                            </button>
+                            <button class="btn btn-default pull-right previous" ng-click="go('previous', 4); mapFormValidity(viewBookingForm)">
+                                Previous
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>

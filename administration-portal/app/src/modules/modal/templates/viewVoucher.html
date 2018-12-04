@@ -1,0 +1,20 @@
+<div class="notification-modal aet-modal">
+    <div class="modal-header">
+        <h3 class="modal-title">View Voucher</h3>
+    </div>
+    <div class="modal-body">
+        <div ng-show="voucherType=='SINGLE_URL'">
+        	<h4>Voucher Url :</h4>
+        	<strong><a class="row" style="word-wrap: break-word;" ng-href="{{voucherUrls[0]}}" target="_blank">{{voucherUrls[0]}}</a></strong>
+        </div>
+        <div ng-show="voucherType=='MULTI_URL'">
+        	<h4>Voucher Urls :</h4>
+        	<strong ng-repeat="voucherUrl in voucherUrls">
+        		<a class="row" style="word-wrap: break-word;" ng-href="{{voucherUrl}}" target="_blank">{{voucherUrl}}</a>
+        	</strong>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="close()" type="button">Close</button>
+    </div>
+</div>

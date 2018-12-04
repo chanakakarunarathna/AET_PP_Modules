@@ -1,0 +1,62 @@
+<div class="search-screen">
+
+    <div class="search-header row">
+
+        <div class="col-sm-8 title-column">
+            <span class="search-title">Partner Places</span>
+            <span class="search-count">{{searchManager.searchResults.pagination.total}}
+                Results</span>
+            <div class="clearfix"></div>
+            <button class="btn create-btn btn-primary" title="New Partner Place" ui-sref="index.secured.partnerPlace.create" aet-has-permission="ADD_PARTNER_PLACE">
+                <i class="icon-placepass-icons-pp-plus"></i>
+                Create New Partner Place
+            </button>
+        </div>
+
+        <div class="col-sm-4 search-column">
+
+            <div class="input-container form-group has-feedback">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search Partner Places" ng-model="searchManager.query" ng-change="addFilter();searchManager.debouncedSearch()" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Partner Places'">
+                    <span class="input-group-btn">
+                        <button ng-click="addFilter();searchManager.search()" class="btn btn-default" type="button">
+                            <i class="icon-placepass-icons-pp-search form-control-feedback"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <aet-search row-name="partnerPlace" search-manager="searchManager">
+                        <aet-search-column label="Parent Id" name="parentId" searchable="true" sort="true"></aet-search-column>
+                        <aet-search-column label="Parent Web Id" name="parentWebId" searchable="true" sort="true"></aet-search-column>
+                        <aet-search-column label="Location" name="location" searchable="true" sort="true"></aet-search-column>
+                        <aet-search-column label="Activity Count" name="activityCount" searchable="true" sort="true"></aet-search-column>
+                        <aet-search-column label="Is Top Destination" name="isTopDestination" searchable="true" sort="true"></aet-search-column>
+                        <aet-search-column label="Has City Guide" name="hasCityGuide" searchable="true" sort="true"></aet-search-column>                        
+                        <aet-search-column label="Aliases" name="parentAliases" searchable="true" sort="false">{{partnerPlace.parentAliases.length != 0 ? partnerPlace.parentAliases.toString() : '-'}}</aet-search-column>
+                        <a aet-action-button class="hover-primary" ng-click="editPartnerPlace(partnerPlace)" title="edit" type="submit" aet-has-permission="EDIT_PARTNER_PLACE">
+                            <span class="icon-placepass-icons-pp-edit"></span>
+                        </a>
+                        <!--a aet-action-button class="hover-primary" ng-click="copyPartnerPlace(partnerPlace)" title="copy" type="submit" aet-has-permission="COPY_MAP">
+                            <span class="icon-placepass-icons-pp-copy"></span>
+                        </a -->
+                        <a aet-action-button class="hover-danger" ng-click="deletePartnerPlace(partnerPlace)" title="delete" type="submit" aet-has-permission="DELETE_PARTNER_PLACE">
+                            <span class="icon-placepass-icons-pp-remove"></span>
+                        </a>
+                    </aet-search>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

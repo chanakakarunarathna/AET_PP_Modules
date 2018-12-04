@@ -1,0 +1,183 @@
+.login-screen {
+  max-width: 400px;
+  margin: 0 auto;
+  top: 70px;
+  position: relative;
+  .panel{
+    border: 1px solid @login-panel-border-color;
+    .shadow(0, 0, 50px, 2px, #000000, 20%);
+    .panel-heading{
+      background-color: @login-panel-header-color;
+      .logo {
+        text-align: center;
+        img{
+          max-width: 300px;
+        }
+      }
+    }
+    .panel-body{
+      padding: 20px 35px 0;
+      min-height: 205px;
+      .login-form {
+        .form-group {
+          .form-control-static{
+            text-align: center;
+          }
+
+          &.has-success{
+            .form-control{}
+          }
+          &.has-error{
+            .form-control{}
+          }
+
+          .form-control{}
+          &.login-details {}
+          .checkbox {
+            .btn {
+              padding: 14px;
+              background-color: transparent;
+              border: 1px solid #cccccc;
+
+              &.active {
+                padding: 4px 7px;
+              }
+              &:focus {
+                outline: none;
+              }
+            }
+          }
+        }
+      }
+    }
+    a{
+      color: #002F87;
+      text-align: center;
+      .panel-footer{
+
+      }
+    }
+
+  }
+}
+
+.reset-password-success-screen {
+  max-width: 715px;
+  margin: 0 auto;
+  top: 70px;
+  position: relative;
+  .panel{
+    border: 1px solid @login-panel-border-color;
+    .shadow(0, 0, 50px, 2px, #000000, 20%);
+    .panel-heading{
+      background-color: @login-panel-header-color;
+      .logo {
+        text-align: left;
+        img{
+          max-width: 300px;
+        }
+      }
+    }
+    .panel-body{
+      padding: 20px 35px 0;
+      min-height: 115px;
+    }
+  }
+}
+
+.reset-password-fail-screen {
+  max-width: 685px;
+  margin: 0 auto;
+  top: 70px;
+  position: relative;
+  .panel{
+    border: 1px solid @login-panel-border-color;
+    .shadow(0, 0, 50px, 2px, #000000, 20%);
+    .panel-heading{
+      background-color: @login-panel-header-color;
+      .logo {
+        text-align: left;
+        img{
+          max-width: 300px;
+        }
+      }
+    }
+    .panel-body{
+      padding: 20px 35px 0;
+      min-height: 115px;
+    }
+  }
+}
+
+.reset-password-account-notfound-screen {
+  max-width: 765px;
+  margin: 0 auto;
+  top: 70px;
+  position: relative;
+  .panel{
+    border: 1px solid @login-panel-border-color;
+    .shadow(0, 0, 50px, 2px, #000000, 20%);
+    .panel-heading{
+      background-color: @login-panel-header-color;
+      .logo {
+        text-align: left;
+        img{
+          max-width: 300px;
+        }
+      }
+    }
+    .panel-body{
+      padding: 20px 35px 0;
+      min-height: 115px;
+    }
+  }
+}
+
+.password-reset-screen {
+  max-width: 500px;
+  margin: 0 auto;
+  top: 70px;
+  position: relative;
+  .panel{
+    border: 1px solid @login-panel-border-color;
+    .shadow(0, 0, 50px, 2px, #000000, 20%);
+    .panel-heading{
+      background-color: @login-panel-header-color;
+      .logo {
+        text-align: center;
+        img{
+          max-width: 300px;
+        }
+      }
+    }
+    .panel-body{
+      padding: 20px 35px 0;
+      min-height: 240px;
+      .login-form {
+        .form-group {
+          .form-control-static{
+            text-align: center;
+          }
+          .control-label{
+			padding-left: 0 !important;
+			padding-right: 0 !important;
+			}
+
+          &.has-success{
+            .form-control{
+              border-bottom: 1px solid #3c763d !important;
+            }
+          }
+          &.has-error{
+            .form-control{
+              border-bottom: 1px solid @brand-danger !important;
+            }
+          }
+        }
+      }
+    }
+  }
+  &.password-reset-form{
+
+	}
+}

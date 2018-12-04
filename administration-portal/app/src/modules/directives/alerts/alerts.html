@@ -1,0 +1,21 @@
+<div class="alert-bar">
+  <div class="alert-bar-container" ng-show="alertsService.getAlerts().length > 0" ui-scrollfix="50">
+    <ul class="alerts">
+      <li id="alert" ng-class="{'error':alert.type == 'error', 'success':alert.type == 'success', 'message':alert.type == 'message', 'showall':showAll}" ng-click="showAll = !showAll" ng-mouseenter="stopTimeout(alert)" ng-mouseleave="startTimeout(alert)" ng-repeat="alert in alertsService.getAlerts()">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="message pull-left" title="{{alert.message}}" ng-if="alert.message != undefined">
+              {{alert.message}}
+            </div>
+            <div class="message pull-left" title="{{alert.message}}" ng-bind-html="alert.htmlTemplate" ng-if="alert.htmlTemplate != undefined">
+            </div>
+
+            <div class="dismiss pull-right">
+              <span class="glyphicon glyphicon-remove pull-right" ng-click="showAll = false;$event.stopPropagation();alertsService.removeAlert(alert)"></span>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

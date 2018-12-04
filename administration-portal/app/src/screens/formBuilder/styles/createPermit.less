@@ -1,0 +1,262 @@
+.create-permit {
+	
+	.permit-sidebar-nav{
+		.panel{
+			.panel-heading{
+				form{
+					.form-group{
+						margin-bottom: 0;
+						label{}
+						.input-group{
+							padding-right: 15px;
+							padding-left: 15px;
+							input{}
+							.input-group-btn{
+								button{}
+							}
+						}
+					}
+				}
+			}
+			.panel-body{
+				max-height: 350px;
+				overflow-y: auto;
+				ul.fields {
+					margin-top: @ggw / 4;
+					padding: 0;
+					background-color: #fff;
+					list-style: none;
+					li {
+						padding: 5px;
+						cursor: move;
+						border-bottom: 1px solid #bbb;
+						border-left: 1px solid #bbb;
+						border-right: 1px solid #bbb;
+						&.hidden-field{
+							background-color: darken(#eeeeee,3%);
+						}
+						&:hover {
+							background-color: #eee;
+						}
+						&:first-child {
+							border-top: 1px solid #bbb;
+							border-top-right-radius: @border-radius-base;
+							border-top-left-radius: @border-radius-base;
+						}
+						&:last-child {
+							border-bottom-right-radius: @border-radius-base;
+							border-bottom-left-radius: @border-radius-base;
+						}
+						span.badge{
+							cursor: pointer;
+							margin-right: 5px;
+							&:first-child {
+								margin-right: 0px;
+							}
+							&:hover{
+								background-color: @brand-primary;
+							}
+							span{}
+						}
+						.popover-inner {
+							cursor: default;
+							.popover-content {
+								padding: 5px;
+								.content{
+									p{
+									padding: 5px 10px;
+									margin: 0;
+									white-space: nowrap;
+									overflow: hidden;
+									text-overflow: ellipsis;
+										strong{
+											min-width: 90px;
+											display: inline-block;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.permit-main {
+		
+		.panel {
+			.panel-heading {
+				.form-group {
+					margin-bottom: 0;
+					label.control-label {
+					}
+					input {
+					}
+				}
+			}
+			.panel-body.form-panel{
+				min-height: 350px;
+				
+				max-height: 500px;
+				overflow-y: auto;
+				
+				.permit-screen{
+					
+					ul.permit-fields{
+						min-height: 200px;
+						z-index: 1;
+						padding: 0;
+						background-color: #fff;
+						list-style: none;
+						border: 1px solid @gray-lighter;
+						border-radius: 5px;
+						
+						li {
+							font-size: @permit-field-font-size;
+							min-height: @permit-field-height;
+							border-bottom: 1px solid #bbb;
+							border-left: 1px solid #bbb;
+							border-right: 1px solid #bbb;
+							&:first-child {
+								border-top: 1px solid #bbb;
+								border-top-right-radius: @border-radius-base;
+								border-top-left-radius: @border-radius-base;
+							}
+							&:last-child {
+								border-bottom-right-radius: @border-radius-base;
+								border-bottom-left-radius: @border-radius-base;
+							}
+							&:hover {
+								border-color: #666;
+							}
+							&.hidden-field{
+								background-color: darken(#eeeeee,3%);
+							}
+							div.field {
+								padding: @permit-field-padding;
+								cursor: pointer;
+								.name-text, .label-text{
+									text-overflow: ellipsis;
+									overflow: hidden;
+									white-space: nowrap;
+								}
+
+							}
+							div.field-details {
+								padding: @permit-field-padding;
+								background-color: #eee;
+								border-top: 1px solid #bbb;
+								.form-group{
+									margin-bottom: 5px;
+								}
+							}
+							
+							span.badge{
+								font-size: 14px;
+								margin-right: 5px;
+							}
+							.popover-inner {
+								cursor: default;
+								.popover-content {
+									padding: 5px;
+									.content{
+										p{
+										padding: 5px 10px;
+										margin: 0;
+										white-space: nowrap;
+										overflow: hidden;
+										text-overflow: ellipsis;
+											strong{
+												min-width: 90px;
+												display: inline-block;
+											}
+										}
+									}
+								}
+							}
+						}
+
+					}
+				}
+
+			}
+
+
+		}
+		
+		.panel.notifications-panel {
+			
+			.notifications-list {
+				
+				div.notification {
+					
+				}
+				
+			}
+			
+		}
+	}
+}
+
+div.screen-list-container {
+	
+	position: relative;
+//	min-height: @input-height-base;
+	
+	button.new-screen {
+		margin-right: 5px;
+		width: 150px;
+	}
+	
+	.screen-list {
+
+		position: relative;
+		padding-left: 5px;
+		
+		.screen-heading {
+			position: relative;
+			margin-bottom: 5px;
+			margin-right: 5px;
+			height: @input-height-base;
+			float: left;
+
+			width: 150px;
+			padding: 0;
+			
+			&.edit-mode {
+				width: 300px;
+			}
+			
+			.screen-label {
+				overflow-x: hidden;
+				text-overflow: ellipsis;
+			}
+			
+			.screen-btn {
+				height: @input-height-base;
+				.btn;
+				.btn-default;
+				.btn-block;
+				
+				&.dndDraggingSource {
+					display: none;
+				}
+			}
+		}
+		
+		.dndPlaceholder {
+			.screen-heading;
+			background-color: #eee;
+		}
+		
+		.dndDraggingSource {
+			display: none;
+		}
+		
+	}
+	
+}
+
+.field-container {
+	
+}

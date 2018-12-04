@@ -1,0 +1,77 @@
+.loader {
+  .backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000;
+    opacity: 0.7;
+  }
+  .loader-container {
+    position: fixed;
+    @media @mobile {
+      left: 30%;
+    }
+    left: 44%;
+    top: 200px;
+    z-index: 2000;
+    h1 {
+      position: relative;
+      top: 50px;
+      left: 15px;
+      color: #fff;
+      font-size: 20px;
+    }
+    @media @mobile {
+      .loadingAnimation{
+        background: url("../../assets/images/img-animation-01.gif") no-repeat;
+        height: 32px;
+        left: 50%;
+        position: relative;
+        top: 40px;
+        width: 32px;
+      }
+    }
+    #loader {
+      animation: animate 1.5s linear infinite;
+      clip: rect(0, 40px, 40px, 20px);
+      height: 40px;
+      width: 40px;
+      position: absolute;
+      left: calc(80% - 40px);
+      top: calc(50% - 40px);
+      &:after {
+        animation: animate2 1.5s ease-in-out infinite;
+        clip: rect(0, 40px, 40px, 20px);
+        content: '';
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        position: absolute;
+      }
+      @keyframes animate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(220deg);
+        }
+      }
+      @keyframes animate2 {
+        0% {
+          box-shadow: inset #fff 0 0 0 17px;
+          transform: rotate(-140deg);
+        }
+        50% {
+          box-shadow: inset #fff 0 0 0 2px;
+        }
+        100% {
+          box-shadow: inset #fff 0 0 0 17px;
+          transform: rotate(140deg);
+        }
+      }
+    }
+  }
+}

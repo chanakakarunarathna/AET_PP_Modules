@@ -1,0 +1,379 @@
+<h1 class="page-header">
+    Create Place
+</h1>
+
+<div class="row places-landing">
+  <div class=" col-sm-12">
+    <form class="form-horizontal" name="createPlaceForm" novalidate>
+
+      <div class="section-body">
+        <div class="row sub-section project-setup">
+          <div class="col-xs-12">
+            <h3 class="title">Place Setup</h3>
+          </div>
+          <div class="col-xs-6 section-padding">
+            <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPlaceForm.id.$valid, 'has-error' : createPlaceForm.id.$showError && createPlaceForm.id.$hasError()}">
+              <label for="placePassRegion">Id</label>
+              <input aria-describedby="inputSuccess2Status" class="form-control" id="id" name="id" ng-maxlength="40" ng-model="places.id" placeholder="Enter a short and unique Id to identify the places ..." required ng-pattern="/^[a-zA-Z0-9 ]*$/" type="text" />
+              <div class="error" ng-show="createPlaceForm.id.$showError">
+                <p class="text-danger" ng-show="createPlaceForm.id.$error.required">Id is required.</p>
+                <p class="text-danger" ng-show="createPlaceForm.id.$error.maxlength">Id must be 40 characters or less</p>
+                <p class="text-danger" ng-show="createPlaceForm.id.$error.pattern">This doesn't seem to be a valid Id, don't use special characters</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 section-padding">
+            <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPlaceForm.webId.$valid, 'has-error' : createPlaceForm.webId.$showError && createPlaceForm.webId.$hasError()}">
+              <label for="webId">Web Id</label>
+              <input aria-describedby="inputSuccess2Status" class="form-control" id="webId" name="webId" ng-maxlength="40" ng-model="places.webId" placeholder="Web Id ..." required ng-pattern="/^[a-zA-Z0-9 ]*$/" type="text" />
+              <div class="error" ng-show="createPlaceForm.webId.$showError">
+                <p class="text-danger" ng-show="createPlaceForm.webId.$error.required">Web Id is required.</p>
+                <p class="text-danger" ng-show="createPlaceForm.webId.$error.maxlength">Web Id must be 40 characters or less</p>
+                <p class="text-danger" ng-show="createPlaceForm.webId.$error.pattern">This doesn't seem to be a valid Id, don't use special characters</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-6 section-padding">
+            <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPlaceForm.placePassRegion.$valid, 'has-error' : createPlaceForm.placePassRegion.$showError && createPlaceForm.placePassRegion.$hasError()}">
+              <label for="placePassRegion">Place Pass Region</label>
+              <input aria-describedby="inputSuccess2Status" class="form-control" id="placePassRegion" name="placePassRegion" ng-maxlength="40" ng-model="places.placePassRegion" placeholder="A Place Pass Region to identify the places ..." required type="text" />
+              <div class="error" ng-show="createPlaceForm.placePassRegion.$showError">
+                <p class="text-danger" ng-show="createPlaceForm.placePassRegion.$error.required">Place Pass Region is required.</p>
+                <p class="text-danger" ng-show="createPlaceForm.placePassRegion.$error.maxlength">Place Pass Region must be 40 characters or less</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 section-padding">
+            <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPlaceForm.placePassRegionWebId.$valid, 'has-error' : createPlaceForm.placePassRegionWebId.$showError && createPlaceForm.placePassRegionWebId.$hasError()}">
+              <label for="placePassRegionWebId">Place Pass Region Web Id</label>
+              <input aria-describedby="inputSuccess2Status" class="form-control" id="placePassRegionWebId" name="placePassRegionWebId" ng-maxlength="40" ng-model="places.placePassRegionWebId" placeholder="A Place Pass Region Web Id to identify the places ..." required
+                ng-pattern="/^[a-zA-Z0-9 ]*$/" type="text" />
+              <div class="error" ng-show="createPlaceForm.placePassRegionWebId.$showError">
+                <p class="text-danger" ng-show="createPlaceForm.placePassRegionWebId.$error.required">Place Pass Region Web Id is required.</p>
+                <p class="text-danger" ng-show="createPlaceForm.placePassRegionWebId.$error.maxlength">Place Pass Region Web Id must be 40 characters or less</p>
+                <p class="text-danger" ng-show="createPlaceForm.placePassRegionWebId.$error.pattern">This doesn't seem to be a valid Id, don't use special characters</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 section-padding">
+            <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPlaceForm.region.$valid, 'has-error' : createPlaceForm.region.$showError && createPlaceForm.region.$hasError()}">
+              <label for="region">Region</label>
+              <input aria-describedby="inputSuccess2Status" class="form-control" id="region" name="region" ng-maxlength="40" ng-model="places.region" placeholder="A Region to identify the places ..." required type="text" />
+              <div class="error" ng-show="createPlaceForm.region.$showError">
+                <p class="text-danger" ng-show="createPlaceForm.region.$error.required">Region is required.</p>
+                <p class="text-danger" ng-show="createPlaceForm.region.$error.maxlength">Region must be 40 characters or less</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 section-padding">
+            <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPlaceForm.regionWebId.$valid, 'has-error' : createPlaceForm.regionWebId.$showError && createPlaceForm.regionWebId.$hasError()}">
+              <label for="regionWebId">Region Web Id</label>
+              <input aria-describedby="inputSuccess2Status" class="form-control" id="regionWebId" name="regionWebId" ng-maxlength="40" ng-model="places.regionWebId" placeholder="Region Web Id ..." required ng-pattern="/^[a-zA-Z0-9 ]*$/" type="text" />
+              <div class="error" ng-show="createPlaceForm.regionWebId.$showError">
+                <p class="text-danger" ng-show="createPlaceForm.regionWebId.$error.required">Region Web Id is required.</p>
+                <p class="text-danger" ng-show="createPlaceForm.regionWebId.$error.maxlength">Region Web Id must be 40 characters or less</p>
+                <p class="text-danger" ng-show="createPlaceForm.regionWebId.$error.pattern">This doesn't seem to be a valid Id, don't use special characters</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 section-padding">
+            <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPlaceForm.country.$valid, 'has-error' : createPlaceForm.country.$showError && createPlaceForm.country.$hasError()}">
+              <label for="country">Country</label>
+              <input aria-describedby="inputSuccess2Status" class="form-control" id="country" name="country" ng-maxlength="40" ng-model="places.country" placeholder="Country ..." required ng-pattern="/^[a-zA-Z0-9 ]*$/" type="text" />
+              <div class="error" ng-show="createPlaceForm.country.$showError">
+                <p class="text-danger" ng-show="createPlaceForm.country.$error.required">Country is required.</p>
+                <p class="text-danger" ng-show="createPlaceForm.country.$error.maxlength">Country must be 40 characters or less</p>
+                <p class="text-danger" ng-show="createPlaceForm.country.$error.pattern">This doesn't seem to be a valid country, don't use special characters</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 section-padding">
+            <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPlaceForm.countryWebId.$valid, 'has-error' : createPlaceForm.countryWebId.$showError && createPlaceForm.countryWebId.$hasError()}">
+              <label for="countryWebId">Country Web Id</label>
+              <input aria-describedby="inputSuccess2Status" class="form-control" id="countryWebId" name="countryWebId" ng-maxlength="40" ng-model="places.countryWebId" placeholder="A Web Id to identify the country ..." required ng-pattern="/^[a-zA-Z0-9 ]*$/" type="text"
+              />
+              <div class="error" ng-show="createPlaceForm.countryWebId.$showError">
+                <p class="text-danger" ng-show="createPlaceForm.countryWebId.$error.required">Country Web Id is required.</p>
+                <p class="text-danger" ng-show="createPlaceForm.countryWebId.$error.maxlength">Country Web Id must be 40 characters or less</p>
+                <p class="text-danger" ng-show="createPlaceForm.countryWebId.$error.pattern">This doesn't seem to be a valid Id, don't use special characters</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 section-padding">
+            <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPlaceForm.city.$valid, 'has-error' : createPlaceForm.city.$showError && createPlaceForm.city.$hasError()}">
+              <label for="city">City</label>
+              <input aria-describedby="inputSuccess2Status" class="form-control" id="city" name="city" ng-maxlength="40" ng-model="places.city" placeholder="City ..." required type="text" />
+              <div class="error" ng-show="createPlaceForm.city.$showError">
+                <p class="text-danger" ng-show="createPlaceForm.city.$error.required">City is required.</p>
+                <p class="text-danger" ng-show="createPlaceForm.city.$error.maxlength">City must be 40 characters or less</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 section-padding">
+            <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPlaceForm.formattedAddress.$valid, 'has-error' : createPlaceForm.formattedAddress.$showError && createPlaceForm.formattedAddress.$hasError()}">
+              <label for="formattedAddress">Formatted Address</label>
+              <input aria-describedby="inputSuccess2Status" class="form-control" id="formattedAddress" name="formattedAddress" ng-maxlength="100" ng-model="places.formattedAddress" placeholder="Formatted Address ..." required type="text" />
+              <div class="error" ng-show="createPlaceForm.formattedAddress.$showError">
+                <p class="text-danger" ng-show="createPlaceForm.formattedAddress.$error.required">Formatted Address is required.</p>
+                <p class="text-danger" ng-show="createPlaceForm.formattedAddress.$error.pattern">This doesn't seem to be a valid address, don't use special characters</p>
+                <p class="text-danger" ng-show="createPlaceForm.formattedAddress.$error.maxlength">Formatted Address must be 100 characters or less</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 section-padding">
+            <div class="form-group has-feedback col-sm-9" ng-class="{ 'has-success' : createPlaceForm.continent.$valid, 'has-error' : createPlaceForm.continent.$showError && createPlaceForm.continent.$hasError()}">
+              <label for="continent">Continent</label>
+              <input aria-describedby="inputSuccess2Status" class="form-control" id="continent" name="continent" ng-maxlength="40" ng-model="places.continent" placeholder="Continent ..." type="text" />
+              <div class="error" ng-show="createPlaceForm.continent.$showError">
+                <p class="text-danger" ng-show="createPlaceForm.continent.$error.required">Continent is required.</p>
+                <p class="text-danger" ng-show="createPlaceForm.continent.$error.maxlength">Continent must be 40 characters or less</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="row sub-section project-setup">
+          <div class="col-xs-12">
+            <h3 class="title">Geo Location</h3>
+          </div>
+          <div class="col-xs-6 section-padding">
+            <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPlaceForm.lat.$valid, 'has-error' : createPlaceForm.lat.$showError && createPlaceForm.lat.$hasError()}">
+              <label for="lat">Latitude</label>
+              <input ng-paste="preventPastingCharactersForLatLong('lat', $event)" ng-pattern="latRegex" aria-describedby="inputSuccess2Status" class="form-control" id="lat" name="lat" onkeypress='return !(event.charCode != 8 && event.charCode != 0 && event.charCode != 46 && event.charCode != 45 && event.charCode > 31 && (event.charCode < 48 || event.charCode > 57))'
+                ng-model="places.geoLocation.lat" placeholder="Latitude ..." required type="text" />
+              <div class="error" ng-show="createPlaceForm.lat.$showError">
+                <p class="text-danger" ng-show="createPlaceForm.lat.$error.pattern">Valid Latitude is required</p>
+                <p class="text-danger" ng-show="createPlaceForm.lat.$error.required">Latitude is required.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 section-padding">
+            <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPlaceForm.lng.$valid, 'has-error' : createPlaceForm.lng.$showError && createPlaceForm.lng.$hasError()}">
+              <label for="lng">Longitude</label>
+              <input ng-paste="preventPastingCharactersForLatLong('long', $event)"  ng-pattern="longRegex" aria-describedby="inputSuccess2Status" class="form-control" id="lng" name="lng" onkeypress='return !(event.charCode != 8 && event.charCode != 0 && event.charCode != 46 && event.charCode != 45 && event.charCode > 31 && (event.charCode < 48 || event.charCode > 57))'
+                ng-model="places.geoLocation.lng" placeholder="Longitude ..." required type="text" />
+              <div class="error" ng-show="createPlaceForm.lng.$showError">
+                <p class="text-danger" ng-show="createPlaceForm.lng.$error.pattern">Valid Longitude is required</p>
+                <p class="text-danger" ng-show="createPlaceForm.lng.$error.required">Longitude is required.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="row sub-section project-setup">
+          <div class="col-xs-12">
+            <h3 class="title">Location Type</h3>
+          </div>
+          <div class="col-xs-6 section-padding">
+            <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPlaceForm.longName.$valid, 'has-error' : createPlaceForm.longName.$showError && createPlaceForm.longName.$hasError()}">
+              <label for="longName">Long Name</label>
+              <input aria-describedby="inputSuccess2Status" class="form-control" id="longName" name="longName" ng-maxlength="40" ng-model="places.locationType.longName" placeholder="Long Name for location type..." required type="text" />
+              <div class="error" ng-show="createPlaceForm.longName.$showError">
+                <p class="text-danger" ng-show="createPlaceForm.longName.$error.required">Long Name is required.</p>
+                <p class="text-danger" ng-show="createPlaceForm.longName.$error.maxlength">Long Name must be 40 characters or less</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 section-padding">
+            <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPlaceForm.shortName.$valid, 'has-error' : createPlaceForm.shortName.$showError && createPlaceForm.shortName.$hasError()}">
+              <label for="shortName">Short Name</label>
+              <input aria-describedby="inputSuccess2Status" class="form-control" id="shortName" name="shortName" ng-maxlength="40" ng-model="places.locationType.shortName" placeholder="Short Name for location type ..." required type="text" />
+              <div class="error" ng-show="createPlaceForm.shortName.$showError">
+                <p class="text-danger" ng-show="createPlaceForm.shortName.$error.required">Short Name is required.</p>
+                <p class="text-danger" ng-show="createPlaceForm.shortName.$error.maxlength">Short Name must be 40 characters or less</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 section-padding">
+            <div class="form-group has-feedback required col-sm-9" ng-class="{ 'has-success' : createPlaceForm.type.$valid, 'has-error' : createPlaceForm.type.$showError && createPlaceForm.type.$hasError()}">
+              <label for="type">Type</label>
+              <input aria-describedby="inputSuccess2Status" class="form-control" id="type" name="type" ng-maxlength="40" ng-model="places.locationType.type" placeholder="Type for location type ..." required ng-pattern="/^[a-zA-Z0-9 ]*$/" type="text" />
+              <div class="error" ng-show="createPlaceForm.type.$showError">
+                <p class="text-danger" ng-show="createPlaceForm.type.$error.required">Type is required.</p>
+                <p class="text-danger" ng-show="createPlaceForm.type.$error.maxlength">Type must be 40 characters or less</p>
+                <p class="text-danger" ng-show="createPlaceForm.type.$error.pattern">This doesn't seem to be a valid name, don't use special characters</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-body form-group">
+        <div class="row sub-section address-compo">
+          <div class="col-xs-12">
+            <h3 class="title">Address Components</h3>
+          </div>
+          <ng-form name="manualForm">
+            <div class="col-xs-3 section-padding">
+              <input aria-describedby="inputSuccess2Status" class="form-control" id="manuallyAddedLongName" name="manuallyAddedLongName" ng-maxlength="40" ng-model="manuallyAddedLongName" placeholder="Long Name for location type..." type="text" />
+            </div>
+            <div class="col-xs-3 section-padding">
+              <input aria-describedby="inputSuccess2Status" class="form-control" id="manuallyAddedShortName" name="manuallyAddedShortName" ng-maxlength="40" ng-model="manuallyAddedShortName" placeholder="Short Name for location type ..." type="text" />
+            </div>
+            <div class="col-xs-5 section-padding">
+              <ui-select id="manuallyAddedType" multiple name="manuallyAddedType" ng-model="manuallyAddedType.type" sortable="true" tagging-label="(custom 'new' label)" title="Select a Type">
+                <ui-select-match allow-clear="true" placeholder="Select a Type">
+                  <span style="text-transform: none">{{ $item }}</span>
+                </ui-select-match>
+                <ui-select-choices repeat="type in locationTypes | filter:$select.search | orderBy : 'id'">
+                  {{type}}
+                </ui-select-choices>
+              </ui-select>
+            </div>
+            <div class="col-md-1">
+              <div class="form-group">
+                <button class="btn btn-sm btn-primary no-label pull-right" ng-click="manullayAddRow(manuallyAddedLongName,manuallyAddedShortName,manuallyAddedType); manualForm.$setPristine()" ng-disabled="!manuallyAddedRowValidation()" type="submit">Add</button>
+              </div>
+            </div>
+          </ng-form>
+
+          <!-- -->
+
+          <div class="col-xs-12 section-padding">
+            <section ng-show="places.addrsComponents.length>0">
+              <div class="row header">
+                <div class="col-md-8">
+                  <h4>
+                                        Address Components Records <span id="3b29c3d0-a899-42fd-bda5-c6855acfc87e"></span>
+                                    </h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <table class="table margin-0">
+                      <colgroup>
+                        <col width="5%">
+                        <col width="20%">
+                        <col width="25%">
+                        <col width="55%">
+                      </colgroup>
+                      <thead>
+                        <th></th>
+                        <th>Long Name</th>
+                        <th>Short Name</th>
+                        <th>Type</th>
+                      </thead>
+                    </table>
+                    <div class="infinite-scroll">
+                      <table class="table">
+                        <colgroup>
+                          <col width="5%">
+                          <col width="20%">
+                          <col width="25%">
+                          <col width="55%">
+                        </colgroup>
+                        <tbody>
+                          <tr ng-repeat="addComponents in places.addrsComponents">
+                            <td>
+                              <button class="btn btn-sm btn-default btn-rounded" ng-click="deleteUniqueRow(addComponents)" type="button">
+                                                            <i class="glyphicon glyphicon-remove"></i>
+                                                        </button>
+                            </td>
+                            <td>
+                              <ng-form name="manualFirstNameForm">
+                                <div class="has-feedback" ng-class="{ 'has-error' : manualFirstNameForm.firstName.$showError && manualFirstNameForm.firstName.$error.required}">
+                                  <input class="form-control" id="firstName" name="firstName" ng-model="addComponents.longName" required type="text">
+                                  <div class="error" ng-show="manualFirstNameForm.firstName.$showError">
+                                    <p class="text-danger" ng-show="manualFirstNameForm.firstName.$error.required">First Name is required.</p>
+                                  </div>
+                                </div>
+                              </ng-form>
+                            </td>
+                            <td><input class="form-control" id="lastName" ng-model="addComponents.shortName" type="text"></td>
+                            <td>
+                              <ui-select ng-disabled="true" id="addComponentType" multiple name="addComponentType" ng-model="addComponents.types" required sortable="true" tagging-label="(custom 'new' label)" title="Select a Type" ui-select-required>
+                                <ui-select-match allow-clear="true" placeholder="Select a Type">
+                                  <span style="text-transform: none">{{$item}}</span>
+                                </ui-select-match>
+                                <ui-select-choices repeat="type in locationTypes | filter:$select.search | orderBy : 'id'">
+                                  {{type}}
+                                </ui-select-choices>
+                              </ui-select>
+                            </td>
+
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+        </div>
+      </div>
+	  <div class="section-body form-group">
+	  	<div class="row sub-section address-compo">
+			<div class="col-xs-12">
+	     		<h3 class="title">Aliases</h3>
+			</div>
+			<ng-form name="manualForm">
+				<div class="col-xs-6 section-padding">
+	            	<div class="form-group has-feedback col-sm-9" ng-class="{ 'has-success' : manualForm.alias.$valid, 'has-error' : manualForm.alias.$showError && manualForm.alias.$hasError()}">
+		            <input aria-describedby="inputSuccess2Status" class="form-control" id="alias" name="alias" ng-maxlength="40" ng-model="alias" placeholder="Alias..." type="text"/>
+		            <div class="error" ng-show="manualForm.alias.$showError">
+		            	<p class="text-danger" ng-show="manualForm.alias.$error.maxlength">Alias must be 40 characters or less.</p>
+		            </div>  
+	            	</div>
+	            	<div class="col-md-2">
+					     <div class="form-group">
+					         <button class="btn btn-sm btn-primary no-label pull-right" ng-click="addAliasRow(alias); manualForm.$setPristine()" ng-disabled="!aliasValidation(alias)" type="submit">Add</button>
+					     </div>
+					</div> 
+	         		</div>
+	          </ng-form>
+			  <div class="col-xs-12 section-padding">
+				    <section ng-show="getLength(places.aliases)>0">
+				        <div class="row header">
+				            <div class="col-md-8">
+				                <h4>
+				                    Aliases
+				                </h4>
+				            </div>
+				        </div>
+				        <div class="row">
+				            <div class="col-md-12">
+				                <div class="form-group">
+				                    <div class="infinite-scroll">
+				                        <table class="table">
+				                            <colgroup>
+				                                <col width="1%">
+				                                <col width="20%">
+				                            </colgroup>
+				                            <tbody>
+				                            <tr ng-repeat="aliases in places.aliases">
+				                                <td>
+				                                    <button class="btn btn-sm btn-default btn-rounded" ng-click="deleteAliasRow(aliases)" type="button">
+				                                        <i class="glyphicon glyphicon-remove"></i>
+				                                    </button>
+				                                </td>
+				                                <td><input class="form-control" id="keyforaliases" ng-model="aliases" type="text"></td>
+				                            </tr>
+				                            </tbody>
+				                        </table>
+			                   </div>
+			                 </div>
+			               </div>
+			             </div>
+		           	</section>
+		      </div>
+		
+		       </div>
+		     </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <button class="btn btn-primary pull-right button-holder" ng-click="submitPlaceForm()" ng-disabled="createPlaceForm.$invalid" type="submit">
+                        Save
+                    </button>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

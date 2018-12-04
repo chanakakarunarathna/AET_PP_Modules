@@ -1,0 +1,58 @@
+<div class="Add-modal map-modal">
+    <form name="editModal" class="form-horizontal">
+  <div class="modal-header">
+    <h3 class="modal-title">Edit {{type}}.</h3>
+  </div>
+  <div class="modal-body">
+
+      <div class="form-group has-feedback required"
+           ng-class="{'has-error' : editModal.stageTitle.$showError && editModal.stageTitle.$hasError()}"
+           ng-if="type === 'Stage'">
+        <label for="stageTitle" class="col-sm-3 control-label">Title</label>
+        <div class="col-sm-8">
+          <input name="stageTitle"
+                 ng-model="$parent.stageTitle"
+                 type="text"
+                 class="form-control"
+                 id="stageTitle"
+                 placeholder="Title"
+                 ng-required="true"
+                 ng-maxlength="40"
+                 autofocus>
+          <div class="error" ng-show="editModal.stageTitle.$showError">
+            <p class="text-danger" ng-show="editModal.stageTitle.$error.required">{{type}} title is required.</p>
+            <p class="text-danger" ng-show="editModal.stageTitle.$error.maxlength">{{type}} title must be 40
+              characters or less</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-group has-feedback required"
+           ng-class="{'has-error' : editModal.touchpointTitle.$showError && editModal.touchpointTitle.$hasError()}"
+           ng-if="type === 'Touchpoint'">
+        <label for="touchpointTitle" class="col-sm-3 control-label">Title</label>
+        <div class="col-sm-8">
+          <input name="touchpointTitle"
+                 ng-model="$parent.touchpointTitle"
+                 type="text"
+                 class="form-control"
+                 id="touchpointTitle"
+                 placeholder="e.g. Pay"
+                 ng-required="true"
+                 ng-maxlength="80"
+                 autofocus>
+          <div class="error" ng-show="editModal.touchpointTitle.$showError">
+            <p class="text-danger" ng-show="editModal.touchpointTitle.$error.required">{{type}} title is required.</p>
+            <p class="text-danger" ng-show="editModal.touchpointTitle.$error.maxlength">{{type}} title must be 80
+              characters or less</p>
+          </div>
+        </div>
+      </div>
+
+  </div>
+  <div class="modal-footer">
+    <button ng-show="type === 'Stage'" ng-disabled="editModal.stageTitle.$invalid" class="btn btn-primary" ng-click="edit()">Save</button>
+    <button ng-show="type === 'Touchpoint'" ng-disabled="editModal.touchpointTitle.$invalid" class="btn btn-primary" ng-click="edit()">Save</button>
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+  </div>
+    </form>
+</div>

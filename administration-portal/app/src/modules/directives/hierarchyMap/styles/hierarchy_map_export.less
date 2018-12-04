@@ -1,0 +1,25 @@
+.map{
+  .hierarchy-map-main-container{
+    .tree {
+      &.export-map{
+        .root-container {
+          .element-container {
+            width: inherit;
+            .node {
+              margin: 0 @padding;
+              position: relative;
+            }
+          }
+        }
+        .child-container {
+          .element-container {
+            .line-to {
+              left: (@width / 2) + @padding;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,38 @@
+//text-angular
+
+.ta-root{
+  .ta-toolbar{
+    .mar-b-10;
+    .btn-group{
+      .btn{
+        &.btn-default{
+          background-image: inherit;
+          font-size: @default-font-size;
+          font-weight: normal;
+          background-color: transparent;
+          color: #505050;
+
+          &.active{
+            background-color: darken(@element-bg-color, 8%);
+            border-color: darken(@element-bg-color, 24%);
+          }
+        }
+      }
+    }
+  }
+  .ta-scroll-window{
+    &.form-control{
+      padding-right: 0 !important;
+      max-height: 170px;
+      min-height: 160px;
+      .ta-bind{
+        min-height: 160px;
+      }
+    }
+  }
+  &.focussed {
+    > .ta-scroll-window{
+      &.form-control{}
+    }
+  }
+}

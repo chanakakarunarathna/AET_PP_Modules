@@ -1,0 +1,486 @@
+<div class="node-detail-modal">
+    <div class="tab-header">
+        <h4 class="pull-left">Action</h4>
+        <h4 class="pull-right">
+            <button class="close" ng-click="cancel()">
+                <i class="glyphicon glyphicon-remove"></i>
+            </button>
+        </h4>
+        <div aet-has-permission="GET_ACTION_DATA_REPORT">
+            <button class="btn btn-primary btn-sm download" ng-click="downloadActionData(stageData.id, touchpointData.id, actionData.id)">
+                Download
+                <i class="glyphicon glyphicon-download-alt"></i>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+        <p>{{stageData.positionIndex + 1}}.{{touchpointData.positionIndex + 1}}.{{actionData.positionIndex +1}}
+            –
+            {{actionData.title}}</p>
+    </div>
+
+    <tabset>
+        <tab active="HierarchyMapService.getTabs[0].active" heading="Performance">
+
+            <!--Expectations-->
+            <div class="col-xs-6 main-chart-container mar-b-30">
+                <p>Expectation</p>
+
+                <div class="alert alert-info" ng-hide="HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.expectation != null" role="alert">
+                    <p>No expectation data available...</p>
+                </div>
+                <div class="chart" ng-show="HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.expectation != null">
+                    <div class="chart-header">
+                        <div class="average" ng-class="averageColorFn(HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.expectation.averageAnswer)">
+                            <span>{{HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.expectation.averageAnswer | number:1}}</span>
+                        </div>
+                    </div>
+                    <div class="chart-body">
+                        <canvas chart-colours="options.colours" chart-data="HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.expectation.answers" chart-labels="options.listOfLocations" chart-options="options.options" class="chart-bar" height="150"></canvas>
+                        <div class="chart-labels">
+                            <span class="low">Does Not Meet</span>
+                            <span class="high">Exceeds</span>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Frequency-->
+            <div class="col-xs-6 main-chart-container mar-b-30">
+                <p>Frequency</p>
+
+                <div class="alert alert-info" ng-hide="HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.frequency != null" role="alert">
+                    <p>No frequency data available...</p>
+                </div>
+                <div class="chart" ng-show="HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.frequency != null">
+                    <div class="chart-header">
+                        <div class="average" ng-class="averageColorFn(HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.frequency.averageAnswer)">
+                            <span>{{HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.frequency.averageAnswer | number:1}}</span>
+                        </div>
+                    </div>
+                    <div class="chart-body">
+                        <canvas chart-colours="options.colours" chart-data="HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.frequency.answers" chart-labels="options.listOfLocations" chart-options="options.options" class="chart-bar" height="150px"></canvas>
+                        <div class="chart-labels">
+                            <span class="low">Never</span>
+                            <span class="high">Frequently</span>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Value-->
+            <div class="col-xs-6 main-chart-container" ng-show="curveType == 'VALUE'">
+                <p>Value</p>
+
+                <div class="alert alert-info" ng-hide="HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.value != null" role="alert">
+                    <p>No value data available...</p>
+                </div>
+                <div class="chart" ng-show="HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.value != null">
+                    <div class="chart-header">
+                        <div class="average" ng-class="averageColorFn(HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.value.averageAnswer)">
+                            <span>{{HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.value.averageAnswer | number:1}}</span>
+                        </div>
+                    </div>
+                    <div class="chart-body">
+                        <canvas chart-colours="options.colours" chart-data="HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.value.answers" chart-labels="options.listOfLocations" chart-options="options.options" class="chart-bar" height="150px"></canvas>
+                        <div class="chart-labels">
+                            <span class="low">Very Low</span>
+                            <span class="high">Very High</span>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Emotion-->
+            <div class="col-xs-6 main-chart-container" ng-show="curveType == 'EMOTION'">
+                <p>Emotion</p>
+
+                <div class="alert alert-info" ng-hide="HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.emotion != null" role="alert">
+                    <p>No emotion data available...</p>
+                </div>
+                <div class="chart" ng-show="HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.emotion != null">
+                    <div class="chart-header">
+                        <div class="average" ng-class="averageColorFn(HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.emotion.averageAnswer)">
+                            <span>{{HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.emotion.averageAnswer | number:1}}</span>
+                        </div>
+                    </div>
+                    <div class="chart-body">
+                        <canvas chart-colours="options.colours" chart-data="HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.emotion.answers" chart-labels="options.listOfLocations" chart-options="options.options" class="chart-bar" height="150px"></canvas>
+                        <div class="chart-labels">
+                            <span class="low">Very Negative</span>
+                            <span class="high">Very Positive</span>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Loyalty-->
+            <div class="col-xs-6 main-chart-container">
+                <p>Importance</p>
+
+                <div class="alert alert-info" ng-hide="HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.loyalty != null" role="alert">
+                    <p>No loyalty data available...</p>
+                </div>
+                <div class="chart" ng-show="HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.loyalty != null">
+                    <div class="chart-header">
+                        <div class="average" ng-class="averageColorFn(HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.loyalty.averageAnswer)">
+                            <span>{{HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.loyalty.averageAnswer | number:1}}</span>
+                        </div>
+                    </div>
+                    <div class="chart-body">
+                        <canvas chart-colours="options.colours" chart-data="HierarchyMapService.getMapType(actionData.feedbackSummary).chartSummary.loyalty.answers" chart-labels="options.listOfLocations" chart-options="options.options" class="chart-bar" height="150px"></canvas>
+                        <div class="chart-labels">
+                            <span class="low">Not At All<br>
+                                Important</span>
+                            <span class="high">Extremely<br>
+                                Important</span>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab active="HierarchyMapService.getTabs[1].active" heading="Ratings Comments">
+            <div class="comment-container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h3>Positive</h3>
+                    </div>
+                    <div class="col-sm-4">
+                        <h3>Neutral</h3>
+                    </div>
+                    <div class="col-sm-4">
+                        <h3>Negative</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 comment positive">
+                        <div class="alert alert-info" ng-show="HierarchyMapService.getMapType(actionData.feedbackSummary).commentSummaries.POSITIVE.length == 0" role="alert">
+                            <p>No positive comments available...</p>
+                        </div>
+                        <div class="panel panel-success" ng-repeat="positiveComment in HierarchyMapService.getMapType(actionData.feedbackSummary).commentSummaries.POSITIVE | orderBy : HierarchyMapService.sortByModalData">
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h5 class="by">{{ positiveComment.username }}</h5>
+
+                                    <p class="date">{{ positiveComment.createdDate | date:'MM/dd/yyyy'}}</p>
+                                </div>
+                                <div class="action-icon-group">
+                                    <div aet-is-forbidden="DELETE_COMMENT">
+                                        <i class="c-icon c-icon-smile-happy"></i>
+                                    </div>
+                                    <div aet-has-permission="DELETE_COMMENT">
+                                        <a class="close">
+                                            <span class="glyphicon glyphicon-remove" ng-click="HierarchyMapService.deleteComment(stageData.id,touchpointData.id,actionData.id,positiveComment.answerId)"></span>
+                                        </a>
+                                    </div>
+                                    <div aet-has-permission="PROMOTE_ACTION_ANSWER">
+                                        <a class="promote" ng-class="{'promoted' : positiveComment.promotedDate!==null}">
+                                            <span ng-init="forceRenderToolTip()" ng-if="positiveComment.promotedDate === null" class="tooltip-hover" data-content="Move to top" data-target="webuiPopover0">
+                                                <i class="icon-placepass-icons-pp-upload" ng-click="HierarchyMapService.promoteComment(stageData.id,touchpointData.id,actionData.id,positiveComment.answerId, 'action', positiveComment)"></i>
+                                            </span>
+                                            <span ng-init="forceRenderToolTip()" ng-if="positiveComment.promotedDate !== null" class="tooltip-hover" data-content="Move back" data-target="webuiPopover0">
+                                                <i class="icon-placepass-icons-pp-upload" ng-click="HierarchyMapService.promoteComment(stageData.id,touchpointData.id,actionData.id,positiveComment.answerId, 'action', positiveComment)"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-body">
+                                <comment comment-text="positiveComment.comment" limit="45" type="positive"></comment>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 comment natural">
+                        <div class="alert alert-info" ng-show="HierarchyMapService.getMapType(actionData.feedbackSummary).commentSummaries.NEUTRAL.length == 0" role="alert">
+                            <p>No neutral comments available...</p>
+                        </div>
+                        <div class="panel panel-default" ng-repeat="naturalComment in HierarchyMapService.getMapType(actionData.feedbackSummary).commentSummaries.NEUTRAL | orderBy : HierarchyMapService.sortByModalData">
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h5 class="by">{{ naturalComment.username }}</h5>
+
+                                    <p class="date">{{ naturalComment.createdDate | date:'MM/dd/yyyy'}}</p>
+                                </div>
+                                <div class="action-icon-group">
+                                    <div aet-is-forbidden="DELETE_COMMENT">
+                                        <i class="c-icon c-icon-smile-meh"></i>
+                                    </div>
+                                    <div aet-has-permission="DELETE_COMMENT">
+                                        <a class="close">
+                                            <span class="glyphicon glyphicon-remove" ng-click="HierarchyMapService.deleteComment(stageData.id,touchpointData.id,actionData.id,naturalComment.answerId)"></span>
+                                        </a>
+                                    </div>
+                                    <div aet-has-permission="PROMOTE_ACTION_ANSWER">
+                                        <a class="promote" ng-class="{'promoted' : naturalComment.promotedDate!==null}">
+                                            <span ng-init="forceRenderToolTip()" ng-if="naturalComment.promotedDate === null" class="tooltip-hover" data-content="Move to top" data-target="webuiPopover0">
+                                                <i class="icon-placepass-icons-pp-upload" ng-click="HierarchyMapService.promoteComment(stageData.id,touchpointData.id,actionData.id,naturalComment.answerId, 'action', naturalComment)"></i>
+                                            </span>
+                                            <span ng-init="forceRenderToolTip()" ng-if="naturalComment.promotedDate !== null" class="tooltip-hover" data-content="Move back" data-target="webuiPopover0">
+                                                <i class="icon-placepass-icons-pp-upload" ng-click="HierarchyMapService.promoteComment(stageData.id,touchpointData.id,actionData.id,naturalComment.answerId, 'action', naturalComment)"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-body">
+                                <comment comment-text="naturalComment.comment" limit="45" type="natural"></comment>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 comment negative">
+                        <div class="alert alert-info" ng-show="HierarchyMapService.getMapType(actionData.feedbackSummary).commentSummaries.NEGATIVE.length == 0" role="alert">
+                            <p>No negative comments available...</p>
+                        </div>
+                        <div class="panel panel-danger" ng-repeat="negativeComment in HierarchyMapService.getMapType(actionData.feedbackSummary).commentSummaries.NEGATIVE | orderBy : HierarchyMapService.sortByModalData">
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h5 class="by">{{ negativeComment.username }}</h5>
+
+                                    <p class="date">{{ negativeComment.createdDate | date:'MM/dd/yyyy'}}</p>
+                                </div>
+                                <div class="action-icon-group">
+                                    <div aet-is-forbidden="DELETE_COMMENT">
+                                        <i class="c-icon c-icon-smile-sad"></i>
+                                    </div>
+                                    <div aet-has-permission="DELETE_COMMENT">
+                                        <a class="close">
+                                            <span class="glyphicon glyphicon-remove" ng-click="HierarchyMapService.deleteComment(stageData.id,touchpointData.id,actionData.id,negativeComment.answerId)"></span>
+                                        </a>
+                                    </div>
+                                    <div aet-has-permission="PROMOTE_ACTION_ANSWER">
+                                        <a class="promote" ng-class="{'promoted' : negativeComment.promotedDate!==null}">
+                                            <span ng-init="forceRenderToolTip()" ng-if="negativeComment.promotedDate === null" class="tooltip-hover" data-content="Move to top" data-target="webuiPopover0">
+                                                <i class="icon-placepass-icons-pp-upload" ng-click="HierarchyMapService.promoteComment(stageData.id,touchpointData.id,actionData.id,negativeComment.answerId, 'action', negativeComment)"></i>
+                                            </span>
+                                            <span ng-init="forceRenderToolTip()" ng-if="negativeComment.promotedDate !== null" class="tooltip-hover" data-content="Move back" data-target="webuiPopover0">
+                                                <i class="icon-placepass-icons-pp-upload" ng-click="HierarchyMapService.promoteComment(stageData.id,touchpointData.id,actionData.id,negativeComment.answerId, 'action', negativeComment)"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-body">
+                                <comment comment-text="negativeComment.comment" limit="45" type="negative"></comment>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab active="HierarchyMapService.getTabs[2].active" heading="Big Ideas">
+            <div class="bigidea-container">
+                <div class="row">
+                    <div class="col-sm-12" ng-show="HierarchyMapService.getMapType(actionData.feedbackSummary).bigIdeaSummaries.length === 0">
+                        <div class="alert alert-info" role="alert">
+                            <p>No big ideas available...</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6" ng-repeat="bigIdea in HierarchyMapService.getMapType(actionData.feedbackSummary).bigIdeaSummaries | orderBy : HierarchyMapService.sortByModalData">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h5 class="by">{{ bigIdea.username }}</h5>
+
+                                    <p class="date">{{ bigIdea.createdDate | date:'MM/dd/yyyy'}}</p>
+                                </div>
+                                <div class="action-icon-group">
+                                  <div aet-is-forbidden="DELETE_BIG_IDEA">
+                                      <i class="fa fa-commenting"></i>
+                                  </div>
+                                  <div aet-has-permission="DELETE_BIG_IDEA">
+                                      <a class="close">
+                                          <span class="glyphicon glyphicon-remove" ng-click="HierarchyMapService.deleteBigIdea(stageData.id,touchpointData.id,actionData.id,bigIdea.answerId)"></span>
+                                      </a>
+                                  </div>
+                                  <div aet-has-permission="PROMOTE_ACTION_ANSWER">
+                                      <a class="promote" ng-class="{'promoted' : bigIdea.promotedDate!==null}">
+                                          <span ng-init="forceRenderToolTip()" ng-if="bigIdea.promotedDate === null" class="tooltip-hover" data-content="Move to top" data-target="webuiPopover0">
+                                              <i class="icon-placepass-icons-pp-upload" ng-click="HierarchyMapService.promoteBigIdea(stageData.id,touchpointData.id,actionData.id,bigIdea.answerId, 'action', bigIdea)"></i>
+                                          </span>
+                                          <span ng-init="forceRenderToolTip()" ng-if="bigIdea.promotedDate !== null" class="tooltip-hover" data-content="Move back" data-target="webuiPopover0">
+                                              <i class="icon-placepass-icons-pp-upload" ng-click="HierarchyMapService.promoteBigIdea(stageData.id,touchpointData.id,actionData.id,bigIdea.answerId, 'action', bigIdea)"></i>
+                                          </span>
+                                      </a>
+                                  </div>
+                                </div>
+                                <div class="pull-right">
+
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-body">
+                                <comment comment-text="bigIdea.bigIdea" limit="70" type="positive"></comment>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+        <tab active="HierarchyMapService.getTabs[3].active" heading="Media">
+            <div class="row">
+                <h3 class="media-title">
+                    Media ({{HierarchyMapService.getMapType(actionData.feedbackSummary).mediaSummaries.length }})
+                </h3>
+                <div aet-has-permission="CREATE_ACTION_BU_MEDIA">
+                    <button class="btn btn-primary bu-media-upload-button" ng-click="HierarchyMapService.createAdminUserMedia(type, stageData.id,touchpointData.id,actionData.id)" type="button">
+                        Upload a File
+                    </button>
+                </div>
+
+                <div class="col-sm-12" ng-show="HierarchyMapService.getMapType(actionData.feedbackSummary).mediaSummaries.length === 0">
+                    <div class="alert alert-info" role="alert">
+                        <p>No media available...</p>
+                    </div>
+                </div>
+                <div class="col-xs-6 media-container mar-b-15" ng-repeat="media in HierarchyMapService.getMapType(actionData.feedbackSummary).mediaSummaries | orderBy:HierarchyMapService.sortByModalData">
+                    <div class="media action">
+                        <a ng-click='view_media(media)'>
+                            <div class="media-type col-xs-4">
+                                <img-type image="media.mediaUrl" time="media.createdDate"></img-type>
+                            </div>
+                        </a>
+
+                        <div class="panel panel-success col-xs-8">
+                            <div class="panel-heading">
+                                <div class="action-icon-group">
+                                    <div ng-if="media.creatorType != 'adminUser'">
+                                        <div aet-has-permission="DELETE_MEDIA">
+                                            <a class="close">
+                                                <span class="glyphicon glyphicon-remove" ng-click="HierarchyMapService.deleteMedia(stageData.id,touchpointData.id,actionData.id,media.answerId, 'action', media)"></span>
+                                            </a>
+                                        </div>
+                                        <div aet-has-permission="PROMOTE_ACTION_ANSWER">
+                                            <a class="promote" ng-class="{'promoted' : media.promotedDate!==null}">
+                                                <span ng-init="forceRenderToolTip()" ng-if="media.promotedDate === null" class="tooltip-hover" data-content="Move to top" data-target="webuiPopover0">
+                                                    <i class="icon-placepass-icons-pp-upload" ng-click="HierarchyMapService.promoteMedia(stageData.id,touchpointData.id,actionData.id,media.answerId, 'action', media)"></i>
+                                                </span>
+                                                <span ng-init="forceRenderToolTip()" ng-if="media.promotedDate !== null" class="tooltip-hover" data-content="Move back" data-target="webuiPopover0">
+                                                    <i class="icon-placepass-icons-pp-upload" ng-click="HierarchyMapService.promoteMedia(stageData.id,touchpointData.id,actionData.id,media.answerId, 'action', media)"></i>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div ng-if="media.creatorType == 'adminUser'">
+                                        <div aet-has-permission="DELETE_MEDIA">
+                                            <a class="close">
+                                                <span class="glyphicon glyphicon-remove" ng-click="HierarchyMapService.deleteMedia(stageData.id,touchpointData.id,actionData.id,media.answerId, 'action', media)"></span>
+                                            </a>
+                                        </div>
+                                        <div aet-has-permission="PROMOTE_ACTION_BU_MEDIA">
+                                            <a class="promote" ng-class="{'promoted' : media.promotedDate!==null}">
+                                                <span ng-init="forceRenderToolTip()" ng-if="media.promotedDate === null" class="tooltip-hover" data-content="Move to top" data-target="webuiPopover0">
+                                                    <i class="icon-placepass-icons-pp-upload" ng-click="HierarchyMapService.promoteMedia(stageData.id,touchpointData.id,actionData.id,media.answerId, 'action', media)"></i>
+                                                </span>
+                                                <span ng-init="forceRenderToolTip()" ng-if="media.promotedDate !== null" class="tooltip-hover" data-content="Move back" data-target="webuiPopover0">
+                                                    <i class="icon-placepass-icons-pp-upload" ng-click="HierarchyMapService.promoteMedia(stageData.id,touchpointData.id,actionData.id,media.answerId, 'action', media)"></i>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="date">{{ media.createdDate | date:'MM/dd/yyyy'}}</p>
+                                <p ng-show="media.username" class="by">Uploaded by:
+                                    {{ media.username | shortenName}}</p>
+                            </div>
+                            <div class="panel-body">
+                                <p>
+                                    <strong>Stage:&nbsp;
+                                    </strong>
+                                    <limit-characters to="40" text="stageData.title"></limit-characters>
+                                </p>
+                                <p>
+                                    <strong>Touchpoint:&nbsp;
+                                    </strong>
+                                    <limit-characters to="40" text="touchpointData.title"></limit-characters>
+                                </p>
+                                <p>
+                                    <strong>Action:&nbsp;
+                                    </strong>
+                                    <limit-characters to="40" text="actionData.title"></limit-characters>
+                                </p>
+                            </div>
+                            <div class="panel-footer" ng-init="forceRenderToolTip()">
+                                <a class="download" ng-click="getDownLoadLink(media.mediaUrl)" aet-has-permission="GET_DOWNLOAD_MEDIA_URL">
+                                    <span class="tooltip-hover glyphicon glyphicon-download-alt" data-content="Download Media" data-target="webuiPopover0"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </tab>
+        <tab active="HierarchyMapService.getTabs[4].active" heading="Insights">
+            <div aet-has-permission="CREATE_INSIGHT" class="row">
+                <div class="col-sm-12 ">
+                    <div class="panel panel-default">
+                        <div class="panel-body text-center">
+                            <p>Share your ideas :
+                                <button class="btn btn-primary" ng-click="HierarchyMapService.createInsight(type, stageData.id,touchpointData.id,actionData.id)" type="button">Add Comments or Upload a File
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="insight-container">
+                <div class="row">
+                    <div class="col-sm-12" ng-show="showNoInsightAvailable(actionData.insightList)">
+                        <div class="alert alert-info" role="alert">
+                            <p>No insights available...</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 " ng-repeat="insight in actionData.insightList | orderBy:HierarchyMapService.sortByModalData" ng-show="insight.mapType == HierarchyMapService.getMapType()">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <div class="pull-left">
+                                    <h5 class="by">{{insight.creatorRole === "PartnerPlace SME" ? 'SME : ' : ''}}{{ insight.creator }}</h5>
+
+                                    <p class="date">{{ insight.createdDate | date:'MM/dd/yyyy'}}</p>
+                                </div>
+                                <div class="action-icon-group">
+                                    <div ng-hide="insight.creatorId === loggedUserID && (insight.creatorRole === 'PartnerPlace SME' || insight.creatorRole === 'PartnerPlace Team'|| insight.creatorRole === 'PartnerPlace Lead'|| insight.creatorRole === 'PartnerPlace Admin')">
+                                        <i class="fa fa-commenting"></i>
+                                    </div>
+                                    <div
+                                        aet-has-permission="DELETE_INSIGHT"
+                                        ng-show="insight.creatorId === loggedUserID && (insight.creatorRole === 'PartnerPlace SME' || insight.creatorRole === 'PartnerPlace Team'|| insight.creatorRole === 'PartnerPlace Lead'|| insight.creatorRole === 'PartnerPlace Admin')">
+                                        <i class="fa fa-trash cursor-pointer" ng-click="HierarchyMapService.deleteInsight(type, insight.id, stageData.id, touchpointData.id, actionData.id)"></i>
+                                    </div>
+                                    <div aet-has-permission="PROMOTE_ACTION_INSIGHT">
+                                        <a class="promote" ng-class="{'promoted' : insight.promotedDate!==null}">
+                                            <span ng-init="forceRenderToolTip()" ng-if="insight.promotedDate === null" class="tooltip-hover" data-content="Move to top" data-target="webuiPopover0">
+                                                <i class="icon-placepass-icons-pp-upload" ng-click="HierarchyMapService.promoteInsight(type, insight.id, insight, stageData.id, touchpointData.id, actionData.id)"></i>
+                                            </span>
+                                            <span ng-init="forceRenderToolTip()" ng-if="insight.promotedDate !== null" class="tooltip-hover" data-content="Move back" data-target="webuiPopover0">
+                                                <i class="icon-placepass-icons-pp-upload" ng-click="HierarchyMapService.promoteInsight(type, insight.id, insight, stageData.id, touchpointData.id, actionData.id)"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-body">
+                                <comment comment-text="insight.comment" created-date="insight.createdDate" insight-data="insight.mediaList" limit="70" type="positive"></comment>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tab>
+    </tabset>
+
+</div>

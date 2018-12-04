@@ -1,0 +1,14 @@
+fieldset{
+  &[disabled]{
+    .btn{
+      &.btn-primary{
+        background-color: darken(@primary-btn-color, 10%);
+        border-color: @primary-btn-border-bottom-color;
+        &:hover{
+          background-color: darken(@primary-btn-color, 10%);
+          border-color: @primary-btn-border-bottom-color;
+        }
+      }
+    }
+  }
+}

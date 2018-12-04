@@ -1,0 +1,94 @@
+<h1 class="page-header">
+    Create Super Administrator
+</h1>
+
+<div class="row">
+    <div class=" col-sm-8">
+        <form class="form-horizontal" name="createAdminUserForm" novalidate>
+            <div class="form-group has-feedback mar-b-30" ng-class="{'has-error' : createAdminUserForm.title.$showError && createAdminUserForm.title.$hasError()}">
+                <label class="col-sm-3 control-label" for="title">Title
+                </label>
+                <div class="col-sm-7">
+                    <input
+                        aria-describedby="inputSuccess2Status"
+                        class="form-control"
+                        id="title"
+                        name="title"
+                        ng-maxlength="255"
+                        ng-model-options="{ updateOn: 'blur' }"
+                        ng-model="adminuser.title"
+                        ng-pattern="/^[a-zA-Z.]*$/"
+                        placeholder="Enter Title ..."
+                        type="text"/>
+                    <div class="error" ng-show="createAdminUserForm.title.$showError">
+                        <p class="text-danger" ng-show="createAdminUserForm.title.$error.maxlength">Title must be 255 characters or less</p>
+                        <p class="text-danger" ng-show="createAdminUserForm.title.$error.pattern">This doesn't seem to be a valid title, use only alpha characters and period (E.g.: Mr.)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group has-feedback required mar-b-30" ng-class="{'has-error' : createAdminUserForm.firstName.$showError && createAdminUserForm.firstName.$hasError()}">
+                <label class="col-sm-3 control-label required" for="firstName">First Name</label>
+                <div class="col-sm-7">
+                    <input class="form-control" id="firstName" name="firstName" ng-maxlength="255" ng-model-options="{ updateOn: 'blur' }" ng-model="adminuser.firstName" placeholder="Enter First Name ..." required ng-pattern="/^[a-zA-Z \'\-]*$/" type="text"/>
+                    <div class="error" ng-show="createAdminUserForm.firstName.$showError">
+                        <p class="text-danger" ng-show="createAdminUserForm.firstName.$error.required">First Name is required</p>
+                        <p class="text-danger" ng-show="createAdminUserForm.firstName.$error.maxlength">First Name must be 255 characters or less</p>
+                        <p class="text-danger" ng-show="createAdminUserForm.firstName.$error.pattern">This doesn't seem to be a valid name, use only alpha characters and space</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group has-feedback required mar-b-30" ng-class="{'has-error' : createAdminUserForm.lastName.$showError && createAdminUserForm.lastName.$hasError()}">
+                <label class="col-sm-3 control-label required" for="lastName">Last Name</label>
+                <div class="col-sm-7">
+                    <input class="form-control" id="lastName" name="lastName" ng-maxlength="255" ng-model-options="{ updateOn: 'blur' }" ng-model="adminuser.lastName" placeholder="Enter Last Name ..." ng-pattern="/^[a-zA-Z \'\-]*$/" required type="text"/>
+                    <div class="error" ng-show="createAdminUserForm.lastName.$showError">
+                        <p class="text-danger" ng-show="createAdminUserForm.lastName.$error.required">Last Name is required</p>
+                        <p class="text-danger" ng-show="createAdminUserForm.lastName.$error.maxlength">Last Name must be 255 characters or less</p>
+                        <p class="text-danger" ng-show="createAdminUserForm.lastName.$error.pattern">This doesn't seem to be a valid name, use only alpha characters and space</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- div class="form-group has-feedback mar-b-30" ng-class="{'has-error' : createAdminUserForm.profilePic.$showError && createAdminUserForm.profilePic.$hasError()}">
+                <label class="col-sm-3 control-label" for="profilePic">Profile Pic</label>
+                <div class="col-sm-7">
+                    <input class="form-control" id="profilePic" accept="image/*" name="profilePic" type="file">
+                    <div class="error" ng-show="createAdminUserForm.profilePic.$showError"></div>
+                </div>
+            </div -->
+
+            <div class="form-group has-feedback required mar-b-30" ng-class="{'has-error' : createAdminUserForm.email.$showError && createAdminUserForm.email.$hasError()}">
+                <label class="col-sm-3 control-label required" for="email">Email
+                </label>
+                <div class="col-sm-7">
+                    <input
+                        class="form-control"
+                        id="email"
+                        name="email"
+                        ng-model-options="{ updateOn: 'blur' }"
+                        ng-maxlength="255"
+                        ng-model="adminuser.email"
+                        ng-pattern="emailValidationPattern"
+                        placeholder="Please enter a valid email... "
+                        required
+                        tooltip-placement="right"
+                        tooltip="This email address must be unique to this system."
+                        type="text"/>
+                    <div class="error" ng-show="createAdminUserForm.email.$showError">
+                        <p class="text-danger" ng-show="createAdminUserForm.email.$error.required">Email is required</p>
+                        <p class="text-danger" ng-show="createAdminUserForm.email.$error.maxlength">Email must be 255 characters or less</p>
+                        <p class="text-danger" ng-show="createAdminUserForm.email.$error.pattern">This doesn't seem to be a valid email address pattern</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-5 col-sm-7">
+                    <button class="btn btn-primary" ng-click="submitForm()" ng-disabled="createAdminUserForm.$invalid" type="submit" aet-is-super-admin>
+                        Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+<h1 class="page-header">
+	Manage Account
+</h1>
+
+<div class="row">
+	<div class=" col-sm-6">
+		<form name="editAdminUserForm" novalidate class="form-horizontal">
+			<div class="form-group has-feedback" ng-class="{'has-error' : editAdminUserForm.title.$showError && editAdminUserForm.title.$hasError()}">
+        <label class="col-sm-5 control-label" for="title">Title
+        </label>
+        <div class="col-sm-7">
+          <input  aria-describedby="inputSuccess2Status" class="form-control" id="title" name="title" ng-maxlength="255" ng-model-options="{ updateOn: 'blur' }" ng-model="adminuser.title" placeholder="Enter Title ..." type="text" ng-pattern="/^[a-zA-Z.]*$/"/>
+
+          <div class="error" ng-show="editAdminUserForm.title.$showError">
+            <span class="text-danger" ng-show="editAdminUserForm.title.$error.maxlength">Title must be 255 characters or less</span>
+            <p class="text-danger" ng-show="editAdminUserForm.title.$error.pattern">This doesn't seem to be a valid title, use only alpha characters and period (E.g.: Mr.)</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-group has-feedback required" ng-class="{'has-success' : editAdminUserForm.firstName.$valid, 'has-error' : editAdminUserForm.firstName.$showError && editAdminUserForm.firstName.$hasError()}">
+        <label class="col-sm-5 control-label required" for="firstName">First Name</label>
+        <div class="col-sm-7">
+          <input  class="form-control" id="firstName" name="firstName" ng-maxlength="255" ng-model-options="{ updateOn: 'blur' }" ng-model="adminuser.firstName" placeholder="Enter First Name ..." required ng-pattern="/^[a-zA-Z ]*$/" type="text"/>
+          <div class="error" ng-show="editAdminUserForm.firstName.$showError">
+            <span aria-hidden="true" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok' : editAdminUserForm.firstName.$valid}"></span>
+            <p class="text-danger" ng-show="editAdminUserForm.firstName.$error.required">First Name is required</p>
+            <p class="text-danger" ng-show="editAdminUserForm.firstName.$error.maxlength">First Name must be 255 characters or less</p>
+            <p class="text-danger" ng-show="editAdminUserForm.firstName.$error.pattern">This doesn't seem to be a valid name, use only alpha characters and space</p>
+          </div>
+        </div>
+      </div>
+      <div class="form-group has-feedback required" ng-class="{'has-success' : editAdminUserForm.lastName.$valid, 'has-error' : editAdminUserForm.lastName.$showError && editAdminUserForm.lastName.$hasError()}">
+        <label class="col-sm-5 control-label required" for="lastName">Last Name</label>
+        <div class="col-sm-7">
+          <input  class="form-control" id="lastName" name="lastName" ng-maxlength="255" ng-model-options="{ updateOn: 'blur' }" ng-model="adminuser.lastName" placeholder="Enter Last Name ..." required ng-pattern="/^[a-zA-Z ]*$/" type="text"/>
+          <div class="error" ng-show="editAdminUserForm.lastName.$showError">
+            <span aria-hidden="true" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok' : editAdminUserForm.lastName.$valid}"></span>
+            <p class="text-danger" ng-show="editAdminUserForm.lastName.$error.required">Last Name is required</p>
+            <p class="text-danger" ng-show="editAdminUserForm.lastName.$error.maxlength">Last Name must be 255 characters or less</p>
+            <p class="text-danger" ng-show="editAdminUserForm.lastName.$error.pattern">This doesn't seem to be a valid name, use only alpha characters and space</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group has-feedback" ng-class="{'has-success' : editAdminUserForm.profilePic.$valid, 'has-error' : editAdminUserForm.profilePic.$showError && editAdminUserForm.profilePic.$hasError()}">
+        <label class="col-sm-5 control-label" for="profilePic">Profile Pic</label>
+        <div class="col-sm-7">
+          <input class="form-control" id="profilePic" accept="image/*" name="profilePic" type="file">
+          <div class="error" ng-show="editAdminUserForm.profilePic.$showError"></div>
+        </div>
+      </div>
+
+      <div class="form-group has-feedback required" ng-class="{ 'has-success' : editAdminUserForm.email.$valid, 'has-error' : editAdminUserForm.email.$showError && editAdminUserForm.email.$hasError()}">
+        <label class="col-sm-5 control-label required" for="email">Email
+        </label>
+        <div class="col-sm-7">
+          <input  class="form-control" id="email" name="email" ng-model-options="{ updateOn: 'blur' }" ng-model="adminuser.email" ng-pattern="emailValidationPattern" placeholder="Please enter a valid email... " required  ng-disabled=true tooltip-placement="right" tooltip="This email address must be unique to this system." type="text"/>
+          <div class="error" ng-show="editAdminUserForm.email.$showError">
+            <span aria-hidden="true" class="glyphicon form-control-feedback" ng-class="{'glyphicon-ok' : editAdminUserForm.email.$valid}"></span>
+            <p class="text-danger" ng-show="editAdminUserForm.email.$error.required">Email is required</p>
+            <p class="text-danger" ng-show="editAdminUserForm.email.$error.pattern">This doesn't seem to be a valid email address pattern</p>
+          </div>
+        </div>
+      </div>
+
+			<div class="form-group" ng-if="!adminuser.isSuperAdmin">
+				<label class="col-sm-5 control-label" for="partners">Partner(s)</label>
+				<div class="col-sm-7">
+					<input  class="form-control" id="partners" name="partners" ng-model="adminuser.partnerList" type="text" ng-readonly="true"/>
+				</div>
+			</div>
+
+			<div class="form-group has-feedback mar-b-30" ng-if="adminuser.showDiscussionDailyNotificationsCheckbox">
+        <label class="col-sm-5 control-label" for="discussionNotifications">Daily Discussion Notifications
+        </label>
+        <div class="col-sm-1 mar-t-15">
+          <input  class="form-control" id="discussionNotifications" name="discussionNotifications" type="checkbox" ng-model="adminuser.sendDiscussionDailyNotifications" />
+        </div>
+        <p class="col-sm-6" for="discussionNotificationsDescription">For every partner place you are assigned to as Partner Place Leader or Partner Place Team you will receive a daily email of the latest discussion posts. Uncheck the box to turn off this daily email.</p>
+      </div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-3 col-sm-9">
+					<button class="btn btn-primary" type="submit" ng-disabled="editAdminUserForm.$invalid" ng-click="submitAdminUserForm()">
+						Save
+					</button>
+				</div>
+			</div>
+
+		</form>
+	</div>
+</div>

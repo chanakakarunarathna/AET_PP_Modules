@@ -1,0 +1,63 @@
+<div class="search-screen">
+
+  <div class="search-header row">
+
+    <div class="col-sm-8 title-column">
+      <span class="search-title">Partners</span>
+      <span class="search-count">{{searchManager.searchResults.pagination.total}} Results</span>
+      <div class="clearfix"></div>
+      <button class="btn create-btn btn-primary" title="New Partner" ui-sref="index.secured.partner.create"  aet-is-super-admin>
+        <i class="icon-placepass-icons-pp-plus"></i> Create New Partner
+      </button>
+    </div>
+
+    <div class="col-sm-4 search-column">
+
+      <div class="input-container form-group has-feedback">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search Partners"
+                   ng-model="searchManager.query" ng-change="searchManager.debouncedSearch()"
+                   onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Partners'">
+            <span class="input-group-btn">
+              <button ng-click="searchManager.search()" class="btn btn-default" type="button">
+                <i class="icon-placepass-icons-pp-search form-control-feedback"></i>
+              </button>
+            </span>
+          </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12">
+
+      <div class="row">
+        <div class="col-sm-12">
+          <aet-search row-name="partner" search-manager="searchManager">
+            <aet-search-column label="Name" name="name" searchable="true" sort="true"></aet-search-column>
+            <aet-search-column label="Street Address1" name="streetAddress1" searchable="true" sort="true"></aet-search-column>
+            <aet-search-column label="Street Address2" name="streetAddress2" searchable="true" sort="true"></aet-search-column>
+            <aet-search-column label="City" name="city" searchable="true" sort="true"></aet-search-column>
+            <aet-search-column label="State" name="state" searchable="true" sort="true"></aet-search-column>
+            <aet-search-column url-param="zipCode" searchable="true"></aet-search-column>
+
+            <a aet-action-button class="hover-primary" ng-click="editPartner(partner)" title="edit" type="submit" aet-is-super-admin>
+              <span class="icon-placepass-icons-pp-edit"></span>
+            </a>
+
+            <a aet-action-button class="hover-danger" ng-click="deletePartner(partner)" title="delete" type="submit" aet-is-super-admin>
+              <span class="icon-placepass-icons-pp-remove"></span>
+            </a>
+
+          </aet-search>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

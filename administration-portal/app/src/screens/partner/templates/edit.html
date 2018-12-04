@@ -1,0 +1,130 @@
+<h1 class="page-header">
+    Edit Partner
+</h1>
+
+<div class="row">
+    <div class=" col-sm-9">
+        <form name="editPartnerForm" novalidate class="form-horizontal">
+            <div class="form-group has-feedback required" ng-class="{ 'has-success' : editPartnerForm.name.$valid, 'has-error' : editPartnerForm.name.$showError && editPartnerForm.name.$hasError()}">
+                <label class="col-sm-3 control-label" for="name">Name</label>
+
+                <div class="col-sm-9">
+                    <input autocomplete="off" aria-describedby="inputSuccess2Status" class="form-control" id="name" name="name" ng-maxlength="40" ng-model="partner.name" ng-pattern="/^[a-zA-Z0-9 ]*$/" placeholder="A short name to identify the partner ..." required type="text"/>
+
+                    <div class="error" ng-show="editPartnerForm.name.$showError">
+                        <p class="text-danger" ng-show="editPartnerForm.name.$error.required">Partner Name is required.</p>
+
+                        <p class="text-danger" ng-show="editPartnerForm.name.$error.maxlength">Partner Name must be 40 characters or less</p>
+
+                        <p class="text-danger" ng-show="editPartnerForm.name.$error.pattern">This doesn't seem to be a valid name, don't use special characters</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="shortName">Short Name</label>
+                <div class="col-sm-9">
+                    <p class="form-control-static">{{partner.shortName}}</p>
+
+                </div>
+            </div>
+
+            <div class="form-group has-feedback" ng-class="{'has-error' : editPartnerForm.streetAddress1.$showError && editPartnerForm.streetAddress1.$hasError()}">
+                <label class="col-sm-3 control-label" for="streetAddress1">Street Address 1
+                </label>
+
+                <div class="col-sm-9">
+                    <input autocomplete="off" class="form-control" id="streetAddress1" name="streetAddress1" ng-maxlength="255" ng-model="partner.streetAddress1" placeholder="Street Address 1 ..." type="text"/>
+
+                    <div class="error" ng-show="editPartnerForm.streetAddress1.$showError">
+                        <p class="text-danger" ng-show="editPartnerForm.streetAddress1.$error.maxlength">Street Address 1 must be 255 characters or less</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback" ng-class="{'has-error' : editPartnerForm.streetAddress2.$showError && editPartnerForm.streetAddress2.$hasError()}">
+                <label class="col-sm-3 control-label" for="streetAddress2">Street Address 2</label>
+
+                <div class="col-sm-9">
+                    <input autocomplete="off" class="form-control" id="streetAddress2" name="streetAddress2" ng-maxlength="255" ng-model="partner.streetAddress2" placeholder="Street Address 2 ..." type="text"/>
+
+                    <div class="error" ng-show="editPartnerForm.streetAddress2.$showError">
+                        <p class="text-danger" ng-show="editPartnerForm.streetAddress2.$error.maxlength">Street Address 2 must be 255 characters or less</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback" ng-class="{'has-error' : editPartnerForm.city.$showError && editPartnerForm.city.$hasError()}">
+                <label class="col-sm-3 control-label" for="city">City</label>
+
+                <div class="col-sm-9">
+                    <input class="form-control" id="city" name="city" ng-maxlength="40" ng-model="partner.city" placeholder="City ..." type="text" />
+
+                    <div class="error" ng-show="editPartnerForm.city.$showError">
+                        <p class="text-danger" ng-show="editPartnerForm.city.$error.maxlength">City must be 40 characters or less</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback required" ng-class="{ 'has-success' : editPartnerForm.state.$valid, 'has-error' : editPartnerForm.state.$showError && editPartnerForm.state.$hasError()}">
+                <label class="col-sm-3 control-label" for="state">State/Province</label>
+
+                <div class="col-sm-9">
+                    <ui-select id="state" name="state" ng-model="partner.state" theme="bootstrap" required>
+                        <ui-select-match placeholder="--Select State--">
+                            <span ng-bind-html="$select.selected.value"></span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="state in stateDetails">
+                            <span ng-bind-html="state.value"></span>
+                        </ui-select-choices>
+                    </ui-select>
+
+                    <div class="error" ng-show="editPartnerForm.state.$showError">
+                        <p class="text-danger" ng-show="editPartnerForm.state.$error.required">State is required.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback" ng-class="{'has-error' : editPartnerForm.zipcode.$showError && editPartnerForm.zipcode.$hasError()}">
+                <label class="col-sm-3 control-label" for="zipcode">Zip Code</label>
+
+                <div class="col-sm-9">
+                    <input class="form-control" id="zipcode" name="zipcode" ng-model="partner.zipCode" placeholder="Zip Code ..." ng-maxlength = "5" ng-pattern="/^[0-9]*$/" type="text"/>
+
+                    <div class="error" ng-show="editPartnerForm.zipcode.$showError">
+                        <p class="text-danger" ng-show="editPartnerForm.zipcode.$error.maxlength">Zip Code must be maximum 5 digits</p>
+                        <p class="text-danger" ng-show="editPartnerForm.zipcode.$error.pattern">This doesn't seem to be a valid Zip Code, don't use special characters</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback required" ng-class="{ 'has-success' : editPartnerForm.subLevel.$valid, 'has-error' : editPartnerForm.subLevel.$showError && editPartnerForm.subLevel.$hasError()}">
+                <label class="col-sm-3 control-label" for="subLevel">Sub Level</label>
+
+                <div class="col-sm-9">
+                    <ui-select id="subLevel" name="subLevel" ng-model="partner.subLevel" theme="bootstrap" required>
+                        <ui-select-match placeholder="--Select Sub Level--">
+                            <span ng-bind-html="$select.selected.value"></span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="subLevel in subLevels">
+                            <span ng-bind-html="subLevel.value"></span>
+                        </ui-select-choices>
+                    </ui-select>
+
+                    <div class="error" ng-show="editPartnerForm.subLevel.$showError">
+                        <p class="text-danger" ng-show="editPartnerForm.subLevel.$error.required">Sub Level is required.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button class="btn btn-primary" type="submit" ng-disabled="editPartnerForm.$invalid" ng-click="submitPartnerForm()">
+                        Save
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="node-detail-modal">
+  <div class="tab-header">
+      <button class="close" ng-click="cancel()">
+        <i class="glyphicon glyphicon-remove"></i>
+      </button>
+    </h4>
+    <div class="clearfix"></div>
+  </div>
+  <div class="modal-body">
+    <!-- <h1>Test</h1> -->
+    <div class="videogular-container pad-b-15" vg-player-ready="onPlayerReady($API)">
+      <videogular vg-theme="config.theme.url" vg-auto-play="config.autoPlay">
+        <vg-media vg-src="config.sources">
+        </vg-media>
+
+        <vg-controls>
+            <vg-play-pause-button></vg-play-pause-button>
+            <vg-scrub-bar>
+                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+            </vg-scrub-bar>
+            <vg-volume>
+                <vg-mute-button></vg-mute-button>
+                <vg-volume-bar></vg-volume-bar>
+            </vg-volume>
+            <vg-fullscreen-button></vg-fullscreen-button>
+        </vg-controls>
+        <vg-buffering></vg-buffering>
+        <!-- <vg-overlay-play></vg-overlay-play> -->
+
+      </videogular>
+    </div>
+    <div>
+      <p>Click <a href="{{ originalUrl }}" target="_blank" download>here</a> to view original video<p>
+    </div>
+  </div>
+</div>

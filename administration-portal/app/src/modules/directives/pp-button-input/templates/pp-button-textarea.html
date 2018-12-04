@@ -1,0 +1,4 @@
+<div class="pp-button-textarea" click-outside="selected = false" ng-class="{'editable':editable, 'placeholder':!ngModel}">
+  <div perfect-scrollbar suppress-scroll-x="true" ng-show="!selected" ng-click="click()" class="textarea-button">{{ngModel || placeholder}}</div>
+  <textarea ng-show="selected" ng-model="ngModel"></textarea>
+</div>

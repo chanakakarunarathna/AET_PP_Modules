@@ -1,0 +1,97 @@
+div.alert-bar {
+  .alert-bar-container {
+    position: absolute;
+    top: @navbar-height;
+    width: 100%;
+    @alert-bar-height: 31px;
+    transition: 0.3s linear opacity;
+    opacity: 1;
+    z-index: 2000;
+    &.ng-hide {
+      opacity: 0;
+    }
+    &.ui-scrollfix {
+      position: fixed;
+      width: 100%;
+    }
+    ul.alerts {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      height: @alert-bar-height;
+      li {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        &.ng-enter,
+        &.ng-leave {
+          transition: 0.3s linear opacity;
+        }
+        &.ng-enter.ng-enter-active,
+        &.ng-leave {
+          opacity: 1;
+        }
+        &.ng-leave.ng-leave-active,
+        &.ng-enter {
+          opacity: 0;
+        }
+        &.showall {
+          height: auto;
+          div.title,
+          div.message {
+            white-space: normal;
+            overflow: auto;
+          }
+        }
+        background-color: @gray-lighter;
+        &.info {
+          background-color: @alerts-info;
+        }
+        &.error {
+          background-color: @alerts-error;
+        }
+        &.success {
+          background-color: @alerts-success;
+        }
+        &.message {
+          background-color: @alerts-message;
+        }
+        .title {
+          display: inline-block;
+          min-width: 32px;
+          max-width: 30%;
+          cursor: default;
+          background-color: rgba(0, 0, 0, .15);
+          padding: 8px;
+          font-weight: bold;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .message {
+          display: inline-block;
+          cursor: default;
+          padding: 8px;
+          width: 60%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .dismiss {
+          height: @alert-bar-height;
+          width: 9%;
+          display: inline-block;
+          font-size: 16px;
+          span {
+            padding: 10px 16px;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0);
+            &:hover {
+              background-color: rgba(0, 0, 0, .1);
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+<div ng-transclude></div>
+<div class="search">
+  <table class="table search-results-table table-striped">
+    <thead>
+    <tr>
+      <th ng-repeat="column in columns">
+        <span ng-if="column.searchable == true" popover="This column is searchable" popover-trigger="mouseenter"></span>
+        <span ng-if="!column.sortable">{{column.label}}</span>
+        <a href ng-if="column.sortable" ng-click="toggleSort(column)" ng-class="column.sortState == 'ASC' || column.sortState == 'DESC' ? 'active' : ''">
+          <span class="glyphicon glyphicon-sort"  popover="This column is sortable. Click to sort."
+                popover-trigger="mouseenter"></span>
+          {{column.label}}
+          <span ng-if="column.sortState == 'ASC'" class="glyphicon glyphicon-menu-up"></span>
+          <span ng-if="column.sortState == 'DESC'" class="glyphicon glyphicon-menu-down"></span>
+        </a>
+      </th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+
+      <tr ng-repeat="searchResult in searchManager.searchResults.results | searchFilter : searchManager.query : searchManager.searchableFields"
+          class="search-result">
+        <td ng-repeat="column in columns" title="{{column.title !== undefined ? column.title : searchResult[column.name]}}">
+            <span aet-search-column-transclude row="searchResult" column="column"></span>
+        </td>
+        <td class="action-column" aet-action-button-transclude row="searchResult"></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination-container">
+    <div class="search-wait" ng-show="searchManager.showLoading">
+      Searching...
+    </div>
+    <pagination total-items="searchManager.searchResults.pagination.total"
+                ng-model="searchManager.page"
+                items-per-page="searchManager.count"
+                ng-change="searchManager.search()"
+                max-size="searchManager.maxPages"
+                rotate="false"
+                ng-show="searchManager.searchResults.pagination.total">
+    </pagination>
+  </div>
+
+
+</div>

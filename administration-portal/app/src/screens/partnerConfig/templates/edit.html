@@ -1,0 +1,357 @@
+<h1 class="page-header">
+    Edit Partner Config
+</h1>
+
+<div class="partner-config-landing edit">
+    <form name="editPartnerConfigForm" novalidate>
+
+        <section class="_partner-config" ng-class="{'tab-collapsed' : tab[1], 'tab-expand' : !tab[1], 'tab-error' : _partnerConfigErrors.length > 0}">
+            <div class="section-header">
+                <div class="pull-left">
+                    <span class="c-icon pull-left" ng-class="tab[1] ? 'c-icon-pp-blue' : 'c-icon-pp-white'"></span>
+                    <h2 class="title pull-left">Hero</h2>
+                    <div class="error-count" ng-show="_partnerConfigErrors.length > 0 && tab[1]">
+                        <span class="glyphicon glyphicon-alert"></span>
+                        <span class="count">{{ _partnerConfigErrors.length }}
+                            error<span ng-show="_partnerConfigErrors.length > 1">s</span>
+                            require<span ng-show="_partnerConfigErrors.length === 1">s</span>
+                            your attention</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="description">Define the construct of the Place Pass Hero you will create for this partner config.</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="collapse-btn pull-right" ng-click="tab[1] = !tab[1]">
+                    <i ng-class="tab[1] ? 'icon icon-placepass-icons-pp-plus' : 'glyphicon glyphicon-minus'"></i>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="tab[1]">
+                <div class="section-body">
+					<div class="row">
+							<div class="col-xs-12">
+								<h3 class="title">Partner Config Setup</h3>
+								<cms-data-rs ng-model="partnerconfig.hero" formv="herovalidation"></cms-data-rs>
+							</div>
+						</div>
+				   </div>
+                   <div class="section-footer">
+					<div class="row">
+						<div class="col-sm-12">
+							<button class="btn btn-primary pull-right" ng-click="go('next', 1); partnerConfigFormValidity(editPartnerConfigForm)">
+                                Next
+								</button>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+        </section>
+        <section class="_map" ng-class="{'tab-collapsed' : tab[2], 'tab-expand' : !tab[2], 'tab-error' : _mapErrors.length > 0}">
+            <div class="section-header">
+                <div class="pull-left">
+                    <span class="icon icon-placepass-icons-pp-map pull-left"></span>
+                    <h2 class="title pull-left">Destinations</h2>
+                    <div class="error-count" ng-show="_mapErrors.length > 0 && tab[2]">
+                        <span class="glyphicon glyphicon-alert"></span>
+                        <span class="count">{{ _mapErrors.length }}
+                            error<span ng-show="_mapErrors.length > 1">s</span>
+                            require<span ng-show="_mapErrors.length === 1">s</span>
+                            your attention</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="description">Define the construct of the Place Pass Destinations you will create for this partner config.</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="collapse-btn pull-right" ng-click="tab[2] = !tab[2]">
+                    <i ng-class="tab[2] ? 'icon icon-placepass-icons-pp-plus' : 'glyphicon glyphicon-minus'"></i>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="tab[2]">
+                <div class="section-body">
+                    <div class="row">
+						<cms-data-rs ng-model="destinationsDr"></cms-data-rs>
+                        <div class="col-md-1">
+                            <div class="form-group btn-p-top">
+                                <button class="btn btn-sm btn-primary no-label pull-right" ng-click="addDestinationOrFeaturedProductRow(destinationsDr, 'DESTINATIONS'); manualForm.$setPristine()" ng-disabled="!isValidCMSDataForm(destinationsDr)"  type="submit">Add</button>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 section-padding">
+                            <section ng-show="partnerconfig.destinations.length>0">
+                                <div class="row header">
+                                    <div class="col-md-8">
+                                        <h4>
+                                            Destinations Records <span id="3b29c3d0-a899-42fd-bda5-c6855acfc87e"></span>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <table class="table margin-0">
+                                                <colgroup>
+                                                    <col width="5%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                </colgroup>
+                                                <thead>
+                                                <th></th>
+                                                <th>Title</th>
+                                                <th>Sub Title</th>
+                                                <th>Sub Desc</th>
+                                                <th>Description</th>
+                                                <th>DestinationUrl</th>
+                                                <th>Image Url</th>
+                                                <th>Style</th>
+                                                <th>Order</th>
+                                                <th>Link Text</th>
+                                                </thead>
+                                            </table>
+                                            <div class="infinite-scroll">
+                                                <table class="table">
+                                                    <colgroup>
+                                                        <col width="5%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                    </colgroup>
+                                                    <tbody>
+                                                    <tr ng-repeat="destination in partnerconfig.destinations">
+                                                        <td>
+                                                            <button class="btn btn-sm btn-default btn-rounded" ng-click="deleteDestinationOrFeaturedProductRow(destination, 'DESTINATIONS')" type="button">
+                                                                <i class="glyphicon glyphicon-remove"></i>
+                                                            </button>
+                                                        </td>
+                                                        <td><input class="form-control" id="dtitle" ng-model="destination.title" type="text"></td>
+                                                        <td><input class="form-control" id="dsubttile" ng-model="destination.subTitle" type="text"></td>
+                                                        <td><input class="form-control" id="dsubdec" ng-model="destination.subDescription" type="text"></td>
+                                                        <td><input class="form-control" id="ddescription" ng-model="destination.description" type="text"></td>
+                                                        <td><input class="form-control" id="ddestinationUrl" ng-model="destination.destinationUrl" type="text"></td>
+                                                        <td><input class="form-control" id="dimageUrl" ng-model="destination.imageUrl" type="text"></td>
+                                                        <td><input class="form-control" id="dstyle" ng-model="destination.style" type="text"></td>
+                                                        <td><input class="form-control" id="porder" ng-model="destination.order" type="text"></td>
+                                                        <td><input class="form-control" id="plinkTExt" ng-model="destination.linkText" type="text"></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>            
+                <div class="section-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary pull-right" ng-click="go('next', 2); mapFormValidity(editPartnerConfigForm)">
+                                Next
+                            </button>
+                            <button class="btn btn-default pull-right previous" ng-click="go('previous', 2)">
+                                Previous
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="_email" ng-class="{'tab-collapsed' : tab[3], 'tab-expand' : !tab[3], 'tab-error' : _emailErrors.length > 0}">
+            <div class="section-header">
+                <div class="pull-left">
+                    <span class="icon icon-placepass-icons-pp-users pull-left"></span>
+                    <h2 class="title pull-left">Featured Products</h2>
+                    <div class="error-count" ng-show="_emailErrors.length > 0 && tab[3]">
+                        <span class="glyphicon glyphicon-alert"></span>
+                        <span class="count">{{ _emailErrors.length }}
+                            error<span ng-show="_emailErrors.length > 1">s</span>
+                            require<span ng-show="_emailErrors.length === 1">s</span>
+                            your attention</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="description">Define the construct of the Place Pass Featured Products you will create for this partner config.</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="collapse-btn pull-right" ng-click="tab[3] = !tab[3]">
+                    <i ng-class="tab[3] ? 'icon icon-placepass-icons-pp-plus' : 'glyphicon glyphicon-minus'"></i>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="tab[3]">
+                <div class="section-body">
+                <div class="row sub-section address-compo">
+                       	<ng-form name="manualForm">
+                            <div class="col-xs-3 section-padding">
+                                <input aria-describedby="inputSuccess2Status" class="form-control" id="featuredProd" name="featuredProd" ng-maxlength="40" ng-model="featuredProd" placeholder="Featured Products..." type="text"/>
+                                <div class="error" ng-show="createPartnerConfigForm.featuredProd.$showError">
+                                	<p class="text-danger" ng-show="createPartnerPlaceForm.featuredProd.$error.required">Featured Product is required.</p>
+                                    <p class="text-danger" ng-show="createPartnerPlaceForm.featuredProd.$error.maxlength">Featured Product  must be 5 characters or less.</p>
+                                </div>
+                            </div>
+                            
+                                
+                                
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <button class="btn btn-sm btn-primary no-label pull-right" ng-click="searchFeaturedProducts(featuredProd)" type="submit">Search</button>
+                                </div>
+                            </div>
+                        </ng-form>
+                        <div class="col-xs-12 section-padding">
+                            <section ng-show="featuredProductsSearchPerformed && featuredProductsSearchResults.results.length==0">
+                                <div class="row header">
+                                    <div class="col-md-8">
+                                        <h4>
+                                            No Search  Results
+                                        </h4>
+                                    </div>
+                                </div>
+                            </section>
+                            <section ng-show="featuredProductsSearchResults.results.length>0">
+                                <div class="row header">
+                                    <div class="col-md-8">
+                                        <h4>
+                                            Search  Results
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="infinite-scroll">
+                                            	<table class="table margin-0">
+	                                                <colgroup>
+	                                                    <col width="35%">
+	                                                    <col width="25%">
+	                                                    <col width="15%">
+	                                                    <col width="10%">
+	                                                    <col width="5%">
+	                                                </colgroup>
+	                                                <thead>
+		                                                <th>Product Title</th>
+		                                                <th>Product Description</th>
+		                                                <th>Product Code</th>
+		                                                <th>Vendor</th>
+		                                                <th>&nbsp;</th>
+	                                                </thead>
+	                                                <tbody>
+														<tr ng-repeat="featuredProductsResult in featuredProductsSearchResults.results">
+                                                            <td>{{featuredProductsResult.productName}}</td>
+                                                            <td>{{featuredProductsResult.productText | limitTo: 20 }}{{featuredProductsResult.productText.length > 20 ? '...' : ''}}</td>
+		                                                	<td>{{featuredProductsResult.productId}}</td>
+		                                                	<td>{{featuredProductsResult.vendor}}</td>
+	                                                        <td>
+	                                                        	<button ng-disabled="btnDisabled_{{objectName(featuredProductsResult.objectID)}}" class="btn btn-sm btn-primary no-label pull-right" ng-click="addDestinationOrFeaturedProductRow(featuredProductsResult,'FEATURED_PRODUCT');" type="submit">Add</button>
+	                                                        </td>
+	                                                    </tr>
+                                                    </tbody>
+                                            	</table>
+                                            	<div class="row">
+											        <div class="col-md-10">
+											          <div class="search-screen">
+											            <div class="search" id="exportable">
+											              <pagination ng-change="searchFeaturedProducts(featuredProd)" items-per-page="numPerPage" boundary-links="true" max-size="maxSize" ng-model="currentPage" ng-show="featuredProductsSearchResults.pagination.total > numPerPage" total-items="totalItems"></pagination>
+											            </div>
+											          </div>
+											        </div>
+											    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-xs-12 section-padding">
+                            <section ng-show="getLength(filteredFeaturedProductsSelectedResults)>0">
+                                <div class="row header">
+                                    <div class="col-md-8">
+                                        <h4>
+                                            Selected Featured Products
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="infinite-scroll">
+                                                <table class="table margin-0">
+	                                                <colgroup>
+                                                        <col width="35%">
+                                                        <col width="25%">
+                                                        <col width="15%">
+                                                        <col width="10%">
+                                                        <col width="5%">
+	                                                </colgroup>
+	                                                <thead>
+		                                                <th>Product Title</th>
+		                                                <th>Product Description</th>
+		                                                <th>Product Code</th>
+		                                                <th>Vendor</th>
+		                                                <th>&nbsp;</th>
+	                                                </thead>
+	                                                <tbody>
+	                                                	<tr ng-repeat="featuredProductSelectedResult in filteredFeaturedProductsSelectedResults">
+                                                            <td>{{featuredProductSelectedResult.productName}}</td>
+                                                            <td>{{featuredProductSelectedResult.productText | limitTo: 20 }}{{featuredProductSelectedResult.productText.length > 20 ? '...' : ''}}</td>
+		                                                	<td>{{featuredProductSelectedResult.productId}}</td>
+		                                                	<td>{{featuredProductSelectedResult.vendor}}</td>
+								                            <td>
+	                                                        	<button class="btn btn-sm btn-default btn-rounded" ng-click="deleteDestinationOrFeaturedProductRow(featuredProductSelectedResult,'FEATURED_PRODUCT')" type="button"><i class="glyphicon glyphicon-remove"></i></button>
+	                                                        </td>
+	                                                    </tr>
+                                                    </tbody>
+                                            	</table>	
+                                            	<div class="row">
+											        <div class="col-md-6">
+											          <div class="search-screen">
+											            <div class="search" id="exportable">
+											              <pagination ng-change="selectedFeaturedProducts()" items-per-page="selectedNumPerPage" boundary-links="true" max-size="maxSize" ng-model="selectedCurrentPage" ng-show="featuredProductsSelectedResults.length > selectedNumPerPage" total-items="featuredProductsSelectedResults.length"></pagination>
+											            </div>
+											          </div>
+											        </div>
+											    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="section-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button aet-has-permission="ADD_PARTNER_CONFIG" class="btn btn-primary pull-right" ng-click="submitPartnerConfigForm()" ng-disabled="!isValidPartnerConfigInfo(partnerconfig.hero)" type="submit">
+                                Save
+                            </button>
+                            <button class="btn btn-default pull-right previous" ng-click="go('previous', 3); emailFormValidity(createPartnerConfigForm)">
+                                Previous
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </form>
+</div>

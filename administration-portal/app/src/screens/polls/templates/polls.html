@@ -1,0 +1,55 @@
+<h1 class="page-header">
+	Polls
+</h1>
+
+<div class="row">
+
+	<div class="col-sm-12">
+
+		<div class="row">
+			<div class="col-sm-4">
+				<button class="btn btn-lg btn-primary" ui-sref="index.secured.polls" title="new poll">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true" ui-sref="index.secured.poll.create"></span> New Poll
+				</button>
+			</div>
+			<div class="col-sm-4">
+				<aet-search-input search-manager="searchManager"></aet-search-input>
+			</div>
+		</div>
+
+
+		<div class="row">
+
+			<div class="col-sm-12">
+				<aet-search search-manager="searchManager" row-name="admin">
+
+					<aet-search-column name="firstName" label="Candidate" searchable="true"></aet-search-column>
+					<aet-search-column name="lastName" label="Favorite" searchable="true"></aet-search-column>
+					<aet-search-column name="emailAddress" label="Email" searchable="true"></aet-search-column>
+
+
+					<button aet-action-button
+							class="btn btn-sm btn-default"
+							title="edit"
+							type="submit"
+							ng-click="editPoll(partner)">
+						<span class="glyphicon glyphicon-edit"></span>
+					</button>
+
+					<button aet-action-button
+							class="btn btn-sm btn-danger"
+							title="delete"
+							type="submit"
+							ng-click="deletePoll(partner)">
+						<span class="glyphicon glyphicon-trash"></span>
+					</button>
+
+				</aet-search>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>

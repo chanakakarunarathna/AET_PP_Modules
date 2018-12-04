@@ -1,0 +1,56 @@
+<div class="add-insight-modal map-modal">
+  <form class="form-horizontal" name="createCommentForm" novalidate>
+
+    <div class="modal-header">
+      <h3 class="modal-title">Add Files
+        <button class="btn pull-right close" ng-click="cancel()" ng-disabled="uploadManager.uploading">
+          <i class="glyphicon glyphicon-remove"></i>
+        </button>
+      </h3>
+    </div>
+    <div class="modal-body ">
+      <div class="row">
+        <div class="col-md-12 form-group" id="uploadManagers">
+            <label class="col-md-12" for="comment">Your File</label>
+
+          <div class="col-md-12">
+            <div class="form-control upload pad-r-0" ecs-upload-data="uploadManager" ng-model="data.mediaURL" tabindex="0">
+              <div class="row">
+                <div class="buttons col-sm-8 col-xs-12">
+                  <button brand-btn-color="{{municipality.buttonColor}}" class="btn btn-primary" ecs-color-update ecs-upload-button="uploadManager" ng-show="!data.mediaURL && !uploadManager.uploading" tabindex="-1">
+                    <span>Upload Media File</span>
+                    <ecs-upload-input></ecs-upload-input>
+                  </button>
+                  <button brand-btn-color="{{municipality.buttonColor}}" class="btn btn-primary" ecs-color-update ecs-upload-button="uploadManager" ng-show="data.mediaURL" tabindex="-1">Change File
+                    <ecs-upload-input></ecs-upload-input>
+                  </button>
+                  <button class="btn btn-danger" ecs-delete-button="uploadManager" ng-show="data.mediaURL" tabindex="-1">Delete</button>
+                  <button class="btn btn-default" ng-click="uploadManager.cancel()" ng-show="uploadManager.uploading" tabindex="-1">Cancel</button>
+                </div>
+                <div class="data col-sm-12 col-xs-11 mar-t-5" ng-show="uploadManager.uploading">
+                  <progressbar animate="true" value="progress"></progressbar>
+                </div>
+                <div class="data col-sm-12 col-xs-12 overflow-hide" ng-show="data.mediaURL">
+                  <a class="filename btn" href ng-click="downloadFile(data.mediaURL)">{{getFileName(data.mediaURL)}}</a>
+                </div>
+              </div>
+            </div>
+            <p class="text-danger" ng-repeat="error in uploadManager.$errors" ng-show="uploadManager.$errors.length > 0">{{error}}</p>
+          </div>
+          <div class="col-md-12">
+            <h6>
+              You may upload any of these file types: PDF, Powerpoint, Word, Excel, image, audio, video
+            </h6>
+          </div>
+
+        </div>
+        <div style="clear:both"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="save()" ng-disabled="createCommentForm.$invalid || uploadManager.uploading || !data.mediaURL">Submit</button>
+      <button class="btn btn-default" ng-click="cancel()" ng-disabled="uploadManager.uploading">Cancel</button>
+    </div>
+
+  </form>
+</div>

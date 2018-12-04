@@ -1,0 +1,45 @@
+@import "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css";
+
+@green: #91c95f;
+@orange: #fbb040;
+@red: #e13034;
+
+@secondary-color-lighter : #87909d;
+@main-color-dark : #568225;
+@main-color-light : #86c355;
+@main-color-lighter : #b8e487;
+
+@light-gray : #f7f7f7;
+@medium-gray : #eaeaea;
+@medium-dark-gray : #969ca5;
+@darker-gray: #292929;
+
+.modal-body, .question-preview {
+  background-color: @element-bg-color;
+  .close-ico{
+    opacity: 1;
+  }
+  .mission{
+    &.holder {
+      background: url(../images/phone-frame.png) no-repeat;
+      height: 960px;
+      width: 525px;
+      margin: 0 auto;
+    }
+    &.preview {
+      padding: 0 15px;
+      width: 448px;
+      overflow: auto;
+      height: 669px;
+      position: relative;
+      top: 147px;
+
+      .uploadManagers{
+        .form-control {
+              height: 55px;
+        }
+      }
+    }
+  }
+
+}

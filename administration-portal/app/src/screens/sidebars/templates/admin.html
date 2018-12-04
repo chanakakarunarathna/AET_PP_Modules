@@ -1,0 +1,66 @@
+<ul class="sidebar-nav">
+
+    <li aet-has-any-permission="['VIEW_ADMIN_USER' ,'ADD_ADMIN_USER' ,'DELETE_ADMIN_USER', 'EDIT_ADMIN_USER']">
+        <a ng-click="mainTabs[1] = !mainTabs[1]; go(1, mainTabs[1])">
+            <span class="glyphicon glyphicon-cog"></span>
+            Administration
+            <span class="glyphicon pull-right" ng-class="{'glyphicon-menu-right' : mainTabs[1], 'glyphicon-menu-down' : !mainTabs[1]}"></span>
+        </a>
+        <ul class="sub-menu" collapse="mainTabs[1]">
+            <li aet-is-super-admin>
+                <a aet-nav-tab="Partners" ui-sref="index.secured.partner.search">Partners</a>
+            </li>
+            <li aet-has-any-permission="['VIEW_ADMIN_USER' ,'ADD_ADMIN_USER' ,'DELETE_ADMIN_USER', 'EDIT_ADMIN_USER']">
+                <a aet-nav-tab="AdminUsers" ui-sref="index.secured.adminUser.search">Admin Users
+                </a>
+            </li>
+            <li aet-is-super-admin>
+                <a aet-nav-tab="SuperAdmins" ui-sref="index.secured.superAdmin.search">Super Admins
+                </a>
+            </li>
+            <li aet-has-any-permission="['VIEW_PLACE' ,'ADD_PLACE' ,'DELETE_PLACE', 'EDIT_PLACE']">
+                <a aet-nav-tab="Places" ui-sref="index.secured.places.search">Place
+                </a>
+            </li>
+            <!-- This is not added to subscription(sp) 01 -->
+            <!-- <li aet-is-super-admin>
+        <a ui-sref="index.secured.role.search"
+           aet-nav-tab="Roles">Roles</a>
+      </li> -->
+        </ul>
+    </li>
+	<li aet-has-permission="VIEW_PARTNER_CONFIG">
+        <a aet-nav-tab="PartnerConfigs" class="tab partner-config" ng-click="mainTabs[2] = !mainTabs[2]; go(2, mainTabs[2])" ui-sref="index.secured.partnerConfig.search">
+            <span class="c-icon c-icon-pp-gray"></span>Partner Configs
+        </a>
+    </li>
+    <li aet-has-any-permission="['LIST_SEARCH_PARTNER_PLACE']">
+        <a aet-nav-tab="PartnerPlaces" class="tab partner-place" ng-click="mainTabs[3] = !mainTabs[3]; go(3, mainTabs[3])" ui-sref="index.secured.partnerPlace.search">
+            <span class="c-icon c-icon-pp-gray"></span>Partner Places
+        </a>
+    </li>
+    <li aet-has-permission="LIST_PARTNER_PROPERTIES">
+        <a aet-nav-tab="PartnerProperty" class="tab partner-property" ng-click="mainTabs[4] = !mainTabs[4]; go(4, mainTabs[4])" ui-sref="index.secured.partnerProperty.search">
+            <span class="c-icon c-icon-pp-gray"></span>Partner Property
+        </a>
+    </li>
+    <li aet-has-permission="LIST_PARTNER_BOOKINGS">
+    	<a ng-click="mainTabs[5] = !mainTabs[5]; clear(); go(5, mainTabs[5])">
+            <span class="c-icon c-icon-pp-gray"></span>Bookings
+            <span class="glyphicon pull-right" ng-class="{'glyphicon-menu-right' : mainTabs[5], 'glyphicon-menu-down' : !mainTabs[5]}"></span>
+        </a>
+        <ul class="sub-menu" collapse="mainTabs[5]">
+            <li aet-has-permission="LIST_PARTNER_BOOKINGS">
+                <a aet-nav-tab="Bookings" class="tab booking" ui-sref="index.secured.booking.search">Search Bookings
+                </a>
+            </li>
+            <li aet-has-permission="LIST_PARTNER_BOOKINGS">
+            	<a aet-nav-tab="Reports" class="tab report" ui-sref="index.secured.booking.report">Booking Issue Report
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>
+<div class="version">
+    <p>Place Pass v{{version}}</p>
+</div>

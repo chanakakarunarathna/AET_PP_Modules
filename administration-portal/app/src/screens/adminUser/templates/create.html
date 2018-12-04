@@ -1,0 +1,152 @@
+<h1 class="page-header">
+    Create Admin User
+</h1>
+
+<div class="row">
+    <div class=" col-sm-8">
+        <form class="form-horizontal" name="createAdminUserForm" novalidate>
+            <div class="form-group has-feedback mar-b-30" ng-class="{'has-error' : createAdminUserForm.title.$showError && createAdminUserForm.title.$hasError()}">
+                <label class="col-sm-3 control-label" for="title">Title
+                </label>
+                <div class="col-sm-7">
+                    <input
+                        aria-describedby="inputSuccess2Status"
+                        class="form-control"
+                        id="title"
+                        name="title"
+                        ng-maxlength="255"
+                        ng-model-options="{ updateOn: 'blur' }"
+                        ng-model="adminuser.title"
+                        ng-pattern="/^[a-zA-Z.]*$/"
+                        placeholder="Enter Title ..."
+                        type="text"/>
+                    <div class="error" ng-show="createAdminUserForm.title.$showError">
+                        <p class="text-danger" ng-show="createAdminUserForm.title.$error.maxlength">Title must be 255 characters or less</p>
+                        <p class="text-danger" ng-show="createAdminUserForm.title.$error.pattern">This doesn't seem to be a valid title, use only alpha characters and period (E.g.: Mr.)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group has-feedback required mar-b-30" ng-class="{'has-error' : createAdminUserForm.firstName.$showError && createAdminUserForm.firstName.$hasError()}">
+                <label class="col-sm-3 control-label required" for="firstName">First Name</label>
+                <div class="col-sm-7">
+                    <input class="form-control" id="firstName" name="firstName" ng-maxlength="255" ng-model-options="{ updateOn: 'blur' }" ng-model="adminuser.firstName" placeholder="Enter First Name ..." required ng-pattern="/^[a-zA-Z \'\-]*$/" type="text"/>
+                    <div class="error" ng-show="createAdminUserForm.firstName.$showError">
+                        <p class="text-danger" ng-show="createAdminUserForm.firstName.$error.required">First Name is required</p>
+                        <p class="text-danger" ng-show="createAdminUserForm.firstName.$error.maxlength">First Name must be 255 characters or less</p>
+                        <p class="text-danger" ng-show="createAdminUserForm.firstName.$error.pattern">This doesn't seem to be a valid name, use only alpha characters and space</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group has-feedback required mar-b-30" ng-class="{'has-error' : createAdminUserForm.lastName.$showError && createAdminUserForm.lastName.$hasError()}">
+                <label class="col-sm-3 control-label required" for="lastName">Last Name</label>
+                <div class="col-sm-7">
+                    <input class="form-control" id="lastName" name="lastName" ng-maxlength="255" ng-model-options="{ updateOn: 'blur' }" ng-model="adminuser.lastName" placeholder="Enter Last Name ..." ng-pattern="/^[a-zA-Z \'\-]*$/" required type="text"/>
+                    <div class="error" ng-show="createAdminUserForm.lastName.$showError">
+                        <p class="text-danger" ng-show="createAdminUserForm.lastName.$error.required">Last Name is required</p>
+                        <p class="text-danger" ng-show="createAdminUserForm.lastName.$error.maxlength">Last Name must be 255 characters or less</p>
+                        <p class="text-danger" ng-show="createAdminUserForm.lastName.$error.pattern">This doesn't seem to be a valid name, use only alpha characters and space</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- div class="form-group has-feedback mar-b-30" ng-class="{'has-error' : createAdminUserForm.profilePic.$showError && createAdminUserForm.profilePic.$hasError()}">
+                <label class="col-sm-3 control-label" for="profilePic">Profile Pic</label>
+                <div class="col-sm-7">
+                    <input class="form-control" id="profilePic" accept="image/*" name="profilePic" type="file">
+                    <div class="error" ng-show="createAdminUserForm.profilePic.$showError"></div>
+                </div>
+            </div -->
+
+            <div class="form-group has-feedback required mar-b-30" ng-class="{'has-error' : createAdminUserForm.email.$showError && createAdminUserForm.email.$hasError()}">
+                <label class="col-sm-3 control-label required" for="email">Email
+                </label>
+                <div class="col-sm-7">
+                    <input
+                        class="form-control"
+                        id="email"
+                        name="email"
+                        ng-model-options="{ updateOn: 'blur' }"
+                        ng-maxlength="255"
+                        ng-model="adminuser.email"
+                        ng-pattern="emailValidationPattern"
+                        placeholder="Please enter a valid email... "
+                        required
+                        tooltip-placement="right"
+                        tooltip="This email address must be unique to this system."
+                        type="text"/>
+                    <div class="error" ng-show="createAdminUserForm.email.$showError">
+                        <p class="text-danger" ng-show="createAdminUserForm.email.$error.required">Email is required</p>
+                        <p class="text-danger" ng-show="createAdminUserForm.email.$error.maxlength">Email must be 255 characters or less</p>
+                        <p class="text-danger" ng-show="createAdminUserForm.email.$error.pattern">This doesn't seem to be a valid email address pattern</p>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-repeat="partnerRoles in adminuser.partnerRoles" class="partner-roles pad-tb-15 mar-b-15" ng-if="!adminuser.isSuperAdmin">
+                <div class="form-group has-feedback required mar-b-15" ng-class="{'has-error' : createAdminUserForm.partner.$showError && createAdminUserForm.partner.$hasError()}">
+                    <label class="col-sm-3 control-label" for="partner">Partner</label>
+                    <div class="col-sm-7">
+                        <ui-select id="partner" name="partner" ng-disabled="!isSuperAdmin" ng-model="partnerRoles.partner" theme="bootstrap" ng-required="true">
+                            <ui-select-match placeholder="">
+                                <span ng-bind-html="$select.selected.name"></span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="partnerDetail in partnerDetails | filter:partnerFilter">
+                                <span ng-bind-html="partnerDetail.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <div class="error" ng-show="createAdminUserForm.partner.$showError">
+                            <p class="text-danger" ng-show="createAdminUserForm.partner.$error.required">Partner is required</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-1" ng-if="adminuser.partnerRoles.length > 1">
+                        <button class="btn btn-sm btn-danger btn-rounded" ng-click="deletePartnerRole($index)" type="button">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback required mar-b-0" ng-class="{'has-error' : createAdminUserForm.role.$showError && createAdminUserForm.role.$hasError()}">
+                    <label class="col-sm-3 control-label" for="role">Role</label>
+                    <div class="col-sm-7">
+                        <ui-select id="role" name="role" ng-model="partnerRoles.role" theme="bootstrap" ng-required="true">
+                            <ui-select-match placeholder="">
+                                <span ng-bind-html="$select.selected.title"></span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="roleDetail in roleDetails">
+                                <span ng-bind-html="roleDetail.title"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                        <div class="error" ng-show="createAdminUserForm.role.$showError">
+                            <p class="text-danger" ng-show="createAdminUserForm.role.$error.required">Role is required</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mar-b-15" ng-if="!adminuser.isSuperAdmin">
+                <div class="col-sm-offset-5 col-sm-7">
+                    <button class="btn btn-primary" ng-disabled="adminuser.partnerRoles.length >= partnerDetails.length" ng-click="addPartnerRole()" type="submit" aet-is-super-admin>
+                        + Add Another
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback mar-b-30" aet-is-super-admin>
+                <label class="col-md-3 control-label" for="superAdmin">Super Admin</label>
+                <div class="col-md-7">
+                    <div class="checkbox">
+                        <input id="superAdmin" name="superAdmin" ng-model="adminuser.isSuperAdmin" type="checkbox"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-5 col-sm-7">
+                    <button class="btn btn-primary" ng-click="submitAdminUserForm()" ng-disabled="createAdminUserForm.$invalid" type="submit" aet-has-permission="ADD_ADMIN_USER">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

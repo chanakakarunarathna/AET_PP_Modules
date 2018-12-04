@@ -1,0 +1,10 @@
+<div class="input-group input-group-lg search-input">
+	<input type="text"
+				 ng-model="searchManager.query"
+				 ng-change="searchManager.debouncedSearch()"
+				 ng-keypress="onKeyPress($event)"
+				 class="{{class}} form-control"
+				 placeholder="Search..."
+			/>
+	<span class="input-group-addon" id="basic-addon2"><i class="glyphicon glyphicon-search"></i></span>
+</div>

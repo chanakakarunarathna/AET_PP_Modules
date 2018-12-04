@@ -1,0 +1,120 @@
+.search-screen-x {
+  
+  .search-heading {
+    
+    .title-and-count {
+      .clearfix;
+      
+      .search-title {
+        .pull-left;
+        font-size: 42px;
+      }
+      
+      .search-count {
+        .pull-left;
+      }
+      
+    }
+    
+    .input-and-button {
+      
+    }
+    
+  }
+  
+  .search-ctrl{
+    .btn {
+      &.btn-lg{
+        padding-left: 60px;
+        .c-icon, .icon{
+          position: absolute;
+          left: 35px;
+          top: 18px;
+        }
+      }
+    }
+    .search-input{
+      .input-group, .form-control {
+        border-right: 0;
+        .placeholder(@form-control-border-color);
+      }
+      .input-group-addon {
+        background-color: @form-control-bg-color;
+        border-color: @form-control-border-color;
+        i{
+          top: 2px;
+          color: @form-control-border-color;
+        }
+      }
+    }
+
+  }
+  .search {
+    .table {
+      margin-top: @grid-gutter-width;
+      margin-bottom: 0;
+      tr.search-result {
+        &:hover {
+          background-color: #eee;
+        }
+        td {
+          button {
+            margin-right: 5px;
+            &.btn-success{
+              background-color: @main-color;
+              border-color: darken(@main-color, 5%);
+              &:hover{
+                background-color: darken(@main-color, 5%);
+              }
+
+            }
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .below-search {
+      height: 30px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #666;
+      float: left;
+      margin-top: 40px;
+      .search-wait {
+        animation: bg-pulse 1s ease-in-out infinite alternate;
+        &.ng-hide {
+          display: none !important;
+        }
+      }
+    }
+    .pagination{
+      float: right;
+      margin-top: 40px;
+      li{
+        a{
+          padding: 10px 15px;
+        }
+        &.active{
+          a{
+            background-color : @main-color-lighten;
+            border-color: transparent;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@keyframes bg-pulse {
+  from {
+    color: transparent;
+  }
+
+  to {
+    color: #666;
+  }
+}

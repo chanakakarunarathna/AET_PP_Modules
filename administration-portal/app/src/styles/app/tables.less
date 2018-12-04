@@ -1,0 +1,50 @@
+.table {
+  &.readonly {
+    thead {
+      th{
+        background-color: @table-th-bg-color;
+        color: @white;
+      }
+    }
+  }
+  thead {
+    th {
+      &:extend(.form-group label);
+    }
+  }
+  tbody {
+    background-color: @white;
+    td {
+      border-top: none !important;
+      .has-feedback.has-error {
+        .form-control {
+            background-color: @form-table-input-error-bg-color;
+            &[disabled] {
+                color: @required-color;
+                background-color: @white;
+            }
+        }
+        .form-control.ng-invalid-required {
+            &[disabled] {
+              border: 1px solid @required-color;
+            }
+        }
+        .error {
+          .text-danger {
+            color: @required-color;
+            font-size: 11px;
+            font-style: italic;
+            margin-top: 5px;
+          }
+        }
+      }
+      .form-control {
+        border-bottom: none;
+        &[disabled] {
+          background-color: @white;
+
+        }
+      }
+    }
+  }
+}

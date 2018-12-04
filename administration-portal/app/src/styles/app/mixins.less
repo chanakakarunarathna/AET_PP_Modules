@@ -1,0 +1,36 @@
+//vertical shadow
+.shadow(@horizontalLength, @verticalLength, @blurRadius, @spreadRadius, @shadowColorRGBA){
+  -webkit-box-shadow: @horizontalLength @verticalLength @blurRadius @spreadRadius @shadowColorRGBA;
+  -moz-box-shadow: @horizontalLength @verticalLength @blurRadius @spreadRadius @shadowColorRGBA;
+  box-shadow: @horizontalLength @verticalLength @blurRadius @spreadRadius @shadowColorRGBA;
+}
+
+.shadow-inset(@horizontalLength, @verticalLength, @blurRadius, @spreadRadius, @shadowColorRGBA){
+  -moz-box-shadow:		inset  @horizontalLength  @verticalLength @blurRadius -@spreadRadius @shadowColorRGBA,
+  						inset  @horizontalLength -@verticalLength @blurRadius -@spreadRadius @shadowColorRGBA;
+  -webkit-box-shadow: 	inset  @horizontalLength  @verticalLength @blurRadius -@spreadRadius @shadowColorRGBA,
+  						inset  @horizontalLength -@verticalLength @blurRadius -@spreadRadius @shadowColorRGBA;
+  box-shadow:        	inset  @horizontalLength  @verticalLength @blurRadius -@spreadRadius @shadowColorRGBA,
+  						inset  @horizontalLength -@verticalLength @blurRadius -@spreadRadius @shadowColorRGBA;
+}
+
+.transition(@property, @duration, @timingFunc) {
+	-webkit-transition:@property @duration @timingFunc;
+    -moz-transition:@property @duration @timingFunc;
+    -o-transition:@property @duration @timingFunc;
+    transition:@property @duration @timingFunc;
+}
+
+.translateX(@dist) {
+	-webkit-transform: translateX(@dist);
+  	-moz-transform: translateX(@dist);
+	-ms-transform: translateX(@dist);
+	-o-transform: translateX(@dist);
+  	transform: translateX(@dist);
+}
+
+.inner-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
+	-webkit-box-shadow: inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	-moz-box-shadow:    inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+	box-shadow:         inset @x @y @blur @spread rgba(0, 0, 0, @alpha);
+}

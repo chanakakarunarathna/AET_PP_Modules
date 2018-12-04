@@ -1,0 +1,24 @@
+<div class="loader" ng-show="loader" data-html2canvas-ignore="true">
+    <div class="backdrop"></div>
+    <div class="loader-container">
+        <div id="loader"></div>
+        <h1 ng-hide="loaderText">Updating...</h1>
+        <h1 ng-show="loaderText">{{loaderText}}</h1>
+    </div>
+</div>
+<div class="sidebar-toggle" ng-class="{'mini' : isSidebarMinimized == true}" ng-click="toggleSidebar()">
+    <i class="icon icon-placepass-icons-pp-caret-left"></i>
+    <i class="icon icon-placepass-icons-pp-caret-right"></i>
+</div>
+<aside class="sidebar" ng-class="{'mini' : isSidebarMinimized == true}">
+    <div class="sidebar-container" ui-view="minisidebar" ng-if="isSidebarMinimized == true"></div>
+    <div class="sidebar-container" ui-view="sidebar" ng-if="isSidebarMinimized == false"></div>
+</aside>
+
+<header class="navbar-fixed-top header" ui-view="header"></header>
+<div class="sidebar-offset full-height" ng-class="{'mini' : isSidebarMinimized == true}">
+    <aet-alerts></aet-alerts>
+    <main ui-view="main" class="main fade-transition"></main>
+
+    <!--	<footer ui-view="footer" class="footer"></footer>-->
+</div>

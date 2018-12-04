@@ -1,0 +1,19 @@
+<div class="row dashboard-container">
+
+	<div class="col-sm-12">
+
+		<div ng-if="!partnerPlaceDetails.getSelectedPartnerPlace()" aet-has-permission="ADD_PARTNER_PLACE" class="no-map-data-alert">
+		  <div class="alert alert-info text-center" role="alert">
+			  <strong >No partner places have been created yet. Please
+			    <a ui-sref="index.secured.partnerPlace.create">Create a new Partner Place</a>.
+		    </strong>
+			</div>
+		</div>
+		<div ng-if="!partnerPlaceDetails.getSelectedPartnerPlace()" class="no-map-data-alert">
+		  <div ng-if="!hasPermissionForAddPartnerPlace && hasPermissionForPartnerPlace" class="alert alert-info text-center" role="alert">
+			  <strong>No partner places have been created yet, or you have not been added to one. Please contact one of your admins for {{partnerDetails.getSelectedPartner().name}} and ask them to add you to a partner place. If you need further assistance, feel free to contact us at support@placepass.com.</strong>
+			</div>
+		</div>
+	</div>
+
+</div>

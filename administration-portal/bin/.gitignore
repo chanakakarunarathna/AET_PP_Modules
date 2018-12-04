@@ -1,0 +1,8 @@
+node_modules/
+tmp/
+bower_components/
+.svn/
+build/
+.project
+.idea
+protractor/results/

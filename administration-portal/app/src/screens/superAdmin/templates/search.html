@@ -1,0 +1,56 @@
+<div class="search-screen">
+
+    <div class="search-header row">
+
+        <div class="col-sm-8 title-column">
+            <span class="search-title">Super Administrators</span>
+            <span class="search-count">{{searchManager.searchResults.pagination.total}}
+                Results</span>
+            <div class="clearfix"></div>
+            <button class="btn create-btn btn-primary" title="New Admin User" ui-sref="index.secured.superAdmin.create" aet-is-super-admin>
+                <i class="icon-placepass-icons-pp-plus"></i>
+                Create New Super Admin
+            </button>
+        </div>
+
+        <div class="col-sm-4 search-column">
+
+            <div class="input-container form-group has-feedback">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search Super Admins" ng-model="searchManager.query" ng-change="searchManager.debouncedSearch()" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Super Admins'">
+                    <span class="input-group-btn">
+                        <button ng-click="searchManager.search()" class="btn btn-default" type="button">
+                            <i class="icon-placepass-icons-pp-search form-control-feedback"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <aet-search row-name="admin" search-manager="searchManager">
+                        <aet-search-column label="FirstName" name="firstName" searchable="true" sort="true"></aet-search-column>
+                        <aet-search-column label="LastName" name="lastName" searchable="true" sort="true"></aet-search-column>
+                        <aet-search-column label="Email" name="email" searchable="true" sort="true"></aet-search-column>
+                        <a aet-action-button class="hover-primary" ng-click="editSuperAdmin(admin)" title="edit" type="submit" aet-is-super-admin>
+                            <span class="icon-placepass-icons-pp-edit"></span>
+                        </a>
+                        <a aet-action-button class="hover-danger" ng-click="deleteSuperAdmin(admin)" title="delete" type="submit" aet-is-super-admin>
+                            <span class="icon-placepass-icons-pp-remove"></span>
+                        </a>
+                    </aet-search>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,784 @@
+<h1 class="page-header">
+    Edit Partner Place
+</h1>
+
+<div class="partner-place-landing create">
+    <form name="createPartnerPlaceForm" novalidate>
+
+        <section class="_partner-place" ng-class="{'tab-collapsed' : tab[1], 'tab-expand' : !tab[1], 'tab-error' : _partnerPlaceErrors.length > 0}">
+            <div class="section-header">
+                <div class="pull-left">
+                    <span class="c-icon pull-left" ng-class="tab[1] ? 'c-icon-pp-blue' : 'c-icon-pp-white'"></span>
+                    <h2 class="title pull-left">Partner Place</h2>
+                    <div class="error-count" ng-show="_partnerPlaceErrors.length > 0 && tab[1]">
+                        <span class="glyphicon glyphicon-alert"></span>
+                        <span class="count">{{ _partnerPlaceErrors.length }}
+                            error<span ng-show="_partnerPlaceErrors.length > 1">s</span>
+                            require<span ng-show="_partnerPlaceErrors.length === 1">s</span>
+                            your attention</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="description">Assign the basics about your partner place to get started. We recommend using a clear and specific partner place name.</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="collapse-btn pull-right" ng-click="tab[1] = !tab[1]">
+                    <i ng-class="tab[1] ? 'icon icon-placepass-icons-pp-plus' : 'glyphicon glyphicon-minus'"></i>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="tab[1]">
+                <div class="section-body">
+                    <div class="row sub-section partner-place-setup">
+                        <div class="col-xs-12">
+                            <h3 class="title">Partner Place Setup</h3>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group has-feedback required" ng-class="{'has-error' : createPartnerPlaceForm.name.$showError && createPartnerPlaceForm.name.$hasError()}">
+                                <label for="partnerPlaceName">Place Name</label>
+                                <span id="F2E9A0C5-5263-4C22-A959-CDACEA40CB4E"></span>
+                                <ui-select ng-model="searchPlaces.selectedPlace"
+                                           theme="bootstrap"
+                                           ng-disabled="true"
+                                           reset-search-input="false">
+                                    <ui-select-match placeholder="Enter an place...">
+                                        <span ng-show="$select.selected.placePassRegion != undefined">{{$select.selected.webId}}&nbsp;-&nbsp;{{$select.selected.city}}&nbsp;-&nbsp;{{$select.selected.placePassRegion}}&nbsp;-&nbsp;{{$select.selected.country}}</span>
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="place in places track by $index"
+                                                       refresh="refreshPlaces($select.search)"
+                                                       refresh-delay="0">
+                                        <div ng-bind-html="(place.webId) + ' - ' +(place.city) + ' - ' +(place.placePassRegion) + ' - ' + (place.country) | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <div class="error" ng-show="createPartnerPlaceForm.name.$showError">
+                                    <p class="text-danger" ng-show="createPartnerPlaceForm.name.$error.required">Partner Place Name is required.</p>
+                                    <p class="text-danger" ng-show="createPartnerPlaceForm.name.$error.maxlength">Partner Place Name must be 40 characters or less</p>
+                                    <p class="text-danger" ng-show="createPartnerPlaceForm.name.$error.pattern">This doesn't seem to be a valid name, don't use special characters</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group has-feedback required" ng-class="{'has-error' : createPartnerPlaceForm.location.$showError && createPartnerPlaceForm.location.$hasError()}">
+                                <label for="location">Location</label>
+                                <input type="text" class="form-control" name="location" id="location" ng-maxlength="255" ng-model-options="{ updateOn: 'blur' }" ng-model="partnerplace.location" required placeholder="Add a location of your partner place">
+                                <div class="error" ng-show="createPartnerPlaceForm.location.$showError">
+                                	<p class="text-danger" ng-show="createPartnerPlaceForm.location.$error.required">Location is required.</p>
+                                    <p class="text-danger" ng-show="createPartnerPlaceForm.location.$error.maxlength">Location must be 255 characters or less</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group has-feedback required" ng-class="{'has-error' : createPartnerPlaceForm.activityCount.$showError && createPartnerPlaceForm.activityCount.$hasError()}">
+                                <label for="location">Activity Count</label>
+                                <input type="text" ng-paste="preventPastingCharacters($event)" class="form-control" name="activityCount" id="activityCount" ng-maxlength="10" ng-model-options="{ updateOn: 'blur' }" ng-model="partnerplace.activityCount" onkeypress='return !(event.charCode != 8 && event.charCode != 0 && (event.charCode < 48 || event.charCode > 57))' required placeholder="Add a Activity Count of your partner place">
+                                <div class="error" ng-show="createPartnerPlaceForm.activityCount.$showError">
+                                    <p class="text-danger" ng-show="createPartnerPlaceForm.activityCount.$error.required">Activity Count is required.</p>
+                                    <p class="text-danger" ng-show="createPartnerPlaceForm.activityCount.$error.maxlength">Activity Count must be 10 digits or less</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+					        <div class="form-group has-feedback required">
+					          <label for="isTopDestination">Is Top Destination</label>
+					          <ui-select placeholder="Select Is Top Destination" theme="bootstrap" id="isTopDestination" name="isTopDestination" ng-model="partnerplace.isTopDestination">
+					              <ui-select-match>
+					                  <span ng-bind-html="$select.selected.value"></span>
+					              </ui-select-match>
+					              <ui-select-choices repeat="isTopDestinationOption in booleanOptions">
+					                  <span ng-bind-html="isTopDestinationOption.value"></span>
+					              </ui-select-choices>
+					          </ui-select>
+					          <div class="error" ng-show="createPartnerPlaceForm.isTopDestination.$showError">
+						      	  <p class="text-danger" ng-show="createPartnerPlaceForm.isTopDestination.$error.required">Please Select Is Top Destination Option</p>	
+						      </div>
+					        </div>
+					     </div>
+					     <div class="col-xs-6">
+					        <div class="form-group has-feedback required">
+					          <label for="hasCityGuide">Has City Guides</label>
+					          <ui-select placeholder="Select Has City Guides" theme="bootstrap" id="hasCityGuide" name="hasCityGuide" ng-model="partnerplace.hasCityGuide">
+					              <ui-select-match>
+					                  <span ng-bind-html="$select.selected.value"></span>
+					              </ui-select-match>
+					              <ui-select-choices repeat="hasCityGuidesOption in booleanOptions">
+					                  <span ng-bind-html="hasCityGuidesOption.value"></span>
+					              </ui-select-choices>
+					          </ui-select>
+					          <div class="error" ng-show="createPartnerPlaceForm.hasCityGuide.$showError">
+						      	  <p class="text-danger" ng-show="createPartnerPlaceForm.hasCityGuide.$error.required">Please Select Has City Guides Option</p>	
+						      </div>
+					        </div>
+					     </div>
+                    </div>
+                    <div class="row sub-section partner-place-participants">
+                        <div class="col-xs-12">
+                            <h3 class="title pull-left">Partner Place Participants</h3>
+
+                            <div class="checkbox show-role-descriptions">
+                                <label>
+                                    <input ng-click="showRoleDescriptions = !showRoleDescriptions" type="checkbox">
+                                    Show Role Descriptions
+                                </label>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="form-group required has-feedback" ng-class="{'has-error' : createPartnerPlaceForm.partnerPlaceLeader.$showError && createPartnerPlaceForm.partnerPlaceLeader.$hasError()}">
+                                        <label for="partnerPlaceLeader">Partner Place Admin</label>
+                                        <span id="EF47B762-808B-411A-82E2-CEF3C8998DC5"></span>
+                                        <ui-select id="partnerPlaceLeader" multiple name="partnerPlaceLeader" ng-model="multipleBU.selectedUsers" required sortable="true" tagging-label="(custom 'new' label)" title="Select a Partner Place Leader" ui-select-required>
+                                            <ui-select-match placeholder="Select a Partner Place Leader">
+                                                <span style="text-transform: none;">{{ $item.firstName + " " + $item.lastName }}</span>
+                                            </ui-select-match>
+                                            <ui-select-choices repeat="adminuser in adminusers | filter:$select.search | orderBy : 'id'">
+                                                {{adminuser.firstName+" "+adminuser.lastName}}
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <div class="error" ng-show="createPartnerPlaceForm.partnerPlaceLeader.$showError">
+                                            <p class="text-danger" ng-show="createPartnerPlaceForm.partnerPlaceLeader.$error.empty">You must select a Partner Place Leader</p>
+                                        </div>
+                                        <span class="help-block" ng-show="showRoleDescriptions">This role has maximum authority on the Partner Place to create, edit, etc.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="partnerPlaceTeam">Partner Place Team Member</label>
+                                        <ui-select multiple id="partnerPlaceTeam" ng-model="multipleBU.selectedTeams" name="partnerPlaceTeam" sortable="true" tagging-label="(custom 'new' label)" theme="bootstrap" title="Select Partner Place Team Members">
+                                            <ui-select-match placeholder="Select a Partner Place Team Member">
+                                                <span style="text-transform: none;">{{$item.firstName+ " " +$item.lastName}}</span>
+                                            </ui-select-match>
+                                            <ui-select-choices repeat="adminuser in adminusers | filter:$select.search">
+                                                {{adminuser.firstName+" "+adminuser.lastName}}
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <span class="help-block" ng-show="showRoleDescriptions">This role can Complete Missions, View Map (and Mission Data collected) and View Reports.</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group">
+                                        <label for="partnerPlaceSupport">Partner Place Support Member</label>
+                                        <ui-select multiple id="partnerPlaceSupport" name="partnerPlaceSupport" ng-model="multipleBU.selectedSupports" sortable="true" tagging-label="(custom 'new' label)" theme="bootstrap" title="Select Partner Place Support Members">
+                                            <ui-select-match placeholder="Select a partner place support">
+                                                <span style="text-transform: none;">{{$item.firstName+" "+$item.lastName}}</span>
+                                            </ui-select-match>
+                                            <ui-select-choices repeat="adminuser in adminusers | filter:$select.search">
+                                                {{adminuser.firstName+" "+adminuser.lastName}}
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <span class="help-block" ng-show="showRoleDescriptions">This role can View the Map and export it, they can also view and print Reports.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div >
+                <div class="section-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary pull-right" ng-click="go('next', 1); partnerPlaceFormValidity(createPartnerPlaceForm)" ng-disabled="!partnerPlaceST1FormValidity()">
+                                Next
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="_hero" ng-class="{'tab-collapsed' : tab[2], 'tab-expand' : !tab[2], 'tab-error' : _heroErrors.length > 0}">
+            <div class="section-header">
+                <div class="pull-left">
+                    <span class="icon icon-placepass-icons-pp-map pull-left"></span>
+                    <h2 class="title pull-left">Hero</h2>
+                    <div class="error-count" ng-show="_heroErrors.length > 0 && tab[2]">
+                        <span class="glyphicon glyphicon-alert"></span>
+                        <span class="count">{{ _heroErrors.length }}
+                            error<span ng-show="_heroErrors.length > 1">s</span>
+                            require<span ng-show="_heroErrors.length === 1">s</span>
+                            your attention</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="description">Define the construct of the Place Pass Journey Hero you will create for this partner place.</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="collapse-btn pull-right" ng-click="tab[2] = !tab[2]">
+                    <i ng-class="tab[2] ? 'icon icon-placepass-icons-pp-plus' : 'glyphicon glyphicon-minus'"></i>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="tab[2]">
+                <div class="section-body">
+                    <div class="row">
+                        <cms-data-rs ng-model="partnerplace.hero"></cms-data-rs>
+                    </div>
+                </div>
+                <div class="section-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary pull-right" ng-click="go('next', 2); heroFormValidity(createPartnerPlaceForm)">
+                                Next
+                            </button>
+                            <button class="btn btn-default pull-right previous" ng-click="go('previous', 2); heroFormValidity(createPartnerPlaceForm)">
+                                Previous
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="_top-tips" ng-class="{'tab-collapsed' : tab[3], 'tab-expand' : !tab[3], 'tab-error' : _topTipsErrors.length > 0}">
+            <div class="section-header">
+                <div class="pull-left">
+                    <span class="icon icon-placepass-icons-pp-map pull-left"></span>
+                    <h2 class="title pull-left">Top Tips</h2>
+                    <div class="error-count" ng-show="_topTipsErrors.length > 0 && tab[3]">
+                        <span class="glyphicon glyphicon-alert"></span>
+                        <span class="count">{{ _topTipsErrors.length }}
+                            error<span ng-show="_topTipsErrors.length > 1">s</span>
+                            require<span ng-show="_topTipsErrors.length === 1">s</span>
+                            your attention</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="description">Define the construct of the Place Pass Journey Top Tips you will create for this partner place.</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="collapse-btn pull-right" ng-click="tab[3] = !tab[3]">
+                    <i ng-class="tab[3] ? 'icon icon-placepass-icons-pp-plus' : 'glyphicon glyphicon-minus'"></i>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="tab[3]">
+                <div class="section-body">
+                    <div class="row">
+                        <cms-data-rs ng-model="toptipsDr"></cms-data-rs>
+                        <div class="col-md-1">
+                            <div class="form-group btn-p-top">
+                                <button class="btn btn-sm btn-primary no-label pull-right" ng-click="manullayAddHeroRow(toptipsDr, 'TOPTIPS'); manualForm.$setPristine()" ng-disabled="!isValidCMSDataForm(toptipsDr)" type="submit">Add</button>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 section-padding">
+                            <section ng-show="topTips.length>0">
+                                <div class="row header">
+                                    <div class="col-md-8">
+                                        <h4>
+                                            Top Tips Records <span id="3b29c3d0-a899-42fd-bda5-c6855acfc87e"></span>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <table class="table margin-0">
+                                                <colgroup>
+                                                    <col width="5%">
+                                                    <col width="15%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                </colgroup>
+                                                <thead>
+                                                <th></th>
+                                                <th>Title</th>
+                                                <th>Sub Title</th>
+                                                <th>Sub Desc</th>
+                                                <th>Description</th>
+                                                <th>DestinationUrl</th>
+                                                <th>Image Url</th>
+                                                <th>Style</th>
+                                                <th>Order</th>
+                                                <th>Link Text</th>
+                                                </thead>
+                                            </table>
+                                            <div class="infinite-scroll">
+                                                <table class="table">
+                                                    <colgroup>
+                                                        <col width="5%">
+                                                        <col width="15%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                    </colgroup>
+                                                    <tbody>
+                                                    <tr ng-repeat="toptip in topTips track by $index">
+                                                        <td>
+                                                            <button class="btn btn-sm btn-default btn-rounded" ng-click="deleteUniqueRow(toptip, 'TOPTIPS')" type="button">
+                                                                <i class="glyphicon glyphicon-remove"></i>
+                                                            </button>
+                                                        </td>
+                                                        <td><input class="form-control" id="tttitle" ng-model="toptip.title" type="text"></td>
+                                                        <td><input class="form-control" id="ttsubttile" ng-model="toptip.subTitle" type="text"></td>
+                                                        <td><input class="form-control" id="ttsubdec" ng-model="toptip.subDescription" type="text"></td>
+                                                        <td><input class="form-control" id="ttdescription" ng-model="toptip.description" type="text"></td>
+                                                        <td><input class="form-control" id="ttdestinationUrl" ng-model="toptip.destinationUrl" type="text"></td>
+                                                        <td><input class="form-control" id="ttimageUrl" ng-model="toptip.imageUrl" type="text"></td>
+                                                        <td><input class="form-control" id="ttstyle" ng-model="toptip.style" type="text"></td>
+                                                        <td><input class="form-control" id="torder" ng-model="toptip.order" type="text"></td>
+                                                        <td><input class="form-control" id="tlinkTExt" ng-model="toptip.linkText" type="text"></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary pull-right" ng-click="go('next', 3); topTipsFormValidity(createPartnerPlaceForm)">
+                                Next
+                            </button>
+                            <button class="btn btn-default pull-right previous" ng-click="go('previous', 3); topTipsFormValidity(createPartnerPlaceForm)">
+                                Previous
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="_partner-collection" ng-class="{'tab-collapsed' : tab[4], 'tab-expand' : !tab[4], 'tab-error' : _partnerCollectionErrors.length > 0}">
+            <div class="section-header">
+                <div class="pull-left">
+                    <span class="icon icon-placepass-icons-pp-map pull-left"></span>
+                    <h2 class="title pull-left">Partner Collection</h2>
+                    <div class="error-count" ng-show="_partnerCollectionErrors.length > 0 && tab[4]">
+                        <span class="glyphicon glyphicon-alert"></span>
+                        <span class="count">{{ _partnerCollectionErrors.length }}
+                            error<span ng-show="_partnerCollectionErrors.length > 1">s</span>
+                            require<span ng-show="_partnerCollectionErrors.length === 1">s</span>
+                            your attention</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="description">Define the construct of the Place Pass Journey Partner Collection you will create for this partner place.</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="collapse-btn pull-right" ng-click="tab[4] = !tab[4]">
+                    <i ng-class="tab[4] ? 'icon icon-placepass-icons-pp-plus' : 'glyphicon glyphicon-minus'"></i>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="tab[4]">
+                <div class="section-body">
+                    <div class="row">
+                        <cms-data-rs ng-model="partnerCollectionDr"></cms-data-rs>
+                        <div class="col-md-1">
+                            <div class="form-group btn-p-top">
+                                <button class="btn btn-sm btn-primary no-label pull-right" ng-click="manullayAddHeroRow(partnerCollectionDr, 'PARTNER'); manualForm.$setPristine()" ng-disabled="!isValidCMSDataForm(partnerCollectionDr)" type="submit">Add</button>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 section-padding">
+                            <section ng-show="partnerCollection.length>0">
+                                <div class="row header">
+                                    <div class="col-md-8">
+                                        <h4>
+                                            Partner Collection Records <span id="3b29c3d0-a899-42fd-bda5-c6855acfc87e"></span>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <table class="table margin-0">
+                                                <colgroup>
+                                                    <col width="5%">
+                                                    <col width="15%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                    <col width="10%">
+                                                </colgroup>
+                                                <thead>
+                                                <th></th>
+                                                <th>Title</th>
+                                                <th>Sub Title</th>
+                                                <th>Sub Desc</th>
+                                                <th>Description</th>
+                                                <th>DestinationUrl</th>
+                                                <th>Image Url</th>
+                                                <th>Style</th>
+                                                <th>Order</th>
+                                                <th>Link Text</th>
+                                                </thead>
+                                            </table>
+                                            <div class="infinite-scroll">
+                                                <table class="table">
+                                                    <colgroup>
+                                                        <col width="5%">
+                                                        <col width="15%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                        <col width="10%">
+                                                    </colgroup>
+                                                    <tbody>
+                                                    <tr ng-repeat="partner in partnerCollection track by $index">
+                                                        <td>
+                                                            <button class="btn btn-sm btn-default btn-rounded" ng-click="deleteUniqueRow(partner, 'PARTNER')" type="button">
+                                                                <i class="glyphicon glyphicon-remove"></i>
+                                                            </button>
+                                                        </td>
+                                                        <td><input class="form-control" id="ptitle" ng-model="partner.title" type="text"></td>
+                                                        <td><input class="form-control" id="psubttile" ng-model="partner.subTitle" type="text"></td>
+                                                        <td><input class="form-control" id="psubdec" ng-model="partner.subDescription" type="text"></td>
+                                                        <td><input class="form-control" id="pdescription" ng-model="partner.description" type="text"></td>
+                                                        <td><input class="form-control" id="pdestinationUrl" ng-model="partner.destinationUrl" type="text"></td>
+                                                        <td><input class="form-control" id="pimageUrl" ng-model="partner.imageUrl" type="text"></td>
+                                                        <td><input class="form-control" id="pstyle" ng-model="partner.style" type="text"></td>
+                                                        <td><input class="form-control" id="porder" ng-model="partner.order" type="text"></td>
+                                                        <td><input class="form-control" id="plinkTExt" ng-model="partner.linkText" type="text"></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary pull-right" ng-click="go('next', 4); partnerCollectionFormValidity(createPartnerPlaceForm)">
+                                Next
+                            </button>
+                            <button class="btn btn-default pull-right previous" ng-click="go('previous', 4); partnerCollectionFormValidity(createPartnerPlaceForm)">
+                                Previous
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="_get-to-know" ng-class="{'tab-collapsed' : tab[5], 'tab-expand' : !tab[5], 'tab-error' : _getToKnowErrors.length > 0}">
+            <div class="section-header">
+                <div class="pull-left">
+                    <span class="icon icon-placepass-icons-pp-users pull-left"></span>
+                    <h2 class="title pull-left">Get To Know</h2>
+                    <div class="error-count" ng-show="_getToKnowErrors.length > 0 && tab[5]">
+                        <span class="glyphicon glyphicon-alert"></span>
+                        <span class="count">{{ _getToKnowErrors.length }}
+                            error<span ng-show="_getToKnowErrors.length > 1">s</span>
+                            require<span ng-show="_getToKnowErrors.length === 1">s</span>
+                            your attention</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="description">Define the construct of the Place Pass Journey Get To Know you will create for this partner place.</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="collapse-btn pull-right" ng-click="tab[5] = !tab[5]">
+                    <i ng-class="tab[5] ? 'icon icon-placepass-icons-pp-plus' : 'glyphicon glyphicon-minus'"></i>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="tab[5]">
+                <div class="section-body">
+                    <div class="row sub-section address-compo">
+                        <div class="col-xs-12">
+                            <h3 class="title">Get To Know Form Details</h3>
+                        </div>
+                        <ng-form name="manualForm">
+                            <div class="col-xs-3 section-padding">
+                                <input aria-describedby="inputSuccess2Status" class="form-control" id="manuallyAddedKey" name="manuallyAddedKey" ng-maxlength="40" ng-model="manuallyAddedKey" placeholder="Key for Get To Know..." type="text"/>
+                            </div>
+                            <div class="col-xs-3 section-padding">
+                                <input aria-describedby="inputSuccess2Status" class="form-control" id="manuallyAddedValue" name="manuallyAddedValue" ng-maxlength="40" ng-model="manuallyAddedValue" placeholder="Value for Get To Know ..." type="text"/>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <button class="btn btn-sm btn-primary no-label pull-right" ng-click="manullayAddMapRow(manuallyAddedKey,manuallyAddedValue); manualForm.$setPristine()" ng-disabled="!manuallyAddedRowMapValidation(manuallyAddedKey, manuallyAddedValue)" type="submit">Add</button>
+                                </div>
+                            </div>
+                        </ng-form>
+
+                        <!-- -->
+
+                        <div class="col-xs-12 section-padding">
+                            <section ng-show="getLength(partnerplace.getToKnow)>0">
+                                <div class="row header">
+                                    <div class="col-md-8">
+                                        <h4>
+                                            Get To Know Details
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <table class="table margin-0">
+                                                <colgroup>
+                                                    <col width="5%">
+                                                    <col width="20%">
+                                                    <col width="25%">
+                                                </colgroup>
+                                                <thead>
+                                                <th></th>
+                                                <th>Key</th>
+                                                <th>Value</th>
+                                                </thead>
+                                            </table>
+                                            <div class="infinite-scroll">
+                                                <table class="table">
+                                                    <colgroup>
+                                                        <col width="5%">
+                                                        <col width="20%">
+                                                        <col width="25%">
+                                                    </colgroup>
+                                                    <tbody>
+                                                    <tr ng-repeat="(key, value) in partnerplace.getToKnow">
+                                                        <td>
+                                                            <button class="btn btn-sm btn-default btn-rounded" ng-click="deleteUniqueRowMap(key)" type="button">
+                                                                <i class="glyphicon glyphicon-remove"></i>
+                                                            </button>
+                                                        </td>
+                                                        <td> <input class="form-control" id="keyforgettoknow" ng-model="key" type="text"></td>
+                                                        <td><input class="form-control" id="valueforgettokknow" ng-model="value" type="text"></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="section-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary pull-right" ng-click="go('next', 5); getToKnowFormValidity(createPartnerPlaceForm)">
+                                Next
+                            </button>
+                            <button class="btn btn-default pull-right previous" ng-click="go('previous', 5); getToKnowFormValidity(createPartnerPlaceForm)">
+                                Previous
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+		<section class="_vendor-activity-count" ng-class="{'tab-collapsed' : tab[6], 'tab-expand' : !tab[6], 'tab-error' : _vendorActivityCountErrors.length > 0}">
+            <div class="section-header">
+                <div class="pull-left">
+                    <span class="icon icon-placepass-icons-pp-users pull-left"></span>
+                    <h2 class="title pull-left">Vendor Activity Counts</h2>
+                    <div class="error-count" ng-show="_vendorActivityCountErrors.length > 0 && tab[6]">
+                        <span class="glyphicon glyphicon-alert"></span>
+                        <span class="count">{{ _vendorActivityCountErrors.length }}
+                            error<span ng-show="_vendorActivityCountErrors.length > 1">s</span>
+                            require<span ng-show="_vendorActivityCountErrors.length === 1">s</span>
+                            your attention</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="description">Define the construct of the Place Pass Journey Vendor Activity Counts you will create for this partner place.</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="collapse-btn pull-right" ng-click="tab[6] = !tab[6]">
+                    <i ng-class="tab[6] ? 'icon icon-placepass-icons-pp-plus' : 'glyphicon glyphicon-minus'"></i>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="tab[6]">
+                <div class="section-body">
+                    <div class="row sub-section address-compo">
+                        <div class="col-xs-12">
+                            <h3 class="title">Vendor Activity Counts</h3>
+                        </div>
+                        <ng-form name="vendorActivityCountValueForm">
+                            <div class="form-group col-xs-3 section-padding">
+                                <input class="form-control" id="vendorActivityCountKey" name="vendorActivityCountKey" ng-maxlength="40" ng-model="vendorActivityCountKey" placeholder="Key for Vendor Activity Counts" type="text"/>
+                            </div>
+                            <div class="form-group has-feedback col-xs-3 section-padding" ng-class="{'has-error' : vendorActivityCountValueForm.vendorActivityCountValue.$showError && vendorActivityCountValueForm.vendorActivityCountValue.$hasError()}">
+                                <input ng-paste="preventPastingCharacters($event)" class="form-control" id="vendorActivityCountValue" name="vendorActivityCountValue" onkeypress='return !(event.charCode != 8 && event.charCode != 0 && (event.charCode < 48 || event.charCode > 57))' min="0" ng-maxlength="10" ng-model="vendorActivityCountValue" placeholder="Value for Vendor Activity Counts" type="number"/>
+                                <div class="error" ng-show="vendorActivityCountValueForm.vendorActivityCountValue.$showError">
+							        <p class="text-danger" ng-show="vendorActivityCountValueForm.vendorActivityCountValue.$error.maxlength">Vendor Activity Count must be 10 digits or less</p>
+							    </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <button class="btn btn-sm btn-primary no-label pull-right" ng-click="addVendorActivityCountRow(vendorActivityCountKey,vendorActivityCountValue); vendorActivityCountValueForm.$setPristine()" ng-disabled="!manuallyAddedRowMapValidation(vendorActivityCountKey,vendorActivityCountValue)" type="submit">Add</button>
+                                </div>
+                            </div>
+                        </ng-form>
+                        <div class="col-xs-12 section-padding">
+                            <section ng-show="getLength(partnerplace.vendorActivityCount)>0">
+                                <div class="row header">
+                                    <div class="col-md-8">
+                                        <h4>
+                                            Vendor Activity Counts Details
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <table class="table margin-0">
+                                                <colgroup>
+                                                    <col width="5%">
+                                                    <col width="20%">
+                                                    <col width="25%">
+                                                </colgroup>
+                                                <thead>
+                                                <th></th>
+                                                <th>Key</th>
+                                                <th>Value</th>
+                                                </thead>
+                                            </table>
+                                            <div class="infinite-scroll">
+                                                <table class="table">
+                                                    <colgroup>
+                                                        <col width="5%">
+                                                        <col width="20%">
+                                                        <col width="25%">
+                                                    </colgroup>
+                                                    <tbody>
+                                                    <tr ng-repeat="(keyforvendoractivitycount, valuevendoractivitycount) in partnerplace.vendorActivityCount">
+                                                        <td>
+                                                            <button class="btn btn-sm btn-default btn-rounded" ng-click="deleteVendorActivityCountRow(keyforvendoractivitycount)" type="button">
+                                                                <i class="glyphicon glyphicon-remove"></i>
+                                                            </button>
+                                                        </td>
+                                                        <td>{{keyforvendoractivitycount}}</td>
+                                                        <td>{{valuevendoractivitycount}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="section-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary pull-right" ng-click="go('next', 6); vendorActivityCountFormValidity(createPartnerPlaceForm)">
+                                Next
+                            </button>
+                            <button class="btn btn-default pull-right previous" ng-click="go('previous', 6); vendorActivityCountFormValidity(createPartnerPlaceForm)">
+                                Previous
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="_alias" ng-class="{'tab-collapsed' : tab[7], 'tab-expand' : !tab[7], 'tab-error' : _aliasErrors.length > 0}">
+            <div class="section-header">
+                <div class="pull-left">
+                    <span class="icon icon-placepass-icons-pp-users pull-left"></span>
+                    <h2 class="title pull-left">Aliases</h2>
+                    <div class="error-count" ng-show="_aliasErrors.length > 0 && tab[7]">
+                        <span class="glyphicon glyphicon-alert"></span>
+                        <span class="count">{{ _aliasErrors.length }}
+                            error<span ng-show="_aliasErrors.length > 1">s</span>
+                            require<span ng-show="_aliasErrors.length === 1">s</span>
+                            your attention</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="description">Define the construct of the Place Pass Journey Aliases you will create for this partner place.</p>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="collapse-btn pull-right" ng-click="tab[7] = !tab[7]">
+                    <i ng-class="tab[7] ? 'icon icon-placepass-icons-pp-plus' : 'glyphicon glyphicon-minus'"></i>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div collapse="tab[7]">
+                <div class="section-body">
+                    <div class="row sub-section address-compo">
+                        <div class="col-xs-12 section-padding">
+					    <section>
+					        <div class="row header">
+					            <div class="col-md-8">
+					                <h4>
+					                    Aliases
+					                </h4>
+					            </div>
+					        </div>
+					        <div ng-show="getLength(partnerplace.parentAliases)>0" class="row">
+					            <div class="col-md-12">
+					                <div class="form-group">
+					                    <div class="infinite-scroll">
+					                    	<ul>
+												<li ng-repeat="parentAlias in partnerplace.parentAliases">
+											  		<span ng-bind-html="parentAlias"></span>
+											  	</li>
+											</ul>
+				                   		</div>
+				                	 </div>
+				               </div>
+				             </div>
+				             <div ng-show="getLength(partnerplace.parentAliases)==0" class="row">
+					            <div class="col-md-12">
+					                <div class="form-group">
+					                    <div class="infinite-scroll">
+					                    	<ul>No Aliases Found</ul>
+					                    </div>
+				                	 </div>
+				               </div>
+				             </div>
+			           	</section>
+			      	</div>
+                    </div>
+                </div>
+                <div class="section-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button aet-has-permission="ADD_PARTNER_PLACE" class="btn btn-primary pull-right" ng-click="submitPartnerPlaceForm()" ng-disabled="!isValidPartnerPlaceInfo()" type="submit">
+                                Save
+                            </button>
+                            <button class="btn btn-default pull-right previous" ng-click="go('previous', 7); aliasFormValidity(createPartnerPlaceForm)">
+                                Previous
+                            </button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </form>
+</div>

@@ -1,0 +1,25 @@
+.panel{
+  border-radius:0 ;
+  &.panel-default, &.panel-success, &.panel-danger, &.panel-primary {
+    .panel-heading {
+      background-image: inherit;
+    }
+  }
+  &.panel-primary{
+    border-color: #97cf62;
+    .panel-heading{
+      background-color: #97cf62;
+    }
+
+  }
+}
+.panel-group{
+  .panel{
+    border-radius:0;
+    .panel-heading{
+      border-top-right-radius: 0;
+      border-top-left-radius: 0;
+    }
+
+  }
+}

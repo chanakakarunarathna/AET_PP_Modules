@@ -1,0 +1,185 @@
+@height : 50px;
+@panelWidth  : 140px;
+@padding : 15px;
+.hierarchy-map-main-container{
+  position: relative;
+  .labels-container{
+    display: flex;
+    float: left;
+    ul {
+      padding: 0;
+      margin: 0;
+      li {
+        list-style: none;
+        margin-bottom: @height;
+        position: relative;
+        width: 180px;
+        height: @height + 1;
+        cursor: pointer;
+        h5{
+          position: relative;
+          top: 25%;
+          text-align: right;
+          margin-right: 40px;
+        }
+      }
+    }
+  }
+  .tree {
+    position: relative;
+    margin-left: 150px;
+    .root-container {
+      display: flex;
+      .element-container {
+        position: relative;
+        //display: inline-block;
+        width: @panelWidth + (@padding * 2);
+        height: @height + (@padding * 2) + 5;
+        cursor: pointer;
+        .node {
+          margin: 0 @padding;
+          > .panel {
+            width: @panelWidth;
+            text-align: center;
+            margin-right: 20px;
+            position: relative;
+            &.panel-primary {
+              -webkit-box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2);
+              -moz-box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2);
+              box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2);
+              border: 1px solid @main-color;
+              background-color: #dddddd;
+            }
+            .tooltip {
+            }
+            .btn-group {
+              top: 10px;
+              .btn {
+
+              }
+            }
+            .btn {
+              font-size: 14px;
+              padding: 2px 8px;
+              .glyphicon {
+                font-size: 12px;
+              }
+              &.add {
+                border-radius: 30px;
+                display: block;
+                position: absolute;
+                right: -15px;
+                z-index: 20;
+                bottom: -15px;
+                i {
+                  left: 1px;
+                  top: 1px;
+                }
+              }
+            }
+            .panel-body {
+              p {
+                margin: 0;
+                text-align: center;
+                position: absolute;
+                right: 5px;
+                top: 5px;
+                min-width: 20px;
+                border-radius: 10px;
+                padding: 0 5px;
+                border: 1px solid #aaaaaa;
+                font-size: 10px;
+                color: #737373;
+                -webkit-box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2);
+                -moz-box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2);
+                box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2);
+              }
+              h4 {
+                margin: 15px 0 5px;
+                font-size: 14px;
+                word-break: break-all;
+                text-overflow: ellipsis;
+                height: 20px;
+                white-space: nowrap;
+                overflow: hidden;
+              }
+            }
+          }
+        }
+      }
+    }
+    .child-container {
+      display: flex;
+      position: relative;
+      margin-top: @height;
+      &:before {
+        content: "";
+        width: 50%;
+        position: absolute;
+        height: @height / 2;
+        left: 0;
+        top: -@height;
+        border-right: 1px solid #dadada;
+        max-width: 100%;
+        max-height: 100%;
+        display: block;
+        z-index: -1;
+      }
+      .element-container {
+        cursor: pointer;
+        &:before {
+          content: "";
+          width: 50%;
+          position: absolute;
+          height: @height / 2;
+          left: 0;
+          top: -(@height / 2);
+          border-right: 1px solid #dadada;
+        }
+        .line-to {
+          position: absolute;
+          top: -(@height / 2);
+          border-top: 1px solid #cfcfcf;
+          width: 100%;
+          left: 50%;
+          display: block;
+        }
+        &.ui-sortable-helper {
+          > .line-to {
+            display: none !important;
+          }
+          &:before {
+            display: none !important;
+          }
+        }
+        &:last-of-type {
+          & > .line-to {
+            display: none;
+          }
+        }
+      }
+    }
+    .placeholder {
+      .node {
+        background-color: #ffffff;
+        border: 1px solid #dddddd ;
+        border-radius: 4px;
+        height: 100px;
+        width: 150px;
+      }
+    }
+    .map-label{
+      //position: absolute;
+      display: none;
+    }
+    ul {
+      padding: 0;
+      margin: 0;
+      li {
+        list-style: none;
+        float: left;
+        margin: 0;
+      }
+    }
+  }
+}

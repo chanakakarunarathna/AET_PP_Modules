@@ -1,0 +1,357 @@
+<h1 class="page-header">
+    Edit Role
+</h1>
+
+<div class="row">
+    <div class=" col-md-6">
+        <form name="editRoleForm" novalidate class="form-horizontal">
+            <div class="form-group has-feedback required"
+                 ng-class="{ 'has-success' : editRoleForm.title.$valid, 'has-error' : editRoleForm.title.$showError && editRoleForm.title.$hasError()}">
+                <label for="title" class="col-md-3 control-label">Title</label>
+
+                <div class="col-md-9">
+                    <input name="title"
+                           id="title"
+                           type="text"
+                           class="form-control"
+                           placeholder="Title..."
+                           ng-model="role.title"
+                           required
+                           ng-maxlength="255"
+                           aria-describedby="inputSuccess2Status"/>
+
+                    <div ng-show="editRoleForm.title.$showError" class="error">
+                        <span class="glyphicon  form-control-feedback" aria-hidden="true"
+                              ng-class="{'glyphicon-ok' : editRoleForm.title.$valid, 'glyphicon-remove' : editRoleForm.title.$showError && editRoleForm.title.$hasError()}"></span>
+
+                        <p class="text-danger" ng-show="editRoleForm.title.$error.required">Title is required</p>
+
+                        <p class="text-danger" ng-show="editRoleForm.title.$error.maxlength">Must be less than 255
+                            characters</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback required"
+                 ng-class="{ 'has-success' : editRoleForm.description.$valid, 'has-error' : editRoleForm.description.$showError && editRoleForm.description.$hasError()}">
+                <label for="description" class="col-md-3 control-label">Description</label>
+
+                <div class="col-md-9">
+					<textarea name="description"
+                              id="description"
+                              class="form-control"
+                              placeholder="Enter description here..."
+                              ng-model="role.description"
+                              required
+                              rows="4"
+                              ng-maxlength="1000">
+					</textarea>
+
+                    <div ng-show="editRoleForm.description.$showError" class="error">
+                        <span class="glyphicon  form-control-feedback" aria-hidden="true"
+                              ng-class="{'glyphicon-ok' : editRoleForm.description.$valid, 'glyphicon-remove' : editRoleForm.description.$showError && editRoleForm.description.$hasError()}"></span>
+
+                        <p class="text-danger" ng-show="editRoleForm.description.$error.required">Description is
+                            required.</p>
+
+                        <p class="text-danger" ng-show="editRoleForm.description.$error.maxlength">Must be less than
+                            1000 characters</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group features">
+                <label for="description" class="col-md-3 control-label">Features</label>
+
+                <div class="col-md-3 feature-group">
+                    <h4>AdminUser Tab</h4>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="LIST_ADMIN_USER"
+                                   id="LIST_ADMIN_USER"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['LIST_ADMIN_USER']"
+                                   ng-checked="hasFeature('LIST_ADMIN_USER')"/> Search AdminUsers
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="CREATE_ADMIN_USER"
+                                   id="CREATE_ADMIN_USER"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['CREATE_ADMIN_USER']"
+                                   ng-checked="hasFeature('CREATE_ADMIN_USER')"/> Create AdminUsers
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="EDIT_ADMIN_USER"
+                                   id="EDIT_ADMIN_USER"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['EDIT_ADMIN_USER']"
+                                   ng-checked="hasFeature('EDIT_ADMIN_USER')"/> Edit AdminUsers
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="DELETE_ADMIN_USER"
+                                   id="DELETE_ADMIN_USER"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['DELETE_ADMIN_USER']"
+                                   ng-checked="hasFeature('DELETE_ADMIN_USER')"/> Delete AdminUsers
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-3 feature-group">
+                    <h4>Roles Tab</h4>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="LIST_ROLE"
+                                   id="LIST_ROLE"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['LIST_ROLE']"
+                                   ng-checked="hasFeature('LIST_ROLE')"/> Search Roles
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="CREATE_ROLE"
+                                   id="CREATE_ROLE"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['CREATE_ROLE']"
+                                   ng-checked="hasFeature('CREATE_ROLE')"/> Create Roles
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="EDIT_ROLE"
+                                   id="EDIT_ROLE"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['EDIT_ROLE']"
+                                   ng-checked="hasFeature('EDIT_ROLE')"/> Edit Roles
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="DELETE_ROLE"
+                                   id="DELETE_ROLE"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['DELETE_ROLE']"
+                                   ng-checked="hasFeature('DELETE_ROLE')"/> Delete Roles
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 feature-group">
+                    <h4>Partner Tab</h4>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="LIST_CLIENT"
+                                   id="LIST_CLIENT"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['LIST_CLIENT']"
+                                   ng-checked="hasFeature('LIST_CLIENT')"/> Search Partners
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="CREATE_CLIENT"
+                                   id="CREATE_CLIENT"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['CREATE_CLIENT']"
+                                   ng-checked="hasFeature('CREATE_CLIENT')"/> Create Partners
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="EDIT_CLIENT"
+                                   id="EDIT_CLIENT"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['EDIT_CLIENT']"
+                                   ng-checked="hasFeature('EDIT_CLIENT')"/> Edit Partners
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="DELETE_CLIENT"
+                                   id="DELETE_CLIENT"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['DELETE_CLIENT']"
+                                   ng-checked="hasFeature('DELETE_CLIENT')"/> Delete Partners
+                        </label>
+                    </div>
+                </div>
+
+                <!-- div class="col-md-3 feature-group">
+                    <h4>Fields Tab</h4>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="LIST_MASTERFIELD"
+                                   id="LIST_MASTERFIELD"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['LIST_MASTERFIELD']"
+                                   ng-checked="hasFeature('LIST_MASTERFIELD')"/> Search Fields
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="CREATE_MASTERFIELD"
+                                   id="CREATE_MASTERFIELD"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['CREATE_MASTERFIELD']"
+                                   ng-checked="hasFeature('CREATE_MASTERFIELD')"/> Create Fields
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="EDIT_MASTERFIELD"
+                                   id="EDIT_MASTERFIELD"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['EDIT_MASTERFIELD']"
+                                   ng-checked="hasFeature('EDIT_MASTERFIELD')"/> Edit Fields
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="DELETE_MASTERFIELD"
+                                   id="DELETE_MASTERFIELD"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['DELETE_MASTERFIELD']"
+                                   ng-checked="hasFeature('DELETE_MASTERFIELD')"/> Delete Fields
+                        </label>
+                    </div>
+                </div -->
+
+                <!-- div class="col-md-3 feature-group">
+                    <h4>Forms Tab</h4>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="LIST_FORM_BUILDER"
+                                   id="LIST_FORM_BUILDER"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['LIST_FORM_BUILDER']"
+                                   ng-checked="hasFeature('LIST_FORM_BUILDER')"/> Search Forms
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="CREATE_FORM_BUILDER"
+                                   id="CREATE_FORM_BUILDER"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['CREATE_FORM_BUILDER']"
+                                   ng-checked="hasFeature('CREATE_FORM_BUILDER')"/> Create Forms
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="EDIT_FORM_BUILDER"
+                                   id="EDIT_FORM_BUILDER"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['EDIT_FORM_BUILDER']"
+                                   ng-checked="hasFeature('EDIT_FORM_BUILDER')"/> Edit Forms
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="DELETE_PERMIT"
+                                   id="DELETE_PERMIT"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['DELETE_PERMIT']"
+                                   ng-checked="hasFeature('DELETE_PERMIT')"/> Delete Forms
+                        </label>
+                    </div>
+                </div -->
+
+                <!-- div class="col-md-3 feature-group">
+                    <h4>Pending Review Tab</h4>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="LIST_SUBMITTED_APPLICATION"
+                                   id="LIST_SUBMITTED_APPLICATION"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['LIST_SUBMITTED_APPLICATION']"/> Search Applications
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="EDIT_SUBMITTED_APPLICATION"
+                                   id="EDIT_SUBMITTED_APPLICATION"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['EDIT_SUBMITTED_APPLICATION']"/> Edit Applications
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="ACCEPT_SUBMITTED_APPLICATION"
+                                   id="ACCEPT_SUBMITTED_APPLICATION"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['ACCEPT_SUBMITTED_APPLICATION']" /> Accept Applications
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="REJECT_PE_SUBMITTED_APPLICATION"
+                                   id="REJECT_PE_SUBMITTED_APPLICATION"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['REJECT_PE_SUBMITTED_APPLICATION']" /> Reject Applications - Pending Edit
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="REJECT_PF_SUBMITTED_APPLICATION"
+                                   id="REJECT_PF_SUBMITTED_APPLICATION"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['REJECT_PF_SUBMITTED_APPLICATION']" /> Reject Applications - Pending Fees
+                        </label>
+                    </div>
+
+                    <div class="checkbox">
+                        <label class="bold-text">
+                            <input name="REJECT_SUBMITTED_APPLICATION"
+                                   id="REJECT_SUBMITTED_APPLICATION"
+                                   type="checkbox"
+                                   ng-model="role.featureNames['REJECT_SUBMITTED_APPLICATION']" /> Reject Applications
+                        </label>
+                    </div>
+                </div -->
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <button class="btn btn-primary" type="submit" ng-disabled="editRoleForm.$invalid"
+                            ng-click="submitRoleForm()">
+                        Save
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

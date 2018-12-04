@@ -1,0 +1,38 @@
+<li class="dropdown notifications-dropdown" is-open="status.isopen" dropdown auto-close="outsideClick" on-toggle="toggled(open)">
+
+	<a class="dropdown-toggle" role="button" data-toggle="dropdown" dropdown-toggle>
+	
+		<span class="notifications-icon">
+			<i class="glyphicon glyphicon-bell"></i>
+		</span>
+	
+	</a>
+	
+	<ul class="dropdown-menu" role="menu">
+		<li class="controls">
+				<div class="more content" ng-show="remaining() <= 0" ng-click="showAll()">
+					{{alertsService.getAlertsHistory().length}} Alerts
+				</div>
+				<div class="more content" ng-show="remaining() == 1" ng-click="showAll()">
+					1 more alert
+					<span class="caret"></span>
+				</div>
+				<div class="more content" ng-show="remaining() > 1" ng-click="showAll()">
+					{{remaining()}} more alerts
+					<span class="caret"></span>
+				</div>
+				<div class="clear content" ng-click="clearAlertsHistory()">
+					Clear All
+				</div>
+		</li>
+		
+		<li ng-repeat="alert in alertsService.getAlertsHistory() | limitTo: limit"
+			ng-class="alert.type">
+			<div class="type"></div>
+			<div class="content">
+				{{alert.title}} - {{alert.message}}
+			</div>
+		</li>
+	</ul>
+
+</li>
